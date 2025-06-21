@@ -13,10 +13,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+      
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          cname: yqh.30515245.xyz
+          publish_dir: ./  # 部署整个项目根目录
+          cname: yqh.30515245.xyz  # 设置自定义域名
