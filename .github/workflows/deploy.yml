@@ -1,0 +1,30 @@
+name: Deploy to GitHub Pages (main branch)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    concurrency:
+      group: deploy
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+        with:
+          static_distribution: ./  # 部署整个仓库根目录
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./  # 上传所有文件作为静态资源
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
