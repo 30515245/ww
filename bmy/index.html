@@ -1,0 +1,699 @@
+<html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>绿电赋能，零元启航 —— 上海酒店零碳新机遇” 交流沙龙</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#00B42A', // 绿色主色调
+            secondary: '#36CBCB',
+            accent: '#006D77',
+            dark: '#1D2129',
+            light: '#F7F8FA'
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+            'noto-sc': ['Noto Sans SC', 'sans-serif']
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(135deg, #00B42A, #006D77);
+      }
+      .bg-grid {
+        background-image: 
+          linear-gradient(rgba(0, 180, 42, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 180, 42, 0.05) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      .animate-pulse-slow {
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+  </style>
+</head>
+
+<body class="font-noto-sc bg-light text-dark antialiased">
+  <!-- 英雄区域 -->
+  <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-dark to-primary/90 overflow-hidden">
+    <!-- 背景装饰 -->
+    <div class="absolute inset-0 bg-grid z-0"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-full overflow-hidden z-0">
+      <div class="w-[600px] h-[600px] rounded-full bg-secondary/20 absolute -top-[300px] -right-[300px] animate-pulse-slow"></div>
+      <div class="w-[400px] h-[400px] rounded-full bg-accent/20 absolute bottom-[100px] right-[100px] animate-pulse-slow" style="animation-delay: 1s;"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-8">
+          <div class="flex items-center space-x-2">
+            <div class="w-1 h-1 rounded-full bg-secondary animate-pulse"></div>
+            <span class="text-white/80">2025年7月10日 · 上海市嘉定区黄家花园路111号1栋T空间</span>
+          </div>
+          <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-extrabold leading-tight text-white">
+            绿电赋能<br>
+            <span class="text-gradient">零碳新机遇</span>
+          </h1>
+          <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 max-w-lg">
+            在"双碳"目标引领下，酒店行业如何实现零碳转型？加入我们的沙龙，探索绿电技术应用与成本优化路径，把握零碳时代新机遇！
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2">
+
+          </div>
+          <div class="flex items-center space-x-6 pt-4">
+            <div class="flex -space-x-2">
+              <img src="https://picsum.photos/id/1011/40/40" alt="参与者" class="w-10 h-10 rounded-full border-2 border-dark">
+              <img src="https://picsum.photos/id/1012/40/40" alt="参与者" class="w-10 h-10 rounded-full border-2 border-dark">
+              <img src="https://picsum.photos/id/1013/40/40" alt="参与者" class="w-10 h-10 rounded-full border-2 border-dark">
+              <img src="https://picsum.photos/id/1014/40/40" alt="参与者" class="w-10 h-10 rounded-full border-2 border-dark">
+              <div class="w-10 h-10 rounded-full bg-primary/90 flex items-center justify-center text-white text-sm border-2 border-dark">
+                20+
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center text-white">
+                <i class="fa fa-map-marker mr-1"></i>
+                <span>上海市嘉定区</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="relative z-10 animate-float">
+            <img src="https://picsum.photos/id/116/600/400" alt="绿色能源" class="w-full h-auto rounded-2xl shadow-2xl">
+            <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                  <i class="fa fa-line-chart text-xl"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-dark/70">能耗降低</p>
+                  <p class="font-bold text-lg">42%</p>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -top-6 -right-6 bg-white p-4 rounded-xl shadow-lg">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
+                  <i class="fa fa-leaf text-xl"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-dark/70">碳排放减少</p>
+                  <p class="font-bold text-lg">58%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-secondary/20 rounded-full blur-3xl z-0"></div>
+          <div class="absolute -top-10 -left-10 w-40 h-40 bg-accent/20 rounded-full blur-3xl z-0"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 活动介绍 -->
+  <section id="about" class="py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-primary font-semibold">关于活动</span>
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mt-2 mb-6">探索酒店零碳转型新路径</h2>
+        <p class="text-dark/70 text-lg">
+          在"双碳"目标引领下，酒店行业正面临前所未有的变革压力与机遇。本次沙龙将聚焦绿电技术应用与成本优化，助力酒店业者把握零碳时代新机遇。
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-light rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2">
+          <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary text-2xl mb-6">
+            <i class="fa fa-bolt"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">绿电技术应用</h3>
+          <p class="text-dark/70">
+            探索太阳能、风能等可再生能源在酒店中的创新应用，实现能源结构转型，降低运营成本。
+          </p>
+        </div>
+        
+        <div class="bg-light rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2">
+          <div class="w-16 h-16 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary text-2xl mb-6">
+            <i class="fa fa-leaf"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">零碳运营管理</h3>
+          <p class="text-dark/70">
+            学习先进的零碳管理体系与认证标准，优化酒店运营流程，提升能源效率，减少碳排放。
+          </p>
+        </div>
+        
+        <div class="bg-light rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2">
+          <div class="w-16 h-16 rounded-xl bg-accent/10 flex items-center justify-center text-accent text-2xl mb-6">
+            <i class="fa fa-money"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">成本效益分析</h3>
+          <p class="text-dark/70">
+            深入分析绿电改造的成本与收益，了解投资回报周期，掌握融资渠道与政策支持。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数据统计 -->
+  <section class="py-16 bg-gradient-to-r from-primary/5 to-secondary/5">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="p-6">
+          <div class="text-4xl font-bold text-primary mb-2 counter" data-target="20">0</div>
+          <p class="text-dark/70">酒店参与</p>
+        </div>
+        <div class="p-6">
+          <div class="text-4xl font-bold text-secondary mb-2 counter" data-target="12">0</div>
+          <p class="text-dark/70">行业专家</p>
+        </div>
+        <div class="p-6">
+          <div class="text-4xl font-bold text-accent mb-2 counter" data-target="6">0</div>
+          <p class="text-dark/70">案例分享</p>
+        </div>
+        <div class="p-6">
+          <div class="text-4xl font-bold text-primary mb-2 counter" data-target="85">0</div>
+          <p class="text-dark/70">满意度(%)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 演讲嘉宾 -->
+  <section id="speaker" class="py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-primary font-semibold">特邀嘉宾</span>
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mt-2 mb-6">行业领袖分享前沿洞察</h2>
+        <p class="text-dark/70 text-lg">
+          聆听来自绿电与酒店行业顶尖专家的实战经验分享，了解最新技术趋势和成功案例。
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="bg-light rounded-2xl overflow-hidden shadow-lg group hover:shadow-xl transition-all">
+          <div class="relative overflow-hidden">
+            <img src="https://picsum.photos/id/1025/600/400" alt="陈教授" class="w-full h-64 object-cover object-center transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6">
+              <h3 class="text-xl font-bold text-white">陈教授</h3>
+              <p class="text-white/80">上海交通大学能源研究所</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-dark/70 mb-4">
+              能源与环境领域专家，长期研究可再生能源在建筑中的应用，主持多项国家级绿色建筑项目，发表论文50余篇。
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-light rounded-2xl overflow-hidden shadow-lg group hover:shadow-xl transition-all">
+          <div class="relative overflow-hidden">
+            <img src="https://picsum.photos/id/1062/600/400" alt="王总监" class="w-full h-64 object-cover object-center transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6">
+              <h3 class="text-xl font-bold text-white">王总监</h3>
+              <p class="text-white/80">某五星级酒店集团</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-dark/70 mb-4">
+              拥有20年酒店运营管理经验，成功主导集团旗下10家酒店的绿电改造项目，实现平均能耗降低42%。
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-light rounded-2xl overflow-hidden shadow-lg group hover:shadow-xl transition-all">
+          <div class="relative overflow-hidden">
+            <img src="https://picsum.photos/id/1074/600/400" alt="李总" class="w-full h-64 object-cover object-center transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6">
+              <h3 class="text-xl font-bold text-white">李总</h3>
+              <p class="text-white/80">绿电科技公司CEO</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-dark/70 mb-4">
+              专注于酒店行业绿电解决方案，带领团队开发多项节能技术，服务超过200家酒店客户，帮助客户实现碳排放减少58%。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 活动详情 -->
+  <section id="details" class="py-20 bg-light">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-primary font-semibold">活动详情</span>
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mt-2 mb-6">日程安排与收获</h2>
+        <p class="text-dark/70 text-lg">
+          精心设计的活动流程，从理论到实践，全方位助力酒店业理解和应用绿电技术，实现零碳转型。
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="space-y-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg relative">
+              <div class="absolute -left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">
+                1
+              </div>
+              <h3 class="text-xl font-bold mb-2 pl-10">双碳目标下的酒店行业机遇与挑战</h3>
+              <p class="text-dark/70 mb-4 pl-10">
+                解读国家"双碳"政策，分析酒店行业面临的挑战与机遇，探讨绿电转型的必要性和紧迫性。
+              </p>
+              <div class="flex items-center text-sm text-dark/50 pl-10">
+                <i class="fa fa-clock-o mr-2"></i>
+                <span>15:00-15:40</span>
+              </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-lg relative">
+              <div class="absolute -left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">
+                2
+              </div>
+              <h3 class="text-xl font-bold mb-2 pl-10">绿电技术在酒店中的创新应用</h3>
+              <p class="text-dark/70 mb-4 pl-10">
+                分享太阳能、风能、地热能等可再生能源在酒店中的创新应用案例，分析技术可行性和经济效益。
+              </p>
+              <div class="flex items-center text-sm text-dark/50 pl-10">
+                <i class="fa fa-clock-o mr-2"></i>
+                <span>15:50-16:30</span>
+              </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-lg relative">
+              <div class="absolute -left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">
+                3
+              </div>
+              <h3 class="text-xl font-bold mb-2 pl-10">酒店零碳运营管理体系建设</h3>
+              <p class="text-dark/70 mb-4 pl-10">
+                介绍零碳酒店的认证标准和管理体系，分享能源管理、碳排放核算和可持续运营的最佳实践。
+              </p>
+              <div class="flex items-center text-sm text-dark/50 pl-10">
+                <i class="fa fa-clock-o mr-2"></i>
+                <span>16:40-17:20</span>
+              </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-lg relative">
+              <div class="absolute -left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">
+                4
+              </div>
+              <h3 class="text-xl font-bold mb-2 pl-10">圆桌讨论与交流互动</h3>
+              <p class="text-dark/70 mb-4 pl-10">
+                行业专家与参会酒店代表面对面交流，解答绿电转型过程中的困惑，分享最佳实践和解决方案。
+              </p>
+              <div class="flex items-center text-sm text-dark/50 pl-10">
+                <i class="fa fa-clock-o mr-2"></i>
+                <span>17:30</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-6">您将获得</h3>
+              <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                  <div class="mt-1 w-3 h-3 rounded-full bg-primary"></div>
+                  <div>
+                    <h4 class="font-semibold">政策解读</h4>
+                    <p class="text-dark/70 text-sm">深入了解国家"双碳"政策，把握酒店行业绿电转型方向</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <div class="mt-1 w-3 h-3 rounded-full bg-primary"></div>
+                  <div>
+                    <h4 class="font-semibold">技术洞察</h4>
+                    <p class="text-dark/70 text-sm">掌握绿电技术最新发展趋势和应用场景，评估技术可行性</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <div class="mt-1 w-3 h-3 rounded-full bg-primary"></div>
+                  <div>
+                    <h4 class="font-semibold">实践经验</h4>
+                    <p class="text-dark/70 text-sm">学习行业领先酒店的绿电改造实践和成功案例，少走弯路</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <div class="mt-1 w-3 h-3 rounded-full bg-primary"></div>
+                  <div>
+                    <h4 class="font-semibold">人脉资源</h4>
+                    <p class="text-dark/70 text-sm">与行业专家和同行酒店交流互动，拓展商业合作机会</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <div class="mt-1 w-3 h-3 rounded-full bg-primary"></div>
+                  <div>
+                    <h4 class="font-semibold">工具资源</h4>
+                    <p class="text-dark/70 text-sm">获得实用的绿电工具和资源推荐，助力酒店快速启动零碳转型</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-8 p-6 bg-primary/5 rounded-xl border border-primary/20">
+                <h4 class="font-bold text-lg mb-2 flex items-center">
+                  <i class="fa fa-map-marker text-primary mr-2"></i>
+                  活动地点
+                </h4>
+                <p class="text-dark/80">上海市嘉定区黄家花园路111号1栋T空间</p>
+                <div class="mt-4 flex items-center text-sm text-primary">
+                  <i class="fa fa-subway mr-2"></i>
+                  <span>地铁14号线 乐秀路1号口出 步行1.9公里</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 报名区域 -->
+  <section id="register" class="py-20 bg-gradient-to-br from-primary to-accent text-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-secondary font-semibold">立即报名</span>
+          <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mt-2 mb-6">开启酒店零碳新征程</h2>
+          <p class="text-white/80 text-lg mb-8">
+            加入「绿电赋能，零元启航」沙龙，探索酒店零碳转型新路径！本次聚焦绿电技术应用与成本优化，助力酒店业者把握零碳时代新机遇。
+          </p>
+          
+          <div class="space-y-6 mb-8">
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-secondary mt-1">
+                <i class="fa fa-check"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg">限量席位</h3>
+                <p class="text-white/70">仅限20家酒店参与，名额有限，先到先得</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-secondary mt-1">
+                <i class="fa fa-check"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg">免费参与</h3>
+                <p class="text-white/70">本次活动不收取任何费用，仅限酒店高管和技术负责人</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-secondary mt-1">
+                <i class="fa fa-check"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg">专属福利</h3>
+                <p class="text-white/70">报名成功即可获得《酒店零碳转型白皮书》和绿电解决方案</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8">
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-secondary">
+                <i class="fa fa-phone text-xl"></i>
+              </div>
+              <div>
+                <p class="text-white/70 text-sm">咨询电话</p>
+                <p class="font-bold text-lg">18005796665</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+          <h3 class="text-2xl font-bold text-dark mb-6">扫码报名</h3>
+          <div class="flex justify-center mb-6">
+            <div class="w-48 h-48 bg-gray-200 rounded-lg flex items-center justify-center">
+              <img src="https://blogtc.30515245.xyz/txwd.webp" alt="报名二维码" class="w-40 h-40">
+            </div>
+          </div>
+          <p class="text-dark/70 text-center">
+            扫描二维码，填写报名信息<br>
+            我们将在24小时内与您联系
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 常见问题 -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-primary font-semibold">常见问题</span>
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mt-2 mb-6">您可能想了解的问题</h2>
+        <p class="text-dark/70 text-lg">
+          以下是我们整理的常见问题，如有其他疑问，请随时联系我们。
+        </p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-6">
+          <div class="bg-light rounded-xl overflow-hidden p-6">
+            <h3 class="text-xl font-semibold mb-3">哪些人适合参加这次沙龙？</h3>
+            <p class="text-dark/70">
+              本次沙龙适合酒店业主、总经理、运营总监、工程总监、行政总厨等对酒店绿电转型感兴趣的人士。无论您是想了解最新政策，还是希望推动酒店零碳转型，都能从本次沙龙中获得价值。
+            </p>
+          </div>
+          
+          <div class="bg-light rounded-xl overflow-hidden p-6">
+            <h3 class="text-xl font-semibold mb-3">活动是否收取费用？</h3>
+            <p class="text-dark/70">
+              本次活动不收取任何费用，但为了保证活动质量，我们将对报名酒店进行审核。审核通过后，我们将通过短信和邮件发送确认通知。
+            </p>
+          </div>
+          
+          <div class="bg-light rounded-xl overflow-hidden p-6">
+            <h3 class="text-xl font-semibold mb-3">活动当天需要携带什么？</h3>
+            <p class="text-dark/70">
+              您只需携带手机或电子设备，以便接收活动通知和查看电子资料。我们将为每位参会者提供纸质资料包和饮品茶歇。
+            </p>
+          </div>
+          
+          <div class="bg-light rounded-xl overflow-hidden p-6">
+            <h3 class="text-xl font-semibold mb-3">如果无法参加，能否取消报名？</h3>
+            <p class="text-dark/70">
+              如果您因故无法参加，请至少提前24小时通过电话或邮件通知我们，以便将名额释放给其他酒店。联系方式：18005796665，邮箱：55116191@qq.com。
+            </p>
+          </div>
+          
+          <div class="bg-light rounded-xl overflow-hidden p-6">
+            <h3 class="text-xl font-semibold mb-3">活动结束后是否提供回放？</h3>
+            <p class="text-dark/70">
+              本次活动将进行录制，报名成功的酒店可在活动结束后一周内获得视频回放链接。同时，我们还将整理活动PPT和案例资料，发送给所有参会者。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 合作伙伴 -->
+  <section class="py-16 bg-light">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-xl font-bold text-dark/70">合作伙伴</h2>
+        <p class="text-dark/50 mt-2">感谢以下机构对本次活动的支持</p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+        <div class="grayscale hover:grayscale-0 transition-all">
+          <img src="https://picsum.photos/id/21/120/60" alt="合作伙伴" class="h-10 mx-auto grayscale hover:grayscale-0 transition-all">
+        </div>
+        <div class="grayscale hover:grayscale-0 transition-all">
+          <img src="https://picsum.photos/id/22/120/60" alt="合作伙伴" class="h-10 mx-auto grayscale hover:grayscale-0 transition-all">
+        </div>
+        <div class="grayscale hover:grayscale-0 transition-all">
+          <img src="https://picsum.photos/id/23/120/60" alt="合作伙伴" class="h-10 mx-auto grayscale hover:grayscale-0 transition-all">
+        </div>
+        <div class="grayscale hover:grayscale-0 transition-all">
+          <img src="https://picsum.photos/id/24/120/60" alt="合作伙伴" class="h-10 mx-auto grayscale hover:grayscale-0 transition-all">
+        </div>
+        <div class="grayscale hover:grayscale-0 transition-all">
+          <img src="https://picsum.photos/id/25/120/60" alt="合作伙伴" class="h-10 mx-auto grayscale hover:grayscale-0 transition-all">
+        </div>
+        <div class="grayscale hover:grayscale-0 transition-all">
+          <img src="https://picsum.photos/id/26/120/60" alt="合作伙伴" class="h-10 mx-auto grayscale hover:grayscale-0 transition-all">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 mb-12">
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+              <i class="fa fa-leaf text-white text-xl"></i>
+            </div>
+            <span class="text-xl font-bold">绿电赋能</span>
+          </div>
+          <p class="text-white/70 mb-6">专注于酒店行业绿电技术应用与零碳转型，助力酒店业实现可持续发展。</p>
+          <div class="flex space-x-4">
+        </div>
+      
+        <div>
+          <h4 class="text-lg font-semibold mb-6">联系我们</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start space-x-3">
+              <i class="fa fa-map-marker text-primary mt-1"></i>
+              <span class="text-white/70">上海市嘉定区黄家花园路111号1栋T空间</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <i class="fa fa-phone text-primary"></i>
+              <span class="text-white/70">18005796665</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <i class="fa fa-envelope text-primary"></i>
+              <span class="text-white/70">55116191@qq.com</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">关注我们</h4>
+          <div class="mb-4">
+            <div class="w-32 h-32 bg-gray-800 rounded-lg flex items-center justify-center mx-auto">
+              <img src="https://blogtc.30515245.xyz/20250621151601127.webp" alt="公众号二维码" class="w-28 h-28">
+            </div>
+          </div>
+          <p class="text-white/70 text-center">
+            扫描二维码，关注公众号<br>
+            获取更多绿电资讯
+          </p>
+        </div>
+      </div>
+      
+      <div class="border-t border-white/10 pt-8 text-center text-white/50 text-sm">
+        <p>© 2025 绿电赋能沙龙. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-dark/90', 'backdrop-blur-md', 'shadow-lg');
+        navbar.classList.remove('bg-transparent');
+      } else {
+        navbar.classList.remove('bg-dark/90', 'backdrop-blur-md', 'shadow-lg');
+        navbar.classList.add('bg-transparent');
+      }
+    });
+    
+    // 数字计数器动画
+    const counters = document.querySelectorAll('.counter');
+    
+    function startCounters() {
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const duration = 2000; // 动画持续时间(毫秒)
+        const step = target / (duration / 16); // 每16毫秒增加的步数
+        let current = 0;
+        
+        const updateCounter = () => {
+          current += step;
+          if (current < target) {
+            counter.innerText = Math.ceil(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        
+        updateCounter();
+      });
+    }
+    
+    // 检查元素是否在视口中
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+    
+    // 监听滚动以启动计数器
+    let countersAnimated = false;
+    
+    window.addEventListener('scroll', function() {
+      if (isInViewport(document.querySelector('.counter').parentElement) && !countersAnimated) {
+        startCounters();
+        countersAnimated = true;
+      }
+    });
+    
+    // 初始检查
+    if (isInViewport(document.querySelector('.counter').parentElement) && !countersAnimated) {
+      startCounters();
+      countersAnimated = true;
+    }
+  </script>
+
+
+
+    </body></html>
