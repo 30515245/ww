@@ -1,0 +1,35 @@
+name: Deploy yqh/bmy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # 根据实际情况修改为您使用的分支名称
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js (如果适用)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16' # 根据需要指定版本
+        
+    - name: Change working directory and install dependencies (如果适用)
+      run: |
+        cd yqh/bmy
+        npm install # 如果需要安装依赖，请确保此命令适用于您的项目
+      
+    - name: Build project (如果适用)
+      run: |
+        cd yqh/bmy
+        npm run build # 如果有构建步骤，请确保指向正确的脚本命令
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./yqh/bmy # 指向您的子目录
