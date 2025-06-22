@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未来基建 - 互动电子手册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .section {
+            margin: 80px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .card-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .interactive-timeline {
+            position: relative;
+            margin: 60px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            width: 45%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        .tech-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .tech-item:hover::after {
+            transform: translateX(100%);
+        }
+
+        .tech-item:hover {
+            transform: rotateY(5deg) rotateX(5deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            border-radius: 4px;
+            transition: width 2s ease-out;
+            width: 0%;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #ff6b6b;
+        }
+
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #4ecdc4;
+            transform: scale(1.3);
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+            }
+            
+            .timeline-content {
+                width: 90%;
+                margin: 10px 0;
+            }
+            
+            .timeline-line {
+                display: none;
+            }
+            
+            .nav-dots {
+                display: none;
+            }
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* 结尾区域样式 */
+        .footer-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 100px 0 0 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, rgba(102, 126, 234, 0.3));
+            pointer-events: none;
+        }
+
+        .footer-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .qr-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .qr-code-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .qr-code-placeholder {
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-code-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(79, 172, 254, 0.3), transparent);
+            animation: qrScan 3s ease-in-out infinite;
+        }
+
+        @keyframes qrScan {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+
+        .qr-pattern {
+            width: 140px;
+            height: 140px;
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+        }
+
+        .qr-corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 4px solid #000;
+            background: #fff;
+        }
+
+        .qr-corner.top-left {
+            top: 8px;
+            left: 8px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .qr-corner.top-right {
+            top: 8px;
+            right: 8px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .qr-corner.bottom-left {
+            bottom: 8px;
+            left: 8px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .qr-corner::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: #000;
+        }
+
+        .qr-dots {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 60px;
+            height: 60px;
+        }
+
+        .qr-dot {
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 1px;
+            animation: qrBlink 2s ease-in-out infinite;
+        }
+
+        .qr-dot:nth-child(1) { animation-delay: 0s; }
+        .qr-dot:nth-child(2) { animation-delay: 0.2s; }
+        .qr-dot:nth-child(3) { animation-delay: 0.4s; }
+        .qr-dot:nth-child(4) { animation-delay: 0.6s; }
+        .qr-dot:nth-child(5) { animation-delay: 0.8s; }
+        .qr-dot:nth-child(6) { animation-delay: 1s; }
+        .qr-dot:nth-child(7) { animation-delay: 1.2s; }
+        .qr-dot:nth-child(8) { animation-delay: 1.4s; }
+        .qr-dot:nth-child(9) { animation-delay: 1.6s; }
+
+        @keyframes qrBlink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.3; }
+        }
+
+        .qr-label {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            min-width: 280px;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 1.3rem;
+            min-width: 25px;
+        }
+
+        .footer-bottom {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .qr-container {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .contact-info {
+                align-items: center;
+            }
+            
+            .contact-item {
+                min-width: auto;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .footer-section {
+                padding: 40px 20px;
+                margin: 50px 0 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 导航点 -->
+        <div class="nav-dots">
+            <div class="nav-dot active" data-section="0"></div>
+            <div class="nav-dot" data-section="1"></div>
+            <div class="nav-dot" data-section="2"></div>
+            <div class="nav-dot" data-section="3"></div>
+            <div class="nav-dot" data-section="4"></div>
+            <div class="nav-dot" data-section="5"></div>
+        </div>
+
+        <!-- 标题区域 -->
+        <div class="header">
+            <div class="floating-elements">
+                <div class="floating-icon" style="top: 20%; left: 10%;">🏗️</div>
+                <div class="floating-icon" style="top: 30%; right: 15%;">⚡</div>
+                <div class="floating-icon" style="top: 60%; left: 20%;">🌐</div>
+                <div class="floating-icon" style="top: 70%; right: 25%;">🚀</div>
+                <div class="floating-icon" style="top: 40%; left: 80%;">💡</div>
+            </div>
+            <h1 class="title">未来基建</h1>
+            <p class="subtitle">探索明天的数字世界基础架构</p>
+        </div>
+
+        <!-- 什么是未来基建 -->
+        <div class="section" data-section="1">
+            <h2 class="section-title">什么是未来基建？</h2>
+            <div class="cards-grid">
+                <div class="card" onclick="openModal('digital-infra')">
+                    <span class="card-icon">🌐</span>
+                    <h3 class="card-title">数字基础设施</h3>
+                    <p class="card-content">5G网络、云计算、边缘计算构成的全新数字底座，为万物互联提供强大支撑。</p>
+                </div>
+                <div class="card" onclick="openModal('smart-city')">
+                    <span class="card-icon">🏙️</span>
+                    <h3 class="card-title">智慧城市网络</h3>
+                    <p class="card-content">融合AI、IoT、大数据的城市神经系统，让城市拥有感知、思考和决策能力。</p>
+                </div>
+                <div class="card" onclick="openModal('green-energy')">
+                    <span class="card-icon">🔋</span>
+                    <h3 class="card-title">绿色能源体系</h3>
+                    <p class="card-content">太阳能、风能、储能技术构建的清洁能源网络，实现碳中和目标。</p>
+                </div>
+                <div class="card" onclick="openModal('space-infra')">
+                    <span class="card-icon">🛰️</span>
+                    <h3 class="card-title">太空基础设施</h3>
+                    <p class="card-content">卫星网络、空间站、月球基地等构成的太空经济新支点。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 发展时间线 -->
+        <div class="section" data-section="2">
+            <h2 class="section-title">发展时间线</h2>
+            <div class="interactive-timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2025-2030: 基础建设期</h3>
+                        <p>5G全面普及，AI基础设施大规模部署，智慧城市试点项目启动。</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2030-2035: 融合发展期</h3>
+                        <p>数字孪生城市实现，量子计算商业化，清洁能源占比达70%。</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2035-2040: 智能升级期</h3>
+                        <p>AGI赋能基础设施，脑机接口普及，太空经济规模化。</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2040-2050: 未来实现期</h3>
+                        <p>人类多星球文明，意识上传技术，完全可持续发展社会。</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心技术 -->
+        <div class="section" data-section="3">
+            <h2 class="section-title">核心技术</h2>
+            <div class="tech-showcase">
+                <div class="tech-item">
+                    <h3>🧠 人工智能</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="85"></div>
+                    </div>
+                    <p>85% 成熟度</p>
+                </div>
+                <div class="tech-item">
+                    <h3>⚛️ 量子计算</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="35"></div>
+                    </div>
+                    <p>35% 成熟度</p>
+                </div>
+                <div class="tech-item">
+                    <h3>🔗 区块链</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="70"></div>
+                    </div>
+                    <p>70% 成熟度</p>
+                </div>
+                <div class="tech-item">
+                    <h3>🌿 生物技术</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="60"></div>
+                    </div>
+                    <p>60% 成熟度</p>
+                </div>
+                <div class="tech-item">
+                    <h3>🚗 自动驾驶</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="75"></div>
+                    </div>
+                    <p>75% 成熟度</p>
+                </div>
+                <div class="tech-item">
+                    <h3>🥽 AR/VR</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="65"></div>
+                    </div>
+                    <p>65% 成熟度</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 影响与挑战 -->
+        <div class="section" data-section="4">
+            <h2 class="section-title">影响与挑战</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-icon">📈</span>
+                    <h3 class="card-title">经济变革</h3>
+                    <p class="card-content">预计创造数万亿美元新经济价值，重塑产业结构和就业形态。</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🛡️</span>
+                    <h3 class="card-title">安全挑战</h3>
+                    <p class="card-content">网络安全、数据隐私、AI治理成为关键议题，需要全球协作。</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🌍</span>
+                    <h3 class="card-title">社会公平</h3>
+                    <p class="card-content">数字鸿沟、技术垄断等问题需要政策引导和制度创新。</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🎓</span>
+                    <h3 class="card-title">人才培养</h3>
+                    <p class="card-content">需要大规模技能升级和教育体系改革，适应未来工作需求。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结尾区域 -->
+        <div class="section footer-section" data-section="5">
+            <div class="footer-content">
+                <h2 class="section-title">探索更多</h2>
+                <p class="footer-description">扫描二维码，获取更多未来基建资讯和深度报告</p>
+                
+                <div class="qr-container">
+                    <div class="qr-code-wrapper">
+                        <div class="qr-code-placeholder">
+                            <div class="qr-pattern">
+                                <div class="qr-corner top-left"></div>
+                                <div class="qr-corner top-right"></div>
+                                <div class="qr-corner bottom-left"></div>
+                                <div class="qr-dots">
+                                    <div class="qr-dot"></div>
+                                    <div class="qr-dot"></div>
+                                    <div class="qr-dot"></div>
+                                    <div class="qr-dot"></div>
+                                    <div class="qr-dot"></div>
+                                    <div class="qr-dot"></div>
+                                    <div class="qr-dot"></div>
+                                    <div class="qr-dot"></div>
+                                    <div class="qr-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="qr-label">扫码关注</p>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span>future@infrastructure.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">🌐</span>
+                            <span>www.future-infrastructure.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <span>关注我们的最新动态</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 未来基建研究院 | 共建数字化未来</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // 粒子效果
+        function createParticles() {
+            const particleCount = 50;
+            for (let i = 0; i < particleCount; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                    particle.style.animation = 'particleFloat ' + (Math.random() * 10 + 5) + 's linear infinite';
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 15000);
+                }, Math.random() * 2000);
+            }
+        }
+
+        // 滚动动画和内容边界控制
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('.section');
+            const navDots = document.querySelectorAll('.nav-dot');
+            const footerSection = document.querySelector('.footer-section');
+            
+            // 检查是否滚动到页面底部
+            const footerRect = footerSection.getBoundingClientRect();
+            const isAtBottom = footerRect.bottom <= window.innerHeight + 10;
+            
+            // 如果到达底部，禁止继续向下滚动
+            if (isAtBottom && window.scrollY > 0) {
+                // 计算正确的滚动位置，确保footer底部刚好贴在视窗底部
+                const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+                if (window.scrollY >= maxScrollTop) {
+                    window.scrollTo(0, maxScrollTop);
+                }
+            }
+            
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight * 0.7 && rect.bottom > 0;
+                
+                if (isVisible) {
+                    section.classList.add('visible');
+                    navDots[index]?.classList.add('active');
+                } else {
+                    navDots[index]?.classList.remove('active');
+                }
+            });
+        }
+
+        // 防止过度滚动
+        function preventOverScroll() {
+            const footerSection = document.querySelector('.footer-section');
+            const footerRect = footerSection.getBoundingClientRect();
+            const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+            
+            // 如果尝试滚动超过内容区域，重置到正确位置
+            if (window.scrollY > maxScrollTop) {
+                window.scrollTo(0, maxScrollTop);
+            }
+        }
+
+        // 进度条动画
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                }
+            });
+        }
+
+        // 导航点击
+        document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const sections = document.querySelectorAll('.section');
+                if (index === 0) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    sections[index - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 模态框内容
+        const modalContent = {
+            'digital-infra': {
+                title: '数字基础设施详解',
+                content: `
+                    <h3>🌐 5G/6G网络</h3>
+                    <p>超高速、低延迟的无线通信网络，支持万物互联和实时数据传输。</p>
+                    
+                    <h3>☁️ 云计算平台</h3>
+                    <p>弹性、可扩展的计算资源池，提供按需服务和全球化部署能力。</p>
+                    
+                    <h3>⚡ 边缘计算</h3>
+                    <p>将计算能力下沉到网络边缘，减少延迟，提升用户体验。</p>
+                    
+                    <h3>📊 数据中心</h3>
+                    <p>绿色、智能的数据处理和存储设施，支撑数字经济发展。</p>
+                `
+            },
+            'smart-city': {
+                title: '智慧城市网络',
+                content: `
+                    <h3>🚦 智能交通系统</h3>
+                    <p>AI调度的交通信号、自动驾驶车辆、智能停车系统构成的交通网络。</p>
+                    
+                    <h3>🏠 智能建筑管理</h3>
+                    <p>自动化的楼宇控制、能源管理、安全监控系统。</p>
+                    
+                    <h3>🌱 环境监测网络</h3>
+                    <p>实时监测空气质量、噪音、水质等环境指标的传感器网络。</p>
+                    
+                    <h3>👮 公共安全体系</h3>
+                    <p>视频分析、预警系统、应急响应构成的智能安防网络。</p>
+                `
+            },
+            'green-energy': {
+                title: '绿色能源体系',
+                content: `
+                    <h3>☀️ 太阳能发电</h3>
+                    <p>高效太阳能电池板、光热发电、分布式发电系统。</p>
+                    
+                    <h3>💨 风力发电</h3>
+                    <p>海上风电、智能风机、风能存储技术。</p>
+                    
+                    <h3>🔋 储能技术</h3>
+                    <p>锂电池、氢能、压缩空气等多元化储能解决方案。</p>
+                    
+                    <h3>⚡ 智能电网</h3>
+                    <p>双向通信、自愈能力、需求响应的新一代电力网络。</p>
+                `
+            },
+            'space-infra': {
+                title: '太空基础设施',
+                content: `
+                    <h3>🛰️ 卫星星座</h3>
+                    <p>低轨道通信卫星、导航卫星、遥感卫星组成的太空网络。</p>
+                    
+                    <h3>🚀 太空运输</h3>
+                    <p>可重复使用火箭、太空电梯、轨道转移飞行器。</p>
+                    
+                    <h3>🏭 太空制造</h3>
+                    <p>微重力环境下的材料加工、药物生产、3D打印技术。</p>
+                    
+                    <h3>🌙 月球基地</h3>
+                    <p>月球资源开采、科研站点、深空探测跳板。</p>
+                `
+            }
+        };
+
+        function openModal(contentKey) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            const content = modalContent[contentKey];
+            
+            if (content) {
+                modalBody.innerHTML = `<h2>${content.title}</h2>${content.content}`;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // 点击模态框外部关闭
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+
+        // 初始化
+        window.addEventListener('scroll', () => {
+            animateOnScroll();
+            animateProgressBars();
+            preventOverScroll();
+        });
+
+        // 添加滚动事件监听，防止过度滚动
+        window.addEventListener('wheel', (e) => {
+            const footerSection = document.querySelector('.footer-section');
+            const footerRect = footerSection.getBoundingClientRect();
+            const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+            
+            // 如果已经在底部且尝试继续向下滚动，阻止默认行为
+            if (window.scrollY >= maxScrollTop && e.deltaY > 0) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // 触摸设备的滚动控制
+        let touchStartY = 0;
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            const footerSection = document.querySelector('.footer-section');
+            const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+            const touchY = e.touches[0].clientY;
+            const deltaY = touchStartY - touchY;
+            
+            // 如果已经在底部且尝试继续向下滚动，阻止默认行为
+            if (window.scrollY >= maxScrollTop && deltaY > 0) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        window.addEventListener('load', () => {
+            animateOnScroll();
+            createParticles();
+            setInterval(createParticles, 10000);
+        });
+
+        // 键盘导航
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
