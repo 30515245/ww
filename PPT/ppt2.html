@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>什么是未来基建</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36D399',
+                        accent: '#FF9F43',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .slide {
+                height: 100vh;
+                width: 100vw;
+                position: relative;
+                overflow: hidden;
+            }
+            .slide-container {
+                height: 100%;
+                transition: transform 0.5s ease-in-out;
+            }
+            .slide-content {
+                overflow-y: auto;
+                height: calc(100vh - 8rem);
+                -webkit-overflow-scrolling: touch;
+            }
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 6px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-track {
+                background: rgba(0,0,0,0.05);
+                border-radius: 10px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background: rgba(22, 93, 255, 0.3);
+                border-radius: 10px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                background: rgba(22, 93, 255, 0.5);
+            }
+            .nav-dot {
+                transition: all 0.3s ease;
+                z-index: 10;
+            }
+            .nav-dot.active {
+                background-color: theme('colors.primary');
+                transform: scale(1.3);
+            }
+            .btn-nav {
+                transition: all 0.3s ease;
+                z-index: 20;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-light text-dark overflow-hidden">
+    <div id="ppt-container" class="relative h-screen">
+        <!-- 幻灯片容器 -->
+        <div id="slides-container" class="slide-container">
+            <!-- 封面 -->
+            <div class="slide bg-gradient-to-br from-primary to-dark flex flex-col items-center justify-center text-white">
+                <div class="absolute inset-0 bg-black/30 z-0"></div>
+                <div class="absolute inset-0 z-0">
+                    <img src="https://picsum.photos/id/1031/1200/800" alt="未来城市景观" class="w-full h-full object-cover">
+                </div>
+                <div class="container mx-auto px-6 relative z-10 text-center">
+                    <h1 class="text-[clamp(2.5rem,8vw,4rem)] font-bold mb-4 opacity-0 animate-fade-in">什么是未来基建</h1>
+                    <p class="text-[clamp(1.2rem,4vw,1.8rem)] max-w-2xl mx-auto mb-8 opacity-0 animate-fade-in">探索基础设施的创新与未来发展方向</p>
+                    <div class="opacity-0 animate-fade-in" style="animation-delay: 0.9s">
+                        <i class="fa fa-angle-down text-3xl animate-bounce"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 目录 -->
+            <div class="slide bg-white">
+                <div class="container mx-auto px-6 py-12 slide-content custom-scrollbar">
+                    <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-primary mb-8 mt-4 slide-title">目录</h2>
+                    <div class="space-y-6">
+                        <a href="#slide3" class="toc-item group flex items-center p-4 rounded-lg bg-gray-50 hover:bg-primary/10 transition-all duration-300" data-slide="2">
+                            <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                <i class="fa fa-rocket"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-dark group-hover:text-primary transition-colors">未来基建的定义</h3>
+                                <p class="text-gray-500 text-sm">探索未来基建的核心概念</p>
+                            </div>
+                        </a>
+                        
+                        <a href="#slide4" class="toc-item group flex items-center p-4 rounded-lg bg-gray-50 hover:bg-primary/10 transition-all duration-300" data-slide="3">
+                            <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                <i class="fa fa-lightbulb-o"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-dark group-hover:text-primary transition-colors">关键技术与创新</h3>
+                                <p class="text-gray-500 text-sm">支撑未来基建的前沿技术</p>
+                            </div>
+                        </a>
+                        
+                        <a href="#slide5" class="toc-item group flex items-center p-4 rounded-lg bg-gray-50 hover:bg-primary/10 transition-all duration-300" data-slide="4">
+                            <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                <i class="fa fa-building"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-dark group-hover:text-primary transition-colors">可持续发展</h3>
+                                <p class="text-gray-500 text-sm">绿色与低碳的基建方向</p>
+                            </div>
+                        </a>
+                        
+                        <a href="#slide6" class="toc-item group flex items-center p-4 rounded-lg bg-gray-50 hover:bg-primary/10 transition-all duration-300" data-slide="5">
+                            <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-dark group-hover:text-primary transition-colors">对社会的影响</h3>
+                                <p class="text-gray-500 text-sm">未来基建如何改变生活</p>
+                            </div>
+                        </a>
+                        
+                        <a href="#slide7" class="toc-item group flex items-center p-4 rounded-lg bg-gray-50 hover:bg-primary/10 transition-all duration-300" data-slide="6">
+                            <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                <i class="fa fa-globe"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-dark group-hover:text-primary transition-colors">全球案例分析</h3>
+                                <p class="text-gray-500 text-sm">世界各地的未来基建项目</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 未来基建的定义 -->
+            <div id="slide3" class="slide bg-gray-50" data-slide="2">
+                <div class="container mx-auto px-6 py-12 slide-content custom-scrollbar">
+                    <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-primary mb-8 mt-4 slide-title">未来基建的定义</h2>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-lg opacity-0 animate-fade-in">
+                            <h3 class="text-xl font-semibold mb-4 text-dark flex items-center">
+                                <i class="fa fa-book text-primary mr-2"></i> 核心概念
+                            </h3>
+                            <p class="text-gray-700 mb-4">未来基建是指基于科技创新和可持续发展理念，构建的新一代基础设施系统，它不仅包括传统的物理设施，还融合了数字技术、绿色能源和智能管理。</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-primary mb-2 flex items-center">
+                                        <i class="fa fa-wifi mr-2"></i> 数字化
+                                    </h4>
+                                    <p class="text-sm text-gray-600">集成物联网、大数据和人工智能技术</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-green-600 mb-2 flex items-center">
+                                        <i class="fa fa-leaf mr-2"></i> 可持续
+                                    </h4>
+                                    <p class="text-sm text-gray-600">采用清洁能源，减少环境影响</p>
+                                </div>
+                                <div class="bg-orange-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-orange-600 mb-2 flex items-center">
+                                        <i class="fa fa-bolt mr-2"></i> 智能化
+                                    </h4>
+                                    <p class="text-sm text-gray-600">具备自我感知、分析和决策能力</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.3s">
+                            <h3 class="text-xl font-semibold mb-4 text-dark flex items-center">
+                                <i class="fa fa-cubes text-primary mr-2"></i> 传统基建 vs 未来基建
+                            </h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="py-2 px-4 text-left">维度</th>
+                                            <th class="py-2 px-4 text-left">传统基建</th>
+                                            <th class="py-2 px-4 text-left">未来基建</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b">
+                                            <td class="py-2 px-4">技术基础</td>
+                                            <td class="py-2 px-4">传统工程技术</td>
+                                            <td class="py-2 px-4">数字技术、AI、物联网</td>
+                                        </tr>
+                                        <tr class="border-b">
+                                            <td class="py-2 px-4">能源来源</td>
+                                            <td class="py-2 px-4">化石燃料为主</td>
+                                            <td class="py-2 px-4">可再生能源为主</td>
+                                        </tr>
+                                        <tr class="border-b">
+                                            <td class="py-2 px-4">建设目标</td>
+                                            <td class="py-2 px-4">满足基本需求</td>
+                                            <td class="py-2 px-4">提升效率、可持续性和韧性</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4">管理方式</td>
+                                            <td class="py-2 px-4">人工管理为主</td>
+                                            <td class="py-2 px-4">智能自动化管理</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 关键技术与创新 -->
+            <div id="slide4" class="slide bg-white" data-slide="3">
+                <div class="container mx-auto px-6 py-12 slide-content custom-scrollbar">
+                    <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-primary mb-8 mt-4 slide-title">关键技术与创新</h2>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 p-6 rounded-xl shadow-lg opacity-0 animate-fade-in">
+                                <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                                    <i class="fa fa-microchip text-2xl text-primary"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3 text-dark">物联网 (IoT)</h3>
+                                <p class="text-gray-700 mb-4">通过部署大量传感器，实现基础设施的实时监控和数据采集，提升管理效率和决策科学性。</p>
+                                <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-primary rounded-full" style="width: 85%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">技术成熟度: 85%</p>
+                            </div>
+                            
+                            <div class="bg-green-50 p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.1s">
+                                <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                                    <i class="fa fa-cloud text-2xl text-green-600"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3 text-dark">云计算与边缘计算</h3>
+                                <p class="text-gray-700 mb-4">提供强大的数据处理能力，支持实时分析和智能决策，降低系统响应时间。</p>
+                                <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-green-500 rounded-full" style="width: 90%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">技术成熟度: 90%</p>
+                            </div>
+                            
+                            <div class="bg-purple-50 p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.2s">
+                                <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mb-4">
+                                    <i class="fa fa-brain text-2xl text-purple-600"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3 text-dark">人工智能 (AI)</h3>
+                                <p class="text-gray-700 mb-4">通过机器学习算法，实现基础设施的预测性维护、智能优化和自动化控制。</p>
+                                <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-purple-500 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">技术成熟度: 75%</p>
+                            </div>
+                            
+                            <div class="bg-orange-50 p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.3s">
+                                <div class="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+                                    <i class="fa fa-cogs text-2xl text-orange-600"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3 text-dark">5G与通信技术</h3>
+                                <p class="text-gray-700 mb-4">提供高速、低延迟的通信网络，支持海量设备连接，为智能基建提供通信保障。</p>
+                                <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-orange-500 rounded-full" style="width: 80%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">技术成熟度: 80%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.4s">
+                            <h3 class="text-xl font-semibold mb-4 text-dark flex items-center">
+                                <i class="fa fa-line-chart text-primary mr-2"></i> 技术应用趋势
+                            </h3>
+                            <div class="h-64">
+                                <canvas id="techTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 可持续发展 -->
+            <div id="slide5" class="slide bg-gray-50" data-slide="4">
+                <div class="container mx-auto px-6 py-12 slide-content custom-scrollbar">
+                    <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-primary mb-8 mt-4 slide-title">可持续发展</h2>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-lg opacity-0 animate-fade-in">
+                            <h3 class="text-xl font-semibold mb-4 text-dark flex items-center">
+                                <i class="fa fa-leaf text-green-600 mr-2"></i> 绿色基建的重要性
+                            </h3>
+                            <p class="text-gray-700 mb-4">未来基建必须与环境保护和可持续发展目标相结合，减少碳排放，提高资源利用效率，实现经济发展与生态保护的平衡。</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <div class="bg-green-50 p-4 rounded-lg flex items-start">
+                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <i class="fa fa-recycle text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-green-600 mb-1">资源循环利用</h4>
+                                        <p class="text-sm text-gray-600">采用可回收材料，设计循环经济模式</p>
+                                    </div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg flex items-start">
+                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <i class="fa fa-sun-o text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-green-600 mb-1">清洁能源整合</h4>
+                                        <p class="text-sm text-gray-600">融合太阳能、风能等可再生能源</p>
+                                    </div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg flex items-start">
+                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <i class="fa fa-tint text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-green-600 mb-1">水资源管理</h4>
+                                        <p class="text-sm text-gray-600">雨水收集、污水处理和再利用系统</p>
+                                    </div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg flex items-start">
+                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <i class="fa fa-tree text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-green-600 mb-1">生态系统保护</h4>
+                                        <p class="text-sm text-gray-600">建设过程中保护自然栖息地</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.3s">
+                            <h3 class="text-xl font-semibold mb-4 text-dark flex items-center">
+                                <i class="fa fa-pie-chart text-primary mr-2"></i> 碳排放对比
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <div class="h-64">
+                                        <canvas id="carbonChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h4 class="font-semibold text-lg mb-3">绿色基建的环境效益</h4>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>相比传统基建，可减少40-60%的碳排放</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>降低能源消耗30-50%</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>减少水资源浪费约25%</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>延长基础设施使用寿命15-20%</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 对社会的影响 -->
+            <div id="slide6" class="slide bg-white" data-slide="5">
+                <div class="container mx-auto px-6 py-12 slide-content custom-scrollbar">
+                    <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-primary mb-8 mt-4 slide-title">对社会的影响</h2>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gradient-to-br from-blue-500 to-blue-700 text-white p-6 rounded-xl shadow-lg opacity-0 animate-fade-in">
+                                <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
+                                    <i class="fa fa-users text-2xl text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3 text-white">改善生活质量</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>智能交通系统减少通勤时间</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>智慧能源管理降低生活成本</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>远程医疗和教育扩大服务覆盖</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>智能城市管理提升公共服务效率</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-green-500 to-green-700 text-white p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.1s">
+                                <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
+                                    <i class="fa fa-briefcase text-2xl text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3 text-white">创造经济机会</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>新兴技术领域创造大量就业岗位</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>基础设施升级带动相关产业发展</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>数字化转型提升企业竞争力</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>智慧城市建设吸引创新投资</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-purple-500 to-purple-700 text-white p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.2s">
+                                <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
+                                    <i class="fa fa-globe text-2xl text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3 text-white">促进可持续发展</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>绿色基建减少环境足迹</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>资源循环利用提高效率</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>可再生能源减少碳排放</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>智能管理优化资源分配</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-orange-500 to-orange-700 text-white p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.3s">
+                                <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
+                                    <i class="fa fa-shield text-2xl text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3 text-white">增强城市韧性</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>智能预警系统应对自然灾害</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>分布式能源系统提高能源安全</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>弹性基础设施减少灾害损失</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                        <span>数字技术保障城市服务连续性</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.4s">
+                            <h3 class="text-xl font-semibold mb-4 text-dark flex items-center">
+                                <i class="fa fa-bar-chart text-primary mr-2"></i> 社会影响评估
+                            </h3>
+                            <div class="h-64">
+                                <canvas id="impactChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 全球案例分析 -->
+            <div id="slide7" class="slide bg-gray-50" data-slide="6">
+                <div class="container mx-auto px-6 py-12 slide-content custom-scrollbar">
+                    <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-primary mb-8 mt-4 slide-title">全球案例分析</h2>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white p-0 rounded-xl shadow-lg overflow-hidden opacity-0 animate-fade-in">
+                                <div class="h-48 overflow-hidden">
+                                    <img src="https://picsum.photos/id/1067/800/600" alt="新加坡智慧城市" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fa fa-map-marker text-primary"></i>
+                                        </div>
+                                        <h3 class="text-xl font-semibold text-dark">新加坡 - 智慧国家2025</h3>
+                                    </div>
+                                    <p class="text-gray-700 mb-4">新加坡通过全面数字化转型，建设智慧城市基础设施，包括智能交通、智慧能源管理和数字政务等，提升城市运行效率和居民生活质量。</p>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="flex items-center mr-4"><i class="fa fa-calendar mr-1"></i> 2014-2025</span>
+                                        <span class="flex items-center"><i class="fa fa-users mr-1"></i> 560万人口</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-0 rounded-xl shadow-lg overflow-hidden opacity-0 animate-fade-in" style="animation-delay: 0.1s">
+                                <div class="h-48 overflow-hidden">
+                                    <img src="https://picsum.photos/id/1031/800/600" alt="迪拜未来基金会" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fa fa-map-marker text-primary"></i>
+                                        </div>
+                                        <h3 class="text-xl font-semibold text-dark">迪拜 - 未来基金会</h3>
+                                    </div>
+                                    <p class="text-gray-700 mb-4">迪拜致力于成为全球最智能的城市，投资建设未来基础设施，包括自动驾驶系统、无人机物流和区块链政务，目标是到2030年减少30%的交通拥堵。</p>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="flex items-center mr-4"><i class="fa fa-calendar mr-1"></i> 2016-2030</span>
+                                        <span class="flex items-center"><i class="fa fa-building mr-1"></i> 200+智能项目</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-0 rounded-xl shadow-lg overflow-hidden opacity-0 animate-fade-in" style="animation-delay: 0.2s">
+                                <div class="h-48 overflow-hidden">
+                                    <img src="https://picsum.photos/id/1048/800/600" alt="上海临港新片区" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fa fa-map-marker text-primary"></i>
+                                        </div>
+                                        <h3 class="text-xl font-semibold text-dark">上海 - 临港新片区</h3>
+                                    </div>
+                                    <p class="text-gray-700 mb-4">上海临港新片区致力于打造未来城市样板，集成智能电网、自动驾驶、5G全域覆盖等技术，构建绿色低碳、智慧生态的现代化新城。</p>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="flex items-center mr-4"><i class="fa fa-calendar mr-1"></i> 2019-2035</span>
+                                        <span class="flex items-center"><i class="fa fa-building mr-1"></i> 智能网联汽车示范区</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-0 rounded-xl shadow-lg overflow-hidden opacity-0 animate-fade-in" style="animation-delay: 0.3s">
+                                <div class="h-48 overflow-hidden">
+                                    <img src="https://picsum.photos/id/1073/800/600" alt="荷兰水上城市" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fa fa-map-marker text-primary"></i>
+                                        </div>
+                                        <h3 class="text-xl font-semibold text-dark">荷兰 - 水上浮动城市</h3>
+                                    </div>
+                                    <p class="text-gray-700 mb-4">面对海平面上升的挑战，荷兰正在开发浮动城市技术，建设可适应气候变化的基础设施，包括浮动房屋、公园和商业区，为沿海城市提供解决方案。</p>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="flex items-center mr-4"><i class="fa fa-calendar mr-1"></i> 2020-至今</span>
+                                        <span class="flex items-center"><i class="fa fa-tint mr-1"></i> 应对海平面上升</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 发展趋势 -->
+            <div class="slide bg-white" data-slide="7">
+                <div class="container mx-auto px-6 py-12 slide-content custom-scrollbar">
+                    <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-primary mb-8 mt-4 slide-title">发展趋势</h2>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-xl shadow-lg opacity-0 animate-fade-in">
+                                <h3 class="text-xl font-semibold mb-4 text-dark flex items-center">
+                                    <i class="fa fa-arrow-up text-primary mr-2"></i> 未来五年关键趋势
+                                </h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                                            <i class="fa fa-1 text-xs text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-dark mb-1">全集成智慧网络</h4>
+                                            <p class="text-sm text-gray-600">物理基础设施与数字技术深度融合</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                                            <i class="fa fa-2 text-xs text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-dark mb-1">绿色与低碳优先</h4>
+                                            <p class="text-sm text-gray-600">可持续发展成为基建核心标准</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                                            <i class="fa fa-3 text-xs text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-dark mb-1">以人为中心设计</h4>
+                                            <p class="text-sm text-gray-600">基建更注重用户体验和社区需求</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                                            <i class="fa fa-4 text-xs text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-dark mb-1">弹性与韧性增强</h4>
+                                            <p class="text-sm text-gray-600">基础设施能够抵御自然灾害和人为破坏</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                                            <i class="fa fa-5 text-xs text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-dark mb-1">分布式与去中心化</h4>
+                                            <p class="text-sm text-gray-600">能源、计算和服务更加分散和本地化</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-secondary/10 to-secondary/5 p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.1s">
+                                <h3 class="text-xl font-semibold mb-4 text-dark flex items-center">
+                                    <i class="fa fa-lightbulb-o text-secondary mr-2"></i> 未来十年展望
+                                </h3>
+                                <div class="space-y-6">
+                                    <div class="flex items-start">
+                                        <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fa fa-bolt text-xl text-secondary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-dark mb-1">能源革命</h4>
+                                            <p class="text-sm text-gray-600">可再生能源占比超过70%，能源存储技术取得重大突破</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fa fa-car text-xl text-secondary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-dark mb-1">交通转型</h4>
+                                            <p class="text-sm text-gray-600">自动驾驶车辆占比超过50%，城市空中交通开始普及</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fa fa-home text-xl text-secondary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-dark mb-1">智能生活</h4>
+                                            <p class="text-sm text-gray-600">智能家居和智慧城市无缝连接，生活便利性大幅提升</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mr-4 flex-shrink-0">
+                                            <i class="fa fa-globe text-xl text-secondary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-dark mb-1">全球协作</h4>
+                                            <p class="text-sm text-gray-600">跨国基础设施项目增加，应对全球性挑战</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-xl shadow-lg opacity-0 animate-fade-in" style="animation-delay: 0.2s">
+                            <h3 class="text-xl font-semibold mb-4 text-dark flex items-center">
+                                <i class="fa fa-calendar text-primary mr-2"></i> 未来基建发展路线图
+                            </h3>
+                            <div class="relative">
+                                <div class="absolute left-5 top-0 bottom-0 w-0.5 bg-primary/20"></div>
+                                <div class="space-y-6">
+                                    <div class="relative pl-12">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                                            <h4 class="font-semibold text-dark mb-1">2020-2025：技术验证期</h4>
+                                            <p class="text-sm text-gray-600">关键技术试点应用，标准制定和政策框架建立</p>
+                                        </div>
+                                    </div>
+                                    <div class="relative pl-12">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                                            <i class="fa fa-cog text-white animate-spin"></i>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                                            <h4 class="font-semibold text-dark mb-1">2025-2030：规模部署期</h4>
+                                            <p class="text-sm text-gray-600">核心基础设施智能化升级，绿色技术广泛应用</p>
+                                        </div>
+                                    </div>
+                                    <div class="relative pl-12">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+                                            <i class="fa fa-clock-o text-white"></i>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                                            <h4 class="font-semibold text-dark mb-1">2030-2040：全面融合期</h4>
+                                            <p class="text-sm text-gray-600">物理与数字基础设施深度融合，形成智能生态系统</p>
+                                        </div>
+                                    </div>
+                                    <div class="relative pl-12">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+                                            <i class="fa fa-clock-o text-white"></i>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                                            <h4 class="font-semibold text-dark mb-1">2040-2050：创新突破期</h4>
+                                            <p class="text-sm text-gray-600">突破性技术应用，实现可持续、韧性和智慧的全面发展</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 总结与展望 -->
+            <div class="slide bg-gradient-to-br from-primary to-dark flex flex-col">
+                <div class="absolute inset-0 bg-black/30 z-0"></div>
+                <div class="container mx-auto px-6 py-12 flex-1 flex flex-col relative z-10">
+                    <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-white mb-8 mt-4 slide-title">总结与展望</h2>
+                    <div class="space-y-6">
+                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-lg text-white opacity-0 animate-fade-in">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fa fa-bookmark text-white mr-2"></i> 核心要点回顾
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                    <span>未来基建是数字化、智能化和可持续化的融合体</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                    <span>关键技术包括物联网、云计算、人工智能和5G等</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                    <span>可持续发展是未来基建的核心原则</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                    <span>未来基建将深刻改变社会、经济和生活方式</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle mt-1 mr-2"></i>
+                                    <span>全球各国正在积极探索和实践未来基建项目</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-lg text-white opacity-0 animate-fade-in" style="animation-delay: 0.3s">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fa fa-lightbulb-o text-white mr-2"></i> 未来展望
+                            </h3>
+                            <p class="mb-4">未来基建不仅是技术的升级，更是人类社会发展理念的转变。通过智能化、绿色化和人性化的基础设施建设，我们将创造更加宜居、高效和可持续的未来城市。</p>
+                            <p>让我们共同期待一个由科技创新驱动、与自然和谐共生的未来世界！</p>
+                        </div>
+                        
+                        <div class="mt-auto text-center pt-6">
+                            <div class="flex justify-center space-x-4 mb-6">
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+                                    <i class="fa fa-weixin"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+                                    <i class="fa fa-weibo"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+                                    <i class="fa fa-envelope"></i>
+                                </a>
+                            </div>
+                            <p class="text-white/70 text-sm">感谢观看 | 期待与您共同探索未来基建</p>
+                            <div class="mt-4">
+                                <img src="https://blogtc.30515245.xyz/20250621151601127.webp" alt="联系方式" class="h-20 mx-auto rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 导航点 -->
+        <div class="fixed right-5 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4 z-20">
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary active" data-slide="0"></button>
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary" data-slide="1"></button>
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary" data-slide="2"></button>
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary" data-slide="3"></button>
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary" data-slide="4"></button>
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary" data-slide="5"></button>
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary" data-slide="6"></button>
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary" data-slide="7"></button>
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary" data-slide="8"></button>
+            <button class="nav-dot w-4 h-4 rounded-full bg-gray-300 hover:bg-primary" data-slide="9"></button>
+        </div>
+        
+        <!-- 控制按钮 -->
+        <div class="fixed bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-4 z-20">
+            <button id="prevBtn" class="btn-nav w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+                <i class="fa fa-angle-up"></i>
+            </button>
+            <button id="nextBtn" class="btn-nav w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+                <i class="fa fa-angle-down"></i>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const navDots = document.querySelectorAll('.nav-dot');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            
+            // 初始化导航点
+            navDots[0].classList.add('active');
+            
+            // 导航点点击事件
+            navDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+            });
+            
+            // 目录项点击事件
+            document.querySelectorAll('.toc-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetSlide = parseInt(item.getAttribute('data-slide'));
+                    if(targetSlide >= 0 && targetSlide < totalSlides) {
+                        goToSlide(targetSlide);
+                    }
+                });
+            });
+            
+            // 上一页/下一页按钮
+            prevBtn.addEventListener('click', () => {
+                if(currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                if(currentSlide < totalSlides - 1) {
+                    goToSlide(currentSlide + 1);
+                }
+            });
+            
+            // 键盘导航
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'ArrowDown' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    if(currentSlide < totalSlides - 1) {
+                        goToSlide(currentSlide + 1);
+                    }
+                } else if(e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    if(currentSlide > 0) {
+                        goToSlide(currentSlide - 1);
+                    }
+                }
+            });
+            
+            // 滑动手势
+            let touchStartY = 0;
+            let touchEndY = 0;
+            let touchStartTime = 0;
+            let touchEndTime = 0;
+            
+            document.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                touchStartTime = new Date().getTime();
+            }, { passive: false });
+            
+            document.addEventListener('touchend', (e) => {
+                touchEndY = e.changedTouches[0].clientY;
+                touchEndTime = new Date().getTime();
+                handleSwipe();
+            }, { passive: false });
+            
+            function handleSwipe() {
+                const swipeThreshold = 30;
+                const timeThreshold = 500;
+                
+                if (touchEndTime - touchStartTime > timeThreshold) return;
+                
+                if (touchStartY - touchEndY > swipeThreshold) {
+                    // 向下滑动
+                    if(currentSlide < totalSlides - 1) {
+                        goToSlide(currentSlide + 1);
+                    }
+                } else if (touchEndY - touchStartY > swipeThreshold) {
+                    // 向上滑动
+                    if(currentSlide > 0) {
+                        goToSlide(currentSlide - 1);
+                    }
+                }
+            }
+            
+            // 幻灯片切换函数
+            function goToSlide(index) {
+                if(index < 0 || index >= totalSlides) return;
+                
+                currentSlide = index;
+                const offset = -currentSlide * 100;
+                document.getElementById('slides-container').style.transform = `translateY(${offset}vh)`;
+                
+                // 更新导航点状态
+                navDots.forEach((dot, i) => {
+                    if(i === currentSlide) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+                
+                // 触发当前幻灯片的动画
+                animateCurrentSlide(slides[currentSlide]);
+            }
+            
+            // 触发当前幻灯片的动画
+            function animateCurrentSlide(slide) {
+                const animatedElements = slide.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-scale');
+                
+                animatedElements.forEach((el, i) => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    
+                    setTimeout(() => {
+                        el.style.transition = 'opacity 0.8s ease-in-out, transform 0.8s ease-out';
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 100 * i);
+                });
+            }
+            
+            // 初始化图表
+            initCharts();
+            
+            // 初始动画
+            setTimeout(() => {
+                animateCurrentSlide(slides[0]);
+            }, 300);
+        });
+        
+        // 初始化图表
+        function initCharts() {
+            // 技术应用趋势图表
+            const techTrendCtx = document.getElementById('techTrendChart');
+            if(techTrendCtx) {
+                new Chart(techTrendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2020', '2022', '2024', '2026', '2028', '2030'],
+                        datasets: [
+                            {
+                                label: '物联网',
+                                data: [30, 45, 60, 75, 85, 90],
+                                borderColor: '#165DFF',
+                                backgroundColor: 'rgba(22, 93, 255, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            },
+                            {
+                                label: '人工智能',
+                                data: [20, 35, 50, 65, 75, 85],
+                                borderColor: '#722ED1',
+                                backgroundColor: 'rgba(114, 46, 209, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            },
+                            {
+                                label: '5G',
+                                data: [10, 30, 55, 70, 80, 88],
+                                borderColor: '#FF9F43',
+                                backgroundColor: 'rgba(255, 159, 67, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 碳排放对比图表
+            const carbonCtx = document.getElementById('carbonChart');
+            if(carbonCtx) {
+                new Chart(carbonCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['传统建筑', '绿色建筑', '智能建筑'],
+                        datasets: [
+                            {
+                                label: '碳排放 (吨/年)',
+                                data: [120, 70, 40],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 211, 153, 0.7)',
+                                    'rgba(22, 93, 255, 0.7)'
+                                ],
+                                borderColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(54, 211, 153)',
+                                    'rgb(22, 93, 255)'
+                                ],
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 社会影响评估图表
+            const impactCtx = document.getElementById('impactChart');
+            if(impactCtx) {
+                new Chart(impactCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['生活质量', '经济发展', '环境保护', '社会公平', '城市韧性'],
+                        datasets: [
+                            {
+                                label: '传统基建',
+                                data: [65, 70, 40, 55, 50],
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                pointBackgroundColor: 'rgb(255, 99, 132)',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: 'rgb(255, 99, 132)'
+                            },
+                            {
+                                label: '未来基建',
+                                data: [90, 85, 80, 75, 85],
+                                backgroundColor: 'rgba(22, 93, 255, 0.2)',
+                                borderColor: 'rgb(22, 93, 255)',
+                                pointBackgroundColor: 'rgb(22, 93, 255)',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: 'rgb(22, 93, 255)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    display: true
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 100
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

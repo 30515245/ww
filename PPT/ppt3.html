@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>什么是未来基建</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .ppt-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            width: 95%;
+            max-width: 400px;
+            height: 85vh;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            display: none;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .slide-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .slide-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .page-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 10px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-link {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            margin: 10px auto;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .content-section {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .content-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            animation: fillProgress 2s ease-out;
+        }
+
+        @keyframes fillProgress {
+            from { width: 0; }
+        }
+
+        .contact-info {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .contact-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -23px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .tech-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                width: 98%;
+                height: 90vh;
+                padding: 15px;
+            }
+            
+            .slide-title {
+                font-size: 20px;
+            }
+            
+            .nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 16px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-circle" style="width: 60px; height: 60px; top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-circle" style="width: 40px; height: 40px; top: 20%; right: 15%; animation-delay: 2s;"></div>
+        <div class="floating-circle" style="width: 80px; height: 80px; bottom: 30%; left: 20%; animation-delay: 4s;"></div>
+        <div class="floating-circle" style="width: 50px; height: 50px; bottom: 10%; right: 10%; animation-delay: 1s;"></div>
+    </div>
+
+    <div class="ppt-container">
+        <!-- 页面1: 封面 -->
+        <div class="slide active" id="slide1">
+            <div class="slide-header">
+                <h1 class="slide-title">🚀 什么是未来基建</h1>
+                <p class="slide-subtitle">探索数字时代的基础设施革命</p>
+            </div>
+            <div class="icon" style="background: linear-gradient(135deg, #667eea, #764ba2); font-size: 80px; width: 150px; height: 150px;">🏗️</div>
+            <div class="content-text" style="text-align: center; font-size: 16px; margin-top: 30px;">
+                <p><span class="highlight">构建智能、互联、可持续的未来世界</span></p>
+                <p>2025年数字化转型的核心驱动力</p>
+            </div>
+        </div>
+
+        <!-- 页面2: 目录 -->
+        <div class="slide" id="slide2">
+            <div class="slide-header">
+                <h2 class="slide-title">📋 目录导航</h2>
+                <p class="slide-subtitle">点击跳转到对应章节</p>
+            </div>
+            <ul class="menu-list">
+                <li class="menu-item" onclick="goToSlide(3)">
+                    <a class="menu-link">🎯 未来基建概述</a>
+                </li>
+                <li class="menu-item" onclick="goToSlide(4)">
+                    <a class="menu-link">🔧 核心技术支柱</a>
+                </li>
+                <li class="menu-item" onclick="goToSlide(5)">
+                    <a class="menu-link">📊 市场发展现状</a>
+                </li>
+                <li class="menu-item" onclick="goToSlide(6)">
+                    <a class="menu-link">🌟 关键应用领域</a>
+                </li>
+                <li class="menu-item" onclick="goToSlide(7)">
+                    <a class="menu-link">⚡ 技术创新趋势</a>
+                </li>
+                <li class="menu-item" onclick="goToSlide(8)">
+                    <a class="menu-link">🗓️ 发展时间线</a>
+                </li>
+                <li class="menu-item" onclick="goToSlide(9)">
+                    <a class="menu-link">🔮 未来展望</a>
+                </li>
+                <li class="menu-item" onclick="goToSlide(10)">
+                    <a class="menu-link">📞 联系我们</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 页面3: 未来基建概述 -->
+        <div class="slide" id="slide3">
+            <div class="slide-header">
+                <h2 class="slide-title">🎯 未来基建概述</h2>
+                <p class="slide-subtitle">重新定义基础设施</p>
+            </div>
+            <div class="content-section">
+                <h3 class="highlight">什么是未来基建？</h3>
+                <p class="content-text">未来基建是指以<strong>数字化、智能化、绿色化</strong>为核心的新一代基础设施体系，包括5G网络、云计算、物联网、人工智能等关键技术的深度融合。</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h4>数字化</h4>
+                    <p style="font-size: 12px;">万物互联的数字世界</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🤖</div>
+                    <h4>智能化</h4>
+                    <p style="font-size: 12px;">AI驱动的智慧决策</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌱</div>
+                    <h4>绿色化</h4>
+                    <p style="font-size: 12px;">可持续发展理念</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h4>高效化</h4>
+                    <p style="font-size: 12px;">极致的运行效率</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页面4: 核心技术支柱 -->
+        <div class="slide" id="slide4">
+            <div class="slide-header">
+                <h2 class="slide-title">🔧 核心技术支柱</h2>
+                <p class="slide-subtitle">构建未来的技术基石</p>
+            </div>
+            <div class="tech-card">
+                <h4>🌐 5G/6G网络</h4>
+                <p class="content-text">超高速、低延迟的网络连接，支持万物互联的基础通信设施。</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%;"></div>
+                </div>
+                <small>技术成熟度: 85%</small>
+            </div>
+            <div class="tech-card">
+                <h4>☁️ 云原生架构</h4>
+                <p class="content-text">弹性可扩展的云计算平台，提供按需分配的计算资源。</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 92%;"></div>
+                </div>
+                <small>技术成熟度: 92%</small>
+            </div>
+            <div class="tech-card">
+                <h4>🤖 人工智能</h4>
+                <p class="content-text">机器学习、深度学习驱动的智能决策和自动化系统。</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 78%;"></div>
+                </div>
+                <small>技术成熟度: 78%</small>
+            </div>
+        </div>
+
+        <!-- 页面5: 市场发展现状 -->
+        <div class="slide" id="slide5">
+            <div class="slide-header">
+                <h2 class="slide-title">📊 市场发展现状</h2>
+                <p class="slide-subtitle">数据说话的发展态势</p>
+            </div>
+            <div class="content-section">
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="stat-number">$2.8万亿</div>
+                    <p class="content-text">2025年全球新基建市场规模</p>
+                </div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="stat-number">45%</div>
+                    <p class="content-text">年复合增长率(CAGR)</p>
+                </div>
+            </div>
+            <div class="content-section">
+                <h4 class="highlight">区域分布</h4>
+                <div style="margin: 15px 0;">
+                    <p>🇨🇳 中国: 35%</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 35%;"></div></div>
+                </div>
+                <div style="margin: 15px 0;">
+                    <p>🇺🇸 美国: 28%</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 28%;"></div></div>
+                </div>
+                <div style="margin: 15px 0;">
+                    <p>🇪🇺 欧盟: 22%</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 22%;"></div></div>
+                </div>
+                <div style="margin: 15px 0;">
+                    <p>🌏 其他: 15%</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 15%;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页面6: 关键应用领域 -->
+        <div class="slide" id="slide6">
+            <div class="slide-header">
+                <h2 class="slide-title">🌟 关键应用领域</h2>
+                <p class="slide-subtitle">触及生活方方面面</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🏙️</div>
+                    <h4>智慧城市</h4>
+                    <p style="font-size: 12px;">智能交通、环境监测</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏭</div>
+                    <h4>工业4.0</h4>
+                    <p style="font-size: 12px;">智能制造、数字孪生</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏥</div>
+                    <h4>智慧医疗</h4>
+                    <p style="font-size: 12px;">远程诊断、精准医疗</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📚</div>
+                    <h4>智慧教育</h4>
+                    <p style="font-size: 12px;">个性化学习、VR教学</p>
+                </div>
+            </div>
+            <div class="content-section">
+                <h4 class="highlight">核心价值</h4>
+                <p class="content-text">• <strong>效率提升:</strong> 自动化处理提升50%以上工作效率</p>
+                <p class="content-text">• <strong>成本降低:</strong> 智能化运营降低30%运维成本</p>
+                <p class="content-text">• <strong>体验优化:</strong> 个性化服务提升用户满意度</p>
+                <p class="content-text">• <strong>创新驱动:</strong> 催生新的商业模式和产业生态</p>
+            </div>
+        </div>
+
+        <!-- 页面7: 技术创新趋势 -->
+        <div class="slide" id="slide7">
+            <div class="slide-header">
+                <h2 class="slide-title">⚡ 技术创新趋势</h2>
+                <p class="slide-subtitle">前沿技术发展方向</p>
+            </div>
+            <div class="tech-card">
+                <h4>🧠 边缘智能</h4>
+                <p class="content-text">将AI计算能力推向网络边缘，实现实时响应和本地化处理。</p>
+            </div>
+            <div class="tech-card">
+                <h4>🔐 量子通信</h4>
+                <p class="content-text">绝对安全的信息传输技术，为未来网络安全提供革命性保障。</p>
+            </div>
+            <div class="tech-card">
+                <h4>🌐 数字孪生</h4>
+                <p class="content-text">物理世界的数字化镜像，实现虚实同步的智能管理。</p>
+            </div>
+            <div class="content-section">
+                <h4 class="highlight">发展预测</h4>
+                <p class="content-text">• 2026年: 边缘AI芯片市场突破500亿美元</p>
+                <p class="content-text">• 2027年: 量子互联网商用试点启动</p>
+                <p class="content-text">• 2028年: 数字孪生技术普及率达60%</p>
+            </div>
+        </div>
+
+        <!-- 页面8: 发展时间线 -->
+        <div class="slide" id="slide8">
+            <div class="slide-header">
+                <h2 class="slide-title">🗓️ 发展时间线</h2>
+                <p class="slide-subtitle">未来基建演进路径</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4 style="color: #667eea;">2020-2022 起步期</h4>
+                    <p style="font-size: 13px;">5G网络规模部署，云计算基础设施建设</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #667eea;">2023-2025 加速期</h4>
+                    <p style="font-size: 13px;">AI技术深度融合，工业互联网快速发展</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #667eea;">2026-2028 成熟期</h4>
+                    <p style="font-size: 13px;">6G网络商用，边缘计算普及应用</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #667eea;">2029-2030 智能期</h4>
+                    <p style="font-size: 13px;">量子计算实用化，全面智能化社会</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页面9: 未来展望 -->
+        <div class="slide" id="slide9">
+            <div class="slide-header">
+                <h2 class="slide-title">🔮 未来展望</h2>
+                <p class="slide-subtitle">构建智能互联的数字世界</p>
+            </div>
+            <div class="content-section">
+                <h4 class="highlight">愿景目标</h4>
+                <p class="content-text">到2030年，未来基建将成为<strong>数字经济的核心支撑</strong>，实现:</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🌍</div>
+                    <h4>全球互联</h4>
+                    <p style="font-size: 12px;">无缝连接的数字地球</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🧠</div>
+                    <h4>智能社会</h4>
+                    <p style="font-size: 12px;">AI赋能的智慧生活</p>
+                </div>
+            </div>
+            <div class="content-section">
+                <h4 class="highlight">关键指标</h4>
+                <p class="content-text">• 网络覆盖率: 99.9%</p>
+                <p class="content-text">• 数字化渗透率: 85%</p>
+                <p class="content-text">• 智能化应用率: 70%</p>
+                <p class="content-text">• 绿色能耗比例: 80%</p>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <p class="highlight" style="font-size: 18px;">"连接一切，智能未来"</p>
+            </div>
+        </div>
+
+        <!-- 页面10: 联系我们 -->
+        <div class="slide" id="slide10">
+            <div class="slide-header">
+                <h2 class="slide-title">📞 联系我们</h2>
+                <p class="slide-subtitle">开启合作之旅</p>
+            </div>
+            <div class="contact-info">
+                <img src="https://blogtc.30515245.xyz/20250621151601127.webp" alt="联系方式" class="contact-image" onerror="this.style.display='none';">
+                <div class="content-section">
+                    <h4 class="highlight">专业服务</h4>
+                    <p class="content-text">• 未来基建咨询规划</p>
+                    <p class="content-text">• 数字化转型解决方案</p>
+                    <p class="content-text">• 智能技术实施部署</p>
+                    <p class="content-text">• 定制化培训服务</p>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <p class="highlight" style="font-size: 20px;">🚀 携手共建智能未来 🚀</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-indicator">
+        <span id="current-page">1</span> / 10
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">‹</button>
+        <button class="nav-btn" onclick="nextSlide()">›</button>
+        <button class="nav-btn" onclick="goToSlide(2)">≡</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            document.getElementById(`slide${currentSlide}`).classList.add('active');
+            document.getElementById('current-page').textContent = currentSlide;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // 触摸滑动支持
+        let startX = 0;
+        let startY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+            
+            // 只有水平滑动距离大于垂直滑动距离时才触发翻页
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    nextSlide(); // 向左滑动，下一页
+                } else {
+                    previousSlide(); // 向右滑动，上一页
+                }
+            }
+        });
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    previousSlide();
+                    break;
+                case 'ArrowRight':
+                    nextSlide();
+                    break;
+                case 'Home':
+                    goToSlide(1);
+                    break;
+                case 'End':
+                    goToSlide(totalSlides);
+                    break;
+            }
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(1);
+        });
+    </script>
+</body>
+</html>
