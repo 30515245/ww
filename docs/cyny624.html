@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迈向零碳未来：产业能源化机遇信息图</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #007BFF, #28A745);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .flow-arrow {
+            font-size: 1.5rem;
+            line-height: 1;
+            color: #28A745;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-8 md:my-12">
+            <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-4">迈向零碳未来</h1>
+            <p class="text-xl md:text-2xl text-gray-600">产业能源化深度解析与职业机遇</p>
+        </header>
+
+        <section id="intro" class="my-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-blue-600 mb-4">全球共识与中国目标</h2>
+                    <p class="text-gray-700 mb-6">为应对全球气候变化，中国提出“双碳”目标，引领一场深刻的经济社会系统性变革。产业能源化，即“新能源+”，已成为推动工业体系再造、实现高质量发展的核心引擎。</p>
+                    <div class="flex justify-around text-center">
+                        <div>
+                            <p class="text-3xl font-bold text-green-600">2030</p>
+                            <p class="text-gray-500">碳达峰</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-green-600">2060</p>
+                            <p class="text-gray-500">碳中和</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h3 class="text-xl font-semibold text-center mb-4">全球能源转型市场（万亿美元）</h3>
+                     <div class="chart-container h-64 md:h-72">
+                        <canvas id="marketGrowthChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-gray-500 mt-4">亚太地区以41.65%的份额主导全球市场。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="drivers" class="my-16">
+            <h2 class="text-3xl font-bold text-center mb-8">变革背后的四大驱动力</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition-shadow duration-300">
+                    <p class="text-5xl mb-4">🌍</p>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-600">气候与环境</h3>
+                    <p class="text-gray-600 text-sm">应对全球变暖，改善公共健康，构建可持续的未来。</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition-shadow duration-300">
+                    <p class="text-5xl mb-4">🛡️</p>
+                    <h3 class="text-xl font-semibold mb-2 text-green-600">能源安全</h3>
+                    <p class="text-gray-600 text-sm">摆脱化石燃料进口依赖，构建多元、有韧性的能源体系。</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition-shadow duration-300">
+                    <p class="text-5xl mb-4">💡</p>
+                    <h3 class="text-xl font-semibold mb-2 text-yellow-500">经济与创新</h3>
+                    <p class="text-gray-600 text-sm">清洁能源成为新增长引擎，技术成本下降激发市场活力。</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition-shadow duration-300">
+                    <p class="text-5xl mb-4">📜</p>
+                    <h3 class="text-xl font-semibold mb-2 text-teal-500">政策与法规</h3>
+                    <p class="text-gray-600 text-sm">全球气候协议与各国政策提供制度保障与明确路线图。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="china-trends" class="my-16">
+            <h2 class="text-3xl font-bold text-center mb-8">中国能源转型的四大趋势</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">中国能源行业正经历从集中到分布、从增量到存量、从To B到To C、从能源到数据的深刻转变。数字化是贯穿所有趋势的核心使能器，预示着行业正迈向“数智化”转型。</p>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center items-center">
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-100 text-blue-600 rounded-full w-24 h-24 flex items-center justify-center text-2xl font-bold">集中式</div>
+                        <div class="flow-arrow my-4 md:hidden">↓</div>
+                        <div class="flow-arrow mx-4 hidden md:block lg:hidden">→</div>
+                        <div class="flow-arrow my-4 hidden lg:block">↓</div>
+                        <div class="bg-blue-500 text-white rounded-full w-24 h-24 flex items-center justify-center text-2xl font-bold">分布式</div>
+                    </div>
+                     <div class="flex flex-col items-center">
+                        <div class="bg-green-100 text-green-600 rounded-full w-24 h-24 flex items-center justify-center text-2xl font-bold">增量扩展</div>
+                        <div class="flow-arrow my-4 md:hidden">↓</div>
+                        <div class="flow-arrow mx-4 hidden md:block lg:hidden">→</div>
+                         <div class="flow-arrow my-4 hidden lg:block">↓</div>
+                        <div class="bg-green-500 text-white rounded-full w-24 h-24 flex items-center justify-center text-2xl font-bold">存量运营</div>
+                    </div>
+                     <div class="flex flex-col items-center">
+                        <div class="bg-yellow-100 text-yellow-600 rounded-full w-24 h-24 flex items-center justify-center text-2xl font-bold">To B</div>
+                        <div class="flow-arrow my-4 md:hidden">↓</div>
+                        <div class="flow-arrow mx-4 hidden md:block lg:hidden">→</div>
+                         <div class="flow-arrow my-4 hidden lg:block">↓</div>
+                        <div class="bg-yellow-500 text-white rounded-full w-24 h-24 flex items-center justify-center text-2xl font-bold">To C</div>
+                    </div>
+                     <div class="flex flex-col items-center">
+                        <div class="bg-teal-100 text-teal-600 rounded-full w-24 h-24 flex items-center justify-center text-2xl font-bold">能源量</div>
+                         <div class="flow-arrow my-4 md:hidden">↓</div>
+                         <div class="flow-arrow mx-4 hidden md:block lg:hidden">→</div>
+                         <div class="flow-arrow my-4 hidden lg:block">↓</div>
+                        <div class="bg-teal-500 text-white rounded-full w-24 h-24 flex items-center justify-center text-2xl font-bold">数据量</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="decarbonization" class="my-16">
+            <h2 class="text-3xl font-bold text-center mb-8">核心战场：高耗能行业脱碳路径</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h3 class="text-xl font-semibold text-center mb-4">钢铁行业脱碳技术路径（减排潜力）</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">钢铁脱碳的关键在于替代作为还原剂的煤炭。氢冶金、电弧炉和CCUS是主要技术方向，共同推动“绿色钢铁”的生产。</p>
+                    <div class="chart-container h-72 md:h-80">
+                        <canvas id="steelDecarbChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h3 class="text-xl font-semibold text-center mb-4">绿氢炼钢工艺流程</h3>
+                    <p class="text-sm text-gray-600 mb-8 text-center">利用可再生能源电解水制取“绿氢”，以氢气替代焦炭作为还原剂，可从源头实现钢铁生产的深度脱碳。</p>
+                     <div class="flex flex-col space-y-4 items-center justify-center h-full">
+                        <div class="bg-green-100 text-green-700 font-medium py-3 px-6 rounded-lg">可再生能源 (风/光)</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="bg-blue-100 text-blue-700 font-medium py-3 px-6 rounded-lg">电解水设备</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="bg-teal-100 text-teal-700 font-medium py-3 px-6 rounded-lg">绿色氢气</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg">氢冶金高炉</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="careers" class="my-16">
+            <h2 class="text-3xl font-bold text-center mb-8">“绿领”革命：新兴职业与技能需求</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">能源转型正在重塑劳动力市场，创造数千万“绿领”岗位。这不仅需要高端技术人才，也为传统技能工人提供了转型升级的广阔空间。</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h3 class="text-xl font-semibold text-center mb-4">全球就业市场变革预测 (至2030年)</h3>
+                     <p class="text-sm text-gray-600 mb-4 text-center">清洁能源转型的就业创造效应远超传统能源的岗位流失，预示着一个庞大且持续增长的就业市场。</p>
+                    <div class="chart-container">
+                        <canvas id="jobsChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h3 class="text-xl font-semibold text-center mb-4">产业能源化复合型人才技能雷达</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">未来的能源人才不仅需要深厚的技术专长，更要具备跨界融合的复合能力和系统性思维。</p>
+                    <div class="chart-container">
+                        <canvas id="skillsRadarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-16 mb-8">
+             <h2 class="text-3xl font-bold text-center mb-8">成为未来的一部分</h2>
+             <p class="text-gray-600 max-w-2xl mx-auto mb-8">产业能源化是通往可持续未来的必由之路。把握时代机遇，培养复合技能，你也能成为这场伟大变革的建设者。</p>
+            <a href="#intro" class="bg-green-500 text-white font-bold py-3 px-8 rounded-full hover:bg-green-600 transition-colors duration-300">开启你的零碳之旅</a>
+        </footer>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const COLORS = {
+                blue: '#007BFF',
+                green: '#28A745',
+                yellow: '#FFC107',
+                teal: '#17A2B8',
+                orange: '#FD7E14',
+                gray: '#6c757d'
+            };
+
+            const FONT_COLOR = '#333';
+            Chart.defaults.color = FONT_COLOR;
+            Chart.defaults.font.family = "'Noto Sans SC', sans-serif";
+
+            function wrapLabel(str, maxWidth) {
+                if (typeof str !== 'string' || str.length <= maxWidth) {
+                    return str;
+                }
+                const words = str.split('');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > maxWidth) {
+                        lines.push(currentLine);
+                        currentLine = '';
+                    }
+                    currentLine += word;
+                });
+                lines.push(currentLine);
+                return lines;
+            }
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                  return label.join('');
+                } else {
+                  return label;
+                }
+            };
+            
+            const defaultPlugins = {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            };
+
+            const marketCtx = document.getElementById('marketGrowthChart').getContext('2d');
+            new Chart(marketCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['亚太地区', '其他地区'],
+                    datasets: [{
+                        label: '全球市场份额',
+                        data: [41.65, 58.35],
+                        backgroundColor: [COLORS.green, COLORS.gray+'40'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        title: {
+                            display: false,
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            const steelCtx = document.getElementById('steelDecarbChart').getContext('2d');
+            new Chart(steelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['氢冶金', wrapLabel('电弧炉+废钢回收', 10), wrapLabel('CCUS (碳捕集)', 10)],
+                    datasets: [{
+                        label: '减排潜力',
+                        data: [90, 40, 25],
+                        backgroundColor: [COLORS.blue, COLORS.green, COLORS.teal],
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'CO2减排潜力 (%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+
+            const jobsCtx = document.getElementById('jobsChart').getContext('2d');
+            new Chart(jobsCtx, {
+                type: 'bar',
+                data: {
+                    labels: [wrapLabel('清洁能源及相关领域', 10), wrapLabel('化石燃料领域', 10)],
+                    datasets: [{
+                        label: '新增/减少岗位 (百万)',
+                        data: [38, -9],
+                        backgroundColor: (context) => {
+                            const value = context.dataset.data[context.dataIndex];
+                            return value > 0 ? COLORS.green : COLORS.orange;
+                        },
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const skillsCtx = document.getElementById('skillsRadarChart').getContext('2d');
+            new Chart(skillsCtx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        '技术专长', '数字技能', '项目管理', 
+                        wrapLabel('批判性思维', 6), 
+                        wrapLabel('商业洞察', 6), 
+                        '沟通协作'
+                    ],
+                    datasets: [{
+                        label: '技能要求',
+                        data: [9, 8, 7, 9, 7, 8],
+                        backgroundColor: COLORS.blue + '40',
+                        borderColor: COLORS.blue,
+                        borderWidth: 2,
+                        pointBackgroundColor: COLORS.blue
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: {
+                                stepSize: 2
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                           display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
