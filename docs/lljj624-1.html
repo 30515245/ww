@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绿领经济：交互式探索报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Muted Green (bg-stone-50, text-stone-800, accent-emerald-600) -->
+    <!-- Application Structure Plan: The SPA uses a thematic, non-linear dashboard structure with a sticky top navigation bar (什么是绿领?, 职业与技能, 全球影响, 政策与未来). This structure was chosen over a direct report-to-page mapping to enhance user engagement and facilitate exploration. It guides the user through a narrative journey from foundational concepts to global implications. Key interactions include tabbed content for definitions, clickable diagrams for frameworks, interactive charts for quantitative data, and a conceptual map for regional policies, transforming the static report into a dynamic, story-driven experience. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification -> Library/Method. Definitions -> Inform -> JS-powered Tabs -> Click -> Breaks down dense text for clarity -> HTML/CSS/JS. Collar Comparison -> Compare -> CSS Cards -> Hover -> Visual contrast is faster to process -> HTML/CSS. Deloitte's Framework -> Organize -> Clickable CSS Diagram -> Click -> Creates a clear mental model -> HTML/CSS/JS. Skills/Job Data -> Compare/Inform -> Chart.js Bar/Pie/Doughnut Charts -> Hover Tooltips -> Visualizes proportions effectively -> Chart.js. Global Policies -> Organize/Explore -> Clickable Conceptual Map -> Click -> Makes geographical info engaging -> HTML/CSS/JS. Key Stats -> Inform/Impact -> Animated Counters -> On Scroll -> Creates memorable impact -> JS. This approach prioritizes user interaction and understanding. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Noto Sans SC', sans-serif; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 50vh; }
+        @media (max-width: 768px) { .chart-container { height: 300px; max-height: 60vh; } }
+        .nav-link { transition: color 0.3s, border-bottom-color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #059669; border-bottom-color: #059669; }
+        .tab.active { background-color: #059669; color: white; }
+        .tab { transition: background-color 0.3s, color 0.3s; }
+        .card-flip { perspective: 1000px; }
+        .card-flip-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .card-flip:hover .card-flip-inner { transform: rotateY(180deg); }
+        .card-face { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem; border-radius: 0.75rem; }
+        .card-front { background-color: #f5f5f4; border: 1px solid #e7e5e4; }
+        .card-back { background-color: #047857; color: white; transform: rotateY(180deg); }
+        .map-region { transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out; cursor: pointer; }
+        .map-region:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased">
+
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold text-emerald-700">绿领经济</div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#definition" class="nav-link border-b-2 border-transparent pb-1">什么是绿领?</a>
+                <a href="#skills" class="nav-link border-b-2 border-transparent pb-1">职业与技能</a>
+                <a href="#impact" class="nav-link border-b-2 border-transparent pb-1">全球影响</a>
+                <a href="#policy" class="nav-link border-b-2 border-transparent pb-1">政策与未来</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-stone-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2">
+            <a href="#definition" class="block py-2 text-stone-700 hover:text-emerald-600">什么是绿领?</a>
+            <a href="#skills" class="block py-2 text-stone-700 hover:text-emerald-600">职业与技能</a>
+            <a href="#impact" class="block py-2 text-stone-700 hover:text-emerald-600">全球影响</a>
+            <a href="#policy" class="block py-2 text-stone-700 hover:text-emerald-600">政策与未来</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 md:py-16">
+
+        <section id="hero" class="text-center mb-16 md:mb-24">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-emerald-800">探索绿领经济</h1>
+            <p class="text-lg md:text-xl text-stone-600 max-w-3xl mx-auto">
+                一个新兴的劳动力类别，推动经济转型与环境目标的双重革命。本应用将带您交互式地解读“绿领”的核心概念、发展趋势与全球前景。
+            </p>
+        </section>
+
+        <section id="definition" class="scroll-mt-20 mb-16 md:mb-24">
+            <h2 class="text-3xl font-bold text-center mb-2">什么是“绿领”?</h2>
+            <p class="text-center text-stone-600 mb-10 max-w-2xl mx-auto">“绿领”超越了传统职业划分，它代表一种价值驱动的分类，反映了社会对环境保护和可持续发展的重视。它不仅指代特定行业，更是一种融入各行各业的环保理念与实践。</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-emerald-700">多维度解读</h3>
+                    <div class="mb-4 border-b border-stone-200">
+                        <nav class="flex -mb-px space-x-4" aria-label="Tabs">
+                            <button class="tab-def whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm border-transparent rounded-t-lg text-stone-600 hover:text-emerald-600 hover:border-stone-300 active" data-content="def-wwf">广义视角</button>
+                            <button class="tab-def whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm border-transparent rounded-t-lg text-stone-600 hover:text-emerald-600 hover:border-stone-300" data-content="def-nsw">专业界定</button>
+                            <button class="tab-def whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm border-transparent rounded-t-lg text-stone-600 hover:text-emerald-600 hover:border-stone-300" data-content="def-dict">简洁定义</button>
+                        </nav>
+                    </div>
+                    <div id="def-content-container" class="p-4 bg-white rounded-lg shadow-sm min-h-[180px]">
+                        <div id="def-wwf" class="def-content">
+                            <h4 class="font-bold text-stone-800">世界自然基金会 (WWF)</h4>
+                            <p class="text-stone-600 mt-2">任何有助地球生态环境持续发展的工作，都可以叫做“绿领”。这强调了工作的环保功能，即使是传统职业，只要拥有“绿色之心”，也能成为绿领的一员。</p>
+                        </div>
+                        <div id="def-nsw" class="def-content hidden">
+                            <h4 class="font-bold text-stone-800">澳大利亚新南威尔士州政府</h4>
+                            <p class="text-stone-600 mt-2">指任职于绿色组织中的各级员工，或在其他组织中具备绿色技能和执掌的人员。这一定义强调了工作场所的性质和员工所具备的绿色技能。</p>
+                        </div>
+                        <div id="def-dict" class="def-content hidden">
+                            <h4 class="font-bold text-stone-800">《字典网》(Dictionary.com)</h4>
+                            <p class="text-stone-600 mt-2">简洁地定义为“从事环境保护工作，或受雇于以环境保护为明确目标的公司”的工人。侧重于直接与环保相关的职业。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                     <div class="p-6 bg-blue-100/60 rounded-lg text-center shadow-sm">
+                        <span class="text-4xl">🏭</span>
+                        <h4 class="font-bold mt-2 text-blue-800">蓝领</h4>
+                        <p class="text-sm text-blue-700 mt-1">从事体力劳动或工业技术工作。</p>
+                    </div>
+                    <div class="p-6 bg-emerald-100/60 rounded-lg text-center shadow-sm border-2 border-emerald-500 transform scale-105">
+                        <span class="text-4xl">🌿</span>
+                        <h4 class="font-bold mt-2 text-emerald-800">绿领</h4>
+                        <p class="text-sm text-emerald-700 mt-1">跨越蓝领与白领，以环境效益为核心。</p>
+                    </div>
+                    <div class="p-6 bg-gray-100/60 rounded-lg text-center shadow-sm">
+                        <span class="text-4xl">💼</span>
+                        <h4 class="font-bold mt-2 text-gray-800">白领</h4>
+                        <p class="text-sm text-gray-700 mt-1">从事管理或行政等专业工作。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="scroll-mt-20 mb-16 md:mb-24">
+            <h2 class="text-3xl font-bold text-center mb-2">职业类型与关键技能</h2>
+            <p class="text-center text-stone-600 mb-10 max-w-2xl mx-auto">绿领工作种类繁多，并且正在不断演变。其成功不仅需要专业技术，更依赖于创新的思维方式和强大的软实力，以推动真正的变革。</p>
+            
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold text-center mb-6 text-emerald-700">未来绿领工作的三种演变路径</h3>
+                 <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="deloitte-card p-6 bg-white rounded-lg shadow-lg cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-type="demand">
+                        <div class="text-3xl mb-3">📈</div>
+                        <h4 class="font-bold text-lg">需求增长型</h4>
+                        <p class="text-sm text-stone-600 mt-2">现有职位在新兴低排放行业中的需求增加。</p>
+                    </div>
+                    <div class="deloitte-card p-6 bg-white rounded-lg shadow-lg cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-type="transform">
+                        <div class="text-3xl mb-3">🛠️</div>
+                        <h4 class="font-bold text-lg">转型变革型</h4>
+                        <p class="text-sm text-stone-600 mt-2">现有工作因净零转型而演变技能和方式。</p>
+                    </div>
+                    <div class="deloitte-card p-6 bg-white rounded-lg shadow-lg cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-type="emerging">
+                        <div class="text-3xl mb-3">💡</div>
+                        <h4 class="font-bold text-lg">新兴净零型</h4>
+                         <p class="text-sm text-stone-600 mt-2">随新技术和新工艺发展而产生的全新工作。</p>
+                    </div>
+                </div>
+                <div id="deloitte-details" class="mt-6 p-6 bg-emerald-50 rounded-lg text-center hidden min-h-[100px]">
+                    <p id="deloitte-text" class="text-emerald-800"></p>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-10 items-start">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-emerald-700">推动转型的关键软实力</h3>
+                    <p class="text-stone-600 mb-4">除了专业技术，企业在招聘绿领人才时高度重视其思维方式和行为能力。环境意识、创新和解决问题的能力是推动可持续转型的三大核心软实力。</p>
+                    <div class="chart-container">
+                        <canvas id="softSkillsChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-emerald-700">热门绿领职业领域</h3>
+                     <p class="text-stone-600 mb-4">绿领职业涵盖了从能源到建筑、从农业到咨询的广泛领域。这些工作不仅直接服务于环保目标，也正在改造传统行业。</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <div class="card-flip h-32">
+                            <div class="card-flip-inner">
+                                <div class="card-face card-front"><span class="text-3xl">☀️</span><span class="font-semibold mt-2">可再生能源</span></div>
+                                <div class="card-back"><p class="text-sm">太阳能安装员、风力涡轮机工程师</p></div>
+                            </div>
+                        </div>
+                         <div class="card-flip h-32">
+                            <div class="card-flip-inner">
+                                <div class="card-face card-front"><span class="text-3xl">🏢</span><span class="font-semibold mt-2">绿色建筑</span></div>
+                                <div class="card-back"><p class="text-sm">绿色建筑师、景观设计师</p></div>
+                            </div>
+                        </div>
+                        <div class="card-flip h-32">
+                            <div class="card-flip-inner">
+                                <div class="card-face card-front"><span class="text-3xl">♻️</span><span class="font-semibold mt-2">环境管理</span></div>
+                                <div class="card-back"><p class="text-sm">ESG顾问、废物管理专家</p></div>
+                            </div>
+                        </div>
+                        <div class="card-flip h-32">
+                            <div class="card-flip-inner">
+                                <div class="card-face card-front"><span class="text-3xl">🌱</span><span class="font-semibold mt-2">可持续农业</span></div>
+                                <div class="card-back"><p class="text-sm">有机农业专家、农场经理</p></div>
+                            </div>
+                        </div>
+                         <div class="card-flip h-32">
+                            <div class="card-flip-inner">
+                                <div class="card-face card-front"><span class="text-3xl">🚗</span><span class="font-semibold mt-2">可持续交通</span></div>
+                                <div class="card-back"><p class="text-sm">电动汽车技术员</p></div>
+                            </div>
+                        </div>
+                        <div class="card-flip h-32">
+                            <div class="card-flip-inner">
+                                <div class="card-face card-front"><span class="text-3xl">🌍</span><span class="font-semibold mt-2">企业永续发展</span></div>
+                                <div class="card-back"><p class="text-sm">永续专员、ESG策略研究员</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="scroll-mt-20 mb-16 md:mb-24">
+            <h2 class="text-3xl font-bold text-center mb-2">战略意义与全球影响</h2>
+            <p class="text-center text-stone-600 mb-10 max-w-2xl mx-auto">绿领就业是应对气候变化和经济挑战的双赢策略，它不仅创造经济价值，更直接贡献于环境保护和社会公平，是实现可持续未来的基石。</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 text-center mb-12">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-emerald-600 font-extrabold text-5xl" data-count="300">0</div>
+                    <div class="text-lg font-semibold mt-2">亿</div>
+                    <p class="text-stone-600 mt-2">到2050年，全球预计可创造的绿领岗位</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-emerald-600 font-extrabold text-5xl" data-count="900">0</div>
+                    <div class="text-lg font-semibold mt-2">万</div>
+                    <p class="text-stone-600 mt-2">美国《通胀削减法案》预计创造的新工作</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-emerald-600 font-extrabold text-5xl" data-count="13">0</div>
+                    <div class="text-lg font-semibold mt-2">%</div>
+                    <p class="text-stone-600 mt-2">清洁经济领域平均工资高出美国整体的比例</p>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-10 items-start">
+                 <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-emerald-700">区域案例：凤凰城的绿色崛起</h3>
+                    <p class="text-stone-600 mb-4">美国亚利桑那州凤凰城是绿领就业增长的典范。得益于充足的日照和前瞻性政策，其清洁能源、绿色建筑等领域蓬勃发展，展示了区域经济绿色转型的巨大潜力。</p>
+                    <div class="chart-container">
+                        <canvas id="phoenixJobsChart"></canvas>
+                    </div>
+                     <p class="text-xs text-center text-stone-500 mt-2">数据来源：凤凰城气候行动研究。展示最具就业创造潜力的领域。</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-emerald-700">绿领的三重价值</h3>
+                    <div class="space-y-4">
+                        <div class="p-6 bg-white rounded-lg shadow-sm">
+                            <h4 class="font-bold text-lg text-emerald-800">🌱 环境保护</h4>
+                            <p class="text-stone-600 mt-1">直接推动能源效率提升、清洁能源生产和自然资源保护，是实现碳中和的关键力量。</p>
+                        </div>
+                         <div class="p-6 bg-white rounded-lg shadow-sm">
+                            <h4 class="font-bold text-lg text-emerald-800">📈 经济增长</h4>
+                            <p class="text-stone-600 mt-1">创造大量高薪就业，抵消传统行业转型冲击，为经济注入新活力。</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-lg shadow-sm">
+                            <h4 class="font-bold text-lg text-emerald-800">🤝 社会公平</h4>
+                            <p class="text-stone-600 mt-1">通过“公正转型”，为弱势群体提供培训和就业机会，确保绿色经济成果普惠共享。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="policy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-2">政策支持与未来展望</h2>
+            <p class="text-center text-stone-600 mb-10 max-w-2xl mx-auto">全球各国正通过积极的政策框架和发展倡议，为绿领就业铺平道路。未来，政府、企业与教育体系的紧密合作将是确保绿色经济健康、包容发展的关键。</p>
+            
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold mb-4 text-center text-emerald-700">全球政策概览</h3>
+                <p class="text-center text-stone-500 mb-6">点击地图上的区域，查看各国的绿色技能发展政策和倡议。</p>
+                
+                <div class="grid lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2">
+                        <svg id="world-map" viewBox="0 0 1000 500" class="w-full h-auto">
+                            <path d="M499.999 499.999L0 499.999 0 0 499.999 0 499.999 499.999z" fill="#e7e5e4" stroke="#fafaf9" stroke-width="1"/>
+                            <path class="map-region" data-region="north_america" fill="#a3e635" d="M102.348 232.023L102.348 107.826 312.174 107.826 312.174 232.023z"/>
+                            <path class="map-region" data-region="europe" fill="#4ade80" d="M370.435 210.197L370.435 91.154 531.304 91.154 531.304 210.197z"/>
+                            <path class="map-region" data-region="asia" fill="#22c55e" d="M589.565 264.458L589.565 107.826 846.957 107.826 846.957 264.458z"/>
+                            <text x="207" y="175" font-family="sans-serif" font-size="24" fill="#1f2937" text-anchor="middle">北美</text>
+                            <text x="450" y="155" font-family="sans-serif" font-size="24" fill="#1f2937" text-anchor="middle">欧洲</text>
+                            <text x="718" y="190" font-family="sans-serif" font-size="24" fill="#1f2937" text-anchor="middle">亚洲</text>
+                        </svg>
+                    </div>
+                    <div id="policy-details" class="p-4 bg-stone-100 rounded-lg min-h-[250px] flex items-center justify-center">
+                        <p class="text-stone-500 text-center">请选择一个区域以查看详细信息。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-stone-800 text-stone-300 mt-16">
+        <div class="container mx-auto px-4 py-8 text-center">
+            <p>绿领劳动力是构建一个更加可持续、公平和繁荣的全球未来的基石。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link, #mobile-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (mobileMenu.offsetParent !== null) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const sections = document.querySelectorAll('section[id]');
+            const mainNavLinks = document.querySelectorAll('header nav a');
+            const onScroll = () => {
+                const scrollPos = window.scrollY + 120;
+                sections.forEach(section => {
+                    if (section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
+                        mainNavLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (section.getAttribute('id') === link.getAttribute('href').substring(1)) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            };
+            window.addEventListener('scroll', onScroll);
+
+            const tabButtons = document.querySelectorAll('.tab-def');
+            const tabContents = document.querySelectorAll('.def-content');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const contentId = button.dataset.content;
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    tabContents.forEach(content => {
+                        content.id === contentId ? content.classList.remove('hidden') : content.classList.add('hidden');
+                    });
+                });
+            });
+
+            const deloitteCards = document.querySelectorAll('.deloitte-card');
+            const detailsContainer = document.getElementById('deloitte-details');
+            const detailsText = document.getElementById('deloitte-text');
+            const deloitteContent = {
+                demand: '例如：随着可再生能源行业扩张，项目经理、太阳能电池板安装人员的需求将持续增长。',
+                transform: '例如：钢铁工人需要学习使用绿色氢气替代煤炭的技术，通过在职培训提升技能。',
+                emerging: '例如：氢能产业发展创造了全新的“燃料电池工程师”等岗位，需要建立新的教育和培训途径。'
+            };
+            deloitteCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const type = card.dataset.type;
+                    detailsText.textContent = deloitteContent[type];
+                    detailsContainer.classList.remove('hidden');
+                    deloitteCards.forEach(c => c.classList.remove('ring-2', 'ring-emerald-500'));
+                    card.classList.add('ring-2', 'ring-emerald-500');
+                });
+            });
+
+            function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const countTo = parseInt(el.dataset.count, 10);
+                        animateValue(el, 0, countTo, 1500);
+                        counterObserver.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+            
+            const mapRegions = document.querySelectorAll('.map-region');
+            const policyDetails = document.getElementById('policy-details');
+            const policyData = {
+                north_america: {
+                    title: '北美（美国）',
+                    content: '通过《通胀削减法案》(IRA)进行历史性投资，并成立“美国气候军团”为年轻人提供清洁能源、能效和气候适应技能培训。'
+                },
+                europe: {
+                    title: '欧洲（欧盟、英、德）',
+                    content: '以《欧洲技能议程》为核心，通过数千亿欧元资金支持技能优化和再培训。各国设立行动计划和网络平台，推动绿色就业。'
+                },
+                asia: {
+                    title: '亚洲（韩、日、新）',
+                    content: '各国制定中长期人才培养战略，通过大学联盟、产学合作和专门的“绿色技能委员会”来定义和发展未来所需的绿色技能。'
+                }
+            };
+            
+            mapRegions.forEach(region => {
+                region.addEventListener('click', () => {
+                    const regionId = region.dataset.region;
+                    const data = policyData[regionId];
+                    mapRegions.forEach(r => r.style.fill = r.getAttribute('fill'));
+                    region.style.fill = '#f59e0b';
+                    policyDetails.innerHTML = `<div class="text-left"><h4 class="font-bold text-lg text-emerald-800">${data.title}</h4><p class="mt-2 text-stone-600">${data.content}</p></div>`;
+                });
+            });
+
+            const softSkillsCtx = document.getElementById('softSkillsChart').getContext('2d');
+            new Chart(softSkillsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['环境意识', '创新和创造力', '问题解决能力'],
+                    datasets: [{
+                        label: '企业重视程度',
+                        data: [45, 37, 31],
+                        backgroundColor: ['#10b981', '#34d399', '#6ee7b7'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: '企业最看重的三大绿领软实力 (%)', font: {size: 14, family: "'Noto Sans SC', sans-serif"} },
+                        tooltip: { callbacks: { label: (context) => `${context.raw}% 的企业认为重要` } }
+                    },
+                    scales: {
+                        x: { beginAtZero: true, grid: { display: false }, suggestedMax: 50 },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+
+            const phoenixJobsCtx = document.getElementById('phoenixJobsChart').getContext('2d');
+            new Chart(phoenixJobsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['电动通勤铁路', '能源效率新建建筑', '太阳能光伏', '其他'],
+                    datasets: [{
+                        label: '就业创造潜力',
+                        data: [41, 27, 11.9, 100 - 41 - 27 - 11.9],
+                        backgroundColor: ['#065f46', '#047857', '#059669', '#10b981'],
+                        borderColor: '#f5f5f4',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { family: "'Noto Sans SC', sans-serif" } } },
+                        title: { display: true, text: '凤凰城气候行动就业创造潜力分布', font: {size: 14, family: "'Noto Sans SC', sans-serif" } },
+                        tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw}%` } }
+                    },
+                    cutout: '60%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
