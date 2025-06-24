@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中国未来基础设施建设发展信息图</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366F1',
+            secondary: '#10B981',
+            accent: '#F59E0B',
+            info: '#3B82F6',
+            danger: '#EF4444',
+            neutral: '#F3F4F6',
+            'neutral-dark': '#1F2937'
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .card-shadow {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .title-gradient {
+        background: linear-gradient(90deg, #6366F1 0%, #3B82F6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  </style>
+</head>
+<body class="font-inter text-gray-900 bg-gray-50">
+  <div class="container mx-auto p-4 md:p-8">
+    <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold text-center mb-8 md:mb-10 title-gradient">
+      中国未来基础设施建设发展信息图
+    </h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div class="bg-white p-4 rounded-xl card-shadow">
+        <h2 class="text-xl font-semibold text-center mb-4">未来基建投资趋势（万亿元）</h2>
+        <div class="h-80">
+          <canvas id="investmentChart"></canvas>
+        </div>
+      </div>
+      
+      <div class="bg-white p-4 rounded-xl card-shadow">
+        <h2 class="text-xl font-semibold text-center mb-4">核心领域占比（%）</h2>
+        <div class="h-80">
+          <canvas id="domainChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 md:mt-12 space-y-6 md:space-y-8">
+      <section class="bg-white p-5 md:p-6 rounded-xl card-shadow">
+        <h2 class="text-2xl font-bold mb-2">一、政策演变</h2>
+        <p class="text-gray-700 leading-relaxed">
+          近年来，中国基础设施从传统交通、电力等"重基建"逐步向以信息化、智能化为特征的"新基建"过渡。2018年中央经济工作会议首次提出"新型基础设施建设"概念。2020年国家发改委权威定义新基建范围，分为信息、融合与创新三类。2021年起新基建写入"十四五"规划，2024年提出"适度超前部署"。
+        </p>
+      </section>
+
+      <section class="bg-white p-5 md:p-6 rounded-xl card-shadow">
+        <h2 class="text-2xl font-bold mb-2">二、核心领域</h2>
+        <p class="text-gray-700 leading-relaxed">
+          数字基础设施（5G、数据中心、算力网络）、新能源（充电桩、光伏、风电）、智能交通（智慧高速）、智慧城市（政务、医疗、教育平台）及人工智能基础设施（AI算力中心、大模型平台）是未来基建重点领域。
+        </p>
+      </section>
+
+      <section class="bg-white p-5 md:p-6 rounded-xl card-shadow">
+        <h2 class="text-2xl font-bold mb-2">三、重大项目</h2>
+        <p class="text-gray-700 leading-relaxed">
+          典型项目包括：上海新基建示范（48项目/2700亿投资）、"东数西算"工程（8大算力枢纽）、广西沙吴5G智慧高速、青海750kV新能源送电工程。
+        </p>
+      </section>
+
+      <section class="bg-white p-5 md:p-6 rounded-xl card-shadow">
+        <h2 class="text-2xl font-bold mb-2">四、投融资模式</h2>
+        <p class="text-gray-700 leading-relaxed">
+          政府引导、市场参与为主导。采用PPP、公募REITs、专项债、政策性金融等方式撬动投资。如国开行贷款支持医疗大数据中心。
+        </p>
+      </section>
+
+      <section class="bg-white p-5 md:p-6 rounded-xl card-shadow">
+        <h2 class="text-2xl font-bold mb-2">五、面临挑战</h2>
+        <p class="text-gray-700 leading-relaxed">
+          挑战包括标准不统一、技术瓶颈（算力/芯片）、投资回报周期长、融资难及监管与数据安全问题。
+        </p>
+      </section>
+
+      <section class="bg-white p-5 md:p-6 rounded-xl card-shadow">
+        <h2 class="text-2xl font-bold mb-2">六、发展趋势与前景展望</h2>
+        <p class="text-gray-700 leading-relaxed">
+          趋势包括：数字化+绿色化融合发展；重点方向如6G、卫星互联网、能源互联网、数据要素市场；预计"十四五"期间新基建投资达20万亿元。
+        </p>
+      </section>
+
+      <section class="bg-white p-5 md:p-6 rounded-xl card-shadow">
+        <h2 class="text-2xl font-bold mb-4">七、结构与流程示意</h2>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex-1 text-center p-4 border border-gray-200 rounded-md shadow-sm bg-gray-50">
+            顶层设计
+          </div>
+          <div class="w-8 h-8 mx-2 text-center text-gray-500">
+            <i class="fa fa-arrow-right"></i>
+          </div>
+          <div class="flex-1 text-center p-4 border border-gray-200 rounded-md shadow-sm bg-gray-50">
+            试点示范
+          </div>
+          <div class="w-8 h-8 mx-2 text-center text-gray-500">
+            <i class="fa fa-arrow-right"></i>
+          </div>
+          <div class="flex-1 text-center p-4 border border-gray-200 rounded-md shadow-sm bg-gray-50">
+            全面推广
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <footer class="mt-10 text-center text-gray-500 text-sm">
+      <p>© 2025 中国基础设施建设发展研究中心</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 投资趋势图表
+      const investmentCtx = document.getElementById('investmentChart').getContext('2d');
+      new Chart(investmentCtx, {
+        type: 'bar',
+        data: {
+          labels: ['2020', '2021', '2022', '2023', '2025E'],
+          datasets: [
+            {
+              label: '投资额',
+              data: [3, 5, 7, 9, 20],
+              backgroundColor: '#6366f1',
+              borderRadius: 8,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              titleColor: '#1F2937',
+              bodyColor: '#1F2937',
+              borderColor: '#E5E7EB',
+              borderWidth: 1,
+              padding: 12,
+              boxPadding: 6,
+              usePointStyle: true,
+              callbacks: {
+                label: function(context) {
+                  return `投资额: ${context.raw} 万亿元`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)',
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+
+      // 领域占比图表
+      const domainCtx = document.getElementById('domainChart').getContext('2d');
+      new Chart(domainCtx, {
+        type: 'pie',
+        data: {
+          labels: [
+            '数字基础设施',
+            '新能源',
+            '智能交通',
+            '智慧城市',
+            'AI基础设施',
+          ],
+          datasets: [
+            {
+              data: [25, 20, 18, 22, 15],
+              backgroundColor: [
+                '#6366F1',
+                '#10B981',
+                '#F59E0B',
+                '#3B82F6',
+                '#EF4444',
+              ],
+              borderWidth: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                padding: 20,
+                usePointStyle: true,
+                pointStyle: 'circle'
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              titleColor: '#1F2937',
+              bodyColor: '#1F2937',
+              borderColor: '#E5E7EB',
+              borderWidth: 1,
+              padding: 12,
+              boxPadding: 6,
+              usePointStyle: true,
+              callbacks: {
+                label: function(context) {
+                  return `${context.label}: ${context.raw}%`;
+                }
+              }
+            }
+          },
+          cutout: '60%'
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+    
