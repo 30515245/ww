@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深度解读：能源产业化与产业能源化</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F8F7F4;
+            color: #3D3D3D;
+        }
+        .concept-blue { color: #4A90E2; }
+        .concept-green { color: #50E3C2; }
+        .bg-concept-blue { background-color: #4A90E2; }
+        .bg-concept-green { background-color: #50E3C2; }
+        .border-concept-blue { border-color: #4A90E2; }
+        .border-concept-green { border-color: #50E3C2; }
+        
+        .nav-link {
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #4A90E2;
+            border-bottom-color: #4A90E2;
+        }
+
+        .tab-btn {
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background-color: #4A90E2;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: grid;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            max-height: 400px;
+            width: 100%;
+            max-width: 800px;
+        }
+        .synergy-cycle-item {
+            transition: all 0.3s ease-in-out;
+        }
+        .synergy-cycle-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .arrow {
+            position: absolute;
+            font-size: 2.5rem;
+            color: #a0aec0;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Chosen Palette: Calm Harmony Neutrals (BG: #F8F7F4, Text: #3D3D3D, Accents: #4A90E2 (Blue), #50E3C2 (Green)) -->
+    <!-- Application Structure Plan: A central-comparison-focused dashboard structure is used instead of mirroring the report's linear format. The flow is designed to guide the user from high-level concepts to detailed comparisons and real-world examples. It starts with a Hero section, moves to a direct Side-by-Side Comparison, visualizes the core relationship in an Interactive Synergy Cycle, uses a togglable Bar Chart for Drivers & Challenges, organizes Pathways into a Tabbed Interface, shows Impacts via Donut Charts, and presents Case Studies with interactive cards. This structure prioritizes usability and direct comparison, enabling users to synthesize information more effectively than a linear read. -->
+    <!-- Visualization & Content Choices:
+        - Report Info: Core Concepts -> Goal: Compare -> Viz: Side-by-side HTML layout. Justification: Most direct way to compare definitions.
+        - Report Info: Symbiotic Relationship -> Goal: Show interaction -> Viz: Custom HTML/CSS interactive diagram. Justification: Visually explains the core feedback loop, a key insight from the report. Interaction: Hover effects to highlight the flow.
+        - Report Info: Drivers & Challenges -> Goal: Compare specifics -> Viz: Grouped Bar Chart (Chart.js). Interaction: Buttons to toggle data. Justification: Provides a quantitative feel to qualitative data, making comparisons sharp and clear.
+        - Report Info: Implementation Paths -> Goal: Organize details -> Viz: Tabbed interface with cards (HTML/JS). Interaction: Tab clicks. Justification: Prevents information overload by chunking content logically.
+        - Report Info: Impacts -> Goal: Inform -> Viz: Donut Charts (Chart.js) + text. Justification: Visually breaks down the three impact areas for quick comprehension.
+        - Report Info: Case Studies -> Goal: Explore examples -> Viz: Interactive cards (HTML/JS). Interaction: Click to expand. Justification: Organizes international examples cleanly without needing a complex map.
+        All visualizations are implemented using Canvas (via Chart.js) or styled HTML, fully avoiding SVG and Mermaid JS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-800">
+                能源转型<span class="concept-blue">双螺旋</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#comparison" class="nav-link text-gray-600 font-medium border-b-2 border-transparent pb-1">核心对比</a>
+                <a href="#synergy" class="nav-link text-gray-600 font-medium border-b-2 border-transparent pb-1">协同关系</a>
+                <a href="#drivers" class="nav-link text-gray-600 font-medium border-b-2 border-transparent pb-1">驱动与挑战</a>
+                <a href="#pathways" class="nav-link text-gray-600 font-medium border-b-2 border-transparent pb-1">实施路径</a>
+                <a href="#impacts" class="nav-link text-gray-600 font-medium border-b-2 border-transparent pb-1">深远影响</a>
+                <a href="#cases" class="nav-link text-gray-600 font-medium border-b-2 border-transparent pb-1">全球案例</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">能源产业化 vs  产业能源化</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
+                    深入剖析驱动全球碳中和的两大核心战略。它们并非孤立存在，而是相互支撑、彼此促进的共生体，共同构建着未来的新型能源体系与经济发展新形态。本应用将带您交互式地探索其内涵、路径与影响。
+                </p>
+            </div>
+        </section>
+
+        <section id="comparison" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">核心概念对比</h2>
+                    <p class="text-md text-gray-500 mt-2">从供给侧到需求侧，理解两大战略的本质区别。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-concept-blue">
+                        <h3 class="text-2xl font-bold mb-4 concept-blue">能源产业化</h3>
+                        <p class="text-gray-600 mb-4">
+                            <strong>核心定义：</strong> 将能源视为一个独立的、高附加值的产业进行培育和市场化运作。它聚焦于能源技术、产品和服务的研发、制造与应用，旨在构建一个现代化、具备国际竞争力的能源工业体系。
+                        </p>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start"><span class="concept-blue mr-3 mt-1">▶</span><strong>侧重点：</strong> 供给侧。发展能源技术（如光伏、储能），壮大能源产业自身。</li>
+                            <li class="flex items-start"><span class="concept-blue mr-3 mt-1">▶</span><strong>目标：</strong> 技术引领、产业升级、保障能源供给安全，成为新的经济增长点。</li>
+                            <li class="flex items-start"><span class="concept-blue mr-3 mt-1">▶</span><strong>好比：</strong> 打造更先进、更高效的“渔船”和“渔具”。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-concept-green">
+                        <h3 class="text-2xl font-bold mb-4 concept-green">产业能源化</h3>
+                        <p class="text-gray-600 mb-4">
+                            <strong>核心定义：</strong> 将新能源与的社会各领域深度融合，推动非能源产业（如工业、建筑、交通）的能源消费结构向清洁低碳转型，最终形成以新能源为能耗根基的经济新形态。
+                        </p>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start"><span class="concept-green mr-3 mt-1">▶</span><strong>侧重点：</strong> 需求侧。推动各行各业使用新能源，实现全产业链绿色转型。</li>
+                            <li class="flex items-start"><span class="concept-green mr-3 mt-1">▶</span><strong>目标：</strong> 降低全社会碳排放、提升能源利用效率，重塑产业价值链。</li>
+                            <li class="flex items-start"><span class="concept-green mr-3 mt-1">▶</span><strong>好比：</strong> 教会所有行业使用新“渔具”去“捕鱼”，并开拓新的“渔场”。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="synergy" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">协同共生：一个良性循环</h2>
+                    <p class="text-md text-gray-500 mt-2">两者互为基础，相互促进。请将鼠标悬停在模块上，观察它们如何驱动彼此。</p>
+                </div>
+                <div class="relative flex flex-col md:flex-row justify-center items-center md:space-x-24 space-y-12 md:space-y-0 p-8 min-h-[400px]">
+                    <div id="synergy-industrialization" class="synergy-cycle-item text-center bg-white p-8 rounded-xl shadow-lg border-2 border-concept-blue w-full md:w-1/3 z-10">
+                        <h4 class="text-xl font-bold concept-blue mb-2">能源产业化</h4>
+                        <p class="text-gray-600">提供技术、产品和解决方案，是产业能源化的“工具箱”和“基石”。</p>
+                    </div>
+                    <div id="synergy-energization" class="synergy-cycle-item text-center bg-white p-8 rounded-xl shadow-lg border-2 border-concept-green w-full md:w-1/3 z-10">
+                        <h4 class="text-xl font-bold concept-green mb-2">产业能源化</h4>
+                        <p class="text-gray-600">创造广阔市场需求和应用场景，是能源产业化的“需求侧”和“市场空间”。</p>
+                    </div>
+                    <div class="arrow top-1/2 left-1/2 -translate-x-1/2 -translate-y-[150%] md:-translate-y-1/2 md:translate-x-[-150%] rotate-90 md:rotate-0">➔</div>
+                    <div class="arrow bottom-1/2 left-1/2 -translate-x-1/2 translate-y-[150%] md:translate-y-1/2 md:translate-x-[50%] rotate-[270deg] md:rotate-180">➔</div>
+                    <div id="synergy-text-supply" class="absolute top-0 left-1/2 -translate-x-1/2 md:top-1/4 md:left-1/2 md:-translate-x-1/2 text-center text-gray-500 opacity-0 transition-opacity duration-300">
+                        <p class="font-semibold concept-blue">供给侧创新</p>
+                        <p>光伏组件、储能电池、智能电网</p>
+                    </div>
+                    <div id="synergy-text-demand" class="absolute bottom-0 left-1/2 -translate-x-1/2 md:bottom-1/4 md:left-1/2 md:-translate-x-1/2 text-center text-gray-500 opacity-0 transition-opacity duration-300">
+                        <p class="font-semibold concept-green">需求侧应用</p>
+                        <p>零碳工厂、电动汽车、绿色建筑</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="drivers" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">核心驱动力与主要挑战</h2>
+                    <p class="text-md text-gray-500 mt-2">通过图表直观对比两大战略背后的推力与阻力。</p>
+                    <div class="mt-6 flex justify-center space-x-4">
+                        <button id="show-drivers-btn" class="chart-toggle-btn bg-blue-500 text-white py-2 px-6 rounded-full font-semibold shadow-md hover:bg-blue-600 transition">查看驱动力</button>
+                        <button id="show-challenges-btn" class="chart-toggle-btn bg-gray-200 text-gray-700 py-2 px-6 rounded-full font-semibold hover:bg-gray-300 transition">查看挑战</button>
+                    </div>
+                </div>
+                <div class="bg-white p-4 sm:p-8 rounded-xl shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="driversChallengesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pathways" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">实施路径与关键活动</h2>
+                    <p class="text-md text-gray-500 mt-2">探索从理念到现实的具体行动方案。</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-4 sm:p-8">
+                    <div class="flex justify-center border-b mb-6">
+                        <button data-tab="tab1" class="tab-btn active py-3 px-6 text-lg font-medium text-gray-600 border-b-4 border-transparent">能源产业化路径</button>
+                        <button data-tab="tab2" class="tab-btn py-3 px-6 text-lg font-medium text-gray-600 border-b-4 border-transparent">产业能源化路径</button>
+                    </div>
+                    <div id="tab1" class="tab-content active grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                    <div id="tab2" class="tab-content grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="impacts" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">深远影响</h2>
+                    <p class="text-md text-gray-500 mt-2">能源转型如何重塑经济、环境与社会。</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center bg-white p-8 rounded-xl shadow-lg">
+                        <div class="w-40 h-40 mx-auto mb-4"><canvas id="economicImpactChart"></canvas></div>
+                        <h4 class="text-xl font-bold mb-2">经济影响</h4>
+                        <p class="text-gray-600">催生“新三样”等新增长引擎，推动产业从资源主导转向技术主导，重构价值链。</p>
+                    </div>
+                    <div class="text-center bg-white p-8 rounded-xl shadow-lg">
+                        <div class="w-40 h-40 mx-auto mb-4"><canvas id="environmentalImpactChart"></canvas></div>
+                        <h4 class="text-xl font-bold mb-2">环境影响</h4>
+                        <p class="text-gray-600">从源头和过程两端减少碳排放，改善生态环境质量，是实现“双碳”目标的核心路径。</p>
+                    </div>
+                    <div class="text-center bg-white p-8 rounded-xl shadow-lg">
+                        <div class="w-40 h-40 mx-auto mb-4"><canvas id="socialImpactChart"></canvas></div>
+                        <h4 class="text-xl font-bold mb-2">社会影响</h4>
+                        <p class="text-gray-600">解决能源贫困，创造新就业岗位，提升全民生活质量，促进社会可持续发展。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cases" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">全球典型案例</h2>
+                    <p class="text-md text-gray-500 mt-2">借鉴国际经验，看协同发展如何落地。</p>
+                </div>
+                <div id="case-studies-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <a href="http://blog.30515245.xyz/2023/05/16/%E8%83%BD%E6%BA%90%E4%BA%A7%E4%B8%9A%E5%8C%96%E5%92%8C%E4%BA%A7%E4%B8%9A%E8%83%BD%E6%BA%90%E5%8C%96%E6%B7%B1%E5%BA%A6%E6%AF%94%E8%BE%83/" class="block mb-6 ml-6 text-white hover:text-gray-300 transition-colors">
+            <i class="fa-solid fa-arrow-left mr-2"></i>
+            返回专题
+        </a>
+        <div class="container mx-auto px-6 text-center">
+            <p>基于深度研究报告制作的交互式解读</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = {
+                drivers: {
+                    labels: ['政策主导', '市场需求', '科技创新', '全球竞争'],
+                    datasets: [
+                        {
+                            label: '能源产业化',
+                            data: [9, 7, 8, 6],
+                            backgroundColor: 'rgba(74, 144, 226, 0.7)',
+                            borderColor: 'rgba(74, 144, 226, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '产业能源化',
+                            data: [9.5, 8, 7.5, 4],
+                            backgroundColor: 'rgba(80, 227, 194, 0.7)',
+                            borderColor: 'rgba(80, 227, 194, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                challenges: {
+                    labels: ['技术瓶颈', '资金/成本', '市场/推广', '外部/政策'],
+                    datasets: [
+                        {
+                            label: '能源产业化',
+                            data: [8, 6, 7, 7.5],
+                            backgroundColor: 'rgba(74, 144, 226, 0.7)',
+                            borderColor: 'rgba(74, 144, 226, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '产业能源化',
+                            data: [7, 8.5, 6, 7],
+                            backgroundColor: 'rgba(80, 227, 194, 0.7)',
+                            borderColor: 'rgba(80, 227, 194, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                pathways: {
+                    tab1: [
+                        { title: '加强研发与技术攻关', content: '布局先进实验室，攻关储能、光伏、氢能、核能等核心技术。' },
+                        { title: '构建产业生态体系', content: '促进“光储端信”全链条融合，统筹产业集聚发展。' },
+                        { title: '培育市场主体与集群', content: '培育国际领先企业，打造能源装备制造基地，形成规模效应。' },
+                        { title: '推动国际合作', content: '依托“绿色一带一路”，深化国际产能合作，构建共赢供应链。' },
+                        { title: '完善标准与体系', content: '健全技术标准和检测认证，推动国内外标准互认。' },
+                    ],
+                    tab2: [
+                        { title: '推动工业再造与优化', content: '鼓励跨产业投资，以新标准引领传统产业升级。' },
+                        { title: '实施节能降碳工程', content: '推动园区、行业系统性节能，打造节能低碳示范。' },
+                        { title: '推广低碳技术设备', content: '加快氢能炼铁、碳捕集等前沿技术在工业领域的应用。' },
+                        { title: '建设零碳园区/工厂', content: '通过优化能源结构、循环经济等综合措施实现区域碳中和。' },
+                        { title: '提升清洁能源消费比重', content: '鼓励替代能源应用，构建多能互补的工业用能结构。' }
+                    ]
+                },
+                caseStudies: [
+                     {
+                        country: '中国',
+                        title: '产业集群与数字化转型',
+                        content: '在光伏、电池、风电领域形成全球领先产业集群，为全球提供核心产品。同时工业企业通过5G+智慧电厂、零碳园区等大规模应用新能源和数字技术。',
+                        color: 'bg-red-500'
+                    },
+                    {
+                        country: '德国',
+                        title: '部门耦合与工业电气化',
+                        content: '通过“能源转型”(Energiewende)政策，利用电气化、绿氢等手段实现电力与其他经济部门的深度耦合，推动工业和交通领域转型。',
+                        color: 'bg-yellow-500'
+                    },
+                    {
+                        country: '日本',
+                        title: '氢能战略与能效提升',
+                        content: '将氢能和氨燃料作为战略资源，推动其在发电、工业、交通等领域的应用，并长期推动全国节能技术开发。',
+                        color: 'bg-gray-700'
+                    },
+                    {
+                        country: '欧洲',
+                        title: 'REPowerEU计划',
+                        content: '旨在摆脱对俄化石燃料依赖，通过大规模投资可再生能源，加速能源供给多元化和各行业清洁能源转型。',
+                        color: 'bg-blue-600'
+                    }
+                ]
+            };
+
+            const driversChallengesCtx = document.getElementById('driversChallengesChart').getContext('2d');
+            const driversChallengesChart = new Chart(driversChallengesCtx, {
+                type: 'bar',
+                data: data.drivers,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '影响/挑战程度 (相对值)' }
+                        }
+                    },
+                    plugins: {
+                        title: { display: true, text: '核心驱动力对比', font: { size: 16 } },
+                        tooltip: { mode: 'index', intersect: false }
+                    },
+                }
+            });
+
+            function updateChart(type) {
+                const chartData = (type === 'drivers') ? data.drivers : data.challenges;
+                const chartTitle = (type === 'drivers') ? '核心驱动力对比' : '主要挑战对比';
+                driversChallengesChart.data.labels = chartData.labels;
+                driversChallengesChart.data.datasets = chartData.datasets;
+                driversChallengesChart.options.plugins.title.text = chartTitle;
+                driversChallengesChart.update();
+            }
+
+            const showDriversBtn = document.getElementById('show-drivers-btn');
+            const showChallengesBtn = document.getElementById('show-challenges-btn');
+
+            showDriversBtn.addEventListener('click', () => {
+                updateChart('drivers');
+                showDriversBtn.classList.add('bg-blue-500', 'text-white');
+                showDriversBtn.classList.remove('bg-gray-200', 'text-gray-700');
+                showChallengesBtn.classList.add('bg-gray-200', 'text-gray-700');
+                showChallengesBtn.classList.remove('bg-blue-500', 'text-white');
+            });
+
+            showChallengesBtn.addEventListener('click', () => {
+                updateChart('challenges');
+                showChallengesBtn.classList.add('bg-blue-500', 'text-white');
+                showChallengesBtn.classList.remove('bg-gray-200', 'text-gray-700');
+                showDriversBtn.classList.add('bg-gray-200', 'text-gray-700');
+                showDriversBtn.classList.remove('bg-blue-500', 'text-white');
+            });
+            
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(button.dataset.tab).classList.add('active');
+                });
+            });
+
+            const tab1Content = document.getElementById('tab1');
+            const tab2Content = document.getElementById('tab2');
+            
+            data.pathways.tab1.forEach(item => {
+                tab1Content.innerHTML += `
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h5 class="font-bold text-lg mb-2 text-gray-800">${item.title}</h5>
+                        <p class="text-gray-600">${item.content}</p>
+                    </div>`;
+            });
+             data.pathways.tab2.forEach(item => {
+                tab2Content.innerHTML += `
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h5 class="font-bold text-lg mb-2 text-gray-800">${item.title}</h5>
+                        <p class="text-gray-600">${item.content}</p>
+                    </div>`;
+            });
+
+            function createImpactChart(canvasId, label, color) {
+                const ctx = document.getElementById(canvasId).getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [label, ''],
+                        datasets: [{
+                            data: [85, 15],
+                            backgroundColor: [color, '#e5e7eb'],
+                            borderColor: ['#F8F7F4'],
+                            borderWidth: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        }
+                    }
+                });
+            }
+
+            createImpactChart('economicImpactChart', '经济影响', '#4A90E2');
+            createImpactChart('environmentalImpactChart', '环境影响', '#50E3C2');
+            createImpactChart('socialImpactChart', '社会影响', '#F5A623');
+
+            const caseContainer = document.getElementById('case-studies-container');
+            data.caseStudies.forEach(item => {
+                const card = `
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-2 transition-transform duration-300 case-card">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="w-3 h-3 rounded-full ${item.color} mr-3"></span>
+                                <h4 class="text-xl font-bold">${item.country}</h4>
+                            </div>
+                            <h5 class="font-semibold text-lg text-gray-800 mb-2">${item.title}</h5>
+                            <p class="text-gray-600 text-sm case-content">${item.content}</p>
+                        </div>
+                    </div>
+                `;
+                caseContainer.innerHTML += card;
+            });
+            
+            const synergyInd = document.getElementById('synergy-industrialization');
+            const synergyEn = document.getElementById('synergy-energization');
+            const synergyTextSupply = document.getElementById('synergy-text-supply');
+            const synergyTextDemand = document.getElementById('synergy-text-demand');
+            
+            synergyInd.addEventListener('mouseover', () => { synergyTextSupply.style.opacity = '1'; });
+            synergyInd.addEventListener('mouseout', () => { synergyTextSupply.style.opacity = '0'; });
+
+            synergyEn.addEventListener('mouseover', () => { synergyTextDemand.style.opacity = '1'; });
+            synergyEn.addEventListener('mouseout', () => { synergyTextDemand.style.opacity = '0'; });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 65) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
