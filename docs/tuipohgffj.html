@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>分布式光伏发展信息图</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e40af', // 深蓝色主色调，代表科技与可靠
+            secondary: '#3b82f6', // 中蓝色辅助色
+            accent: '#f97316', // 橙色强调色，代表能量与创新
+            neutral: '#f3f4f6', // 浅灰色背景
+            dark: '#1f2937', // 深灰色文本
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .section-card {
+        @apply bg-white rounded-lg shadow-md p-6 mb-6 transition-all duration-300 hover:shadow-lg;
+      }
+      .title-gradient {
+        @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+      }
+      .stats-table {
+        @apply w-full border-collapse;
+      }
+      .stats-table th {
+        @apply bg-neutral text-dark font-semibold py-3 px-4 border-b;
+      }
+      .stats-table td {
+        @apply py-3 px-4 border-b;
+      }
+      .stats-table tr:last-child td {
+        @apply border-b-0;
+      }
+      .key-point {
+        @apply relative pl-6 mb-3;
+      }
+      .key-point::before {
+        content: '•';
+        @apply absolute left-0 text-accent text-xl;
+      }
+      .progress-bar {
+        @apply h-2 bg-neutral rounded-full overflow-hidden;
+      }
+      .progress-value {
+        @apply h-full bg-accent rounded-full transition-all duration-700 ease-out;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-dark">
+  <!-- 顶部导航栏 -->
+  <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-sun-o text-accent text-2xl"></i>
+        <span class="text-primary font-bold text-lg">光伏发展研究</span>
+      </div>
+      <div class="hidden md:flex space-x-6">
+        <a href="#status" class="text-gray-600 hover:text-primary transition-colors">现状</a>
+        <a href="#advantage" class="text-gray-600 hover:text-primary transition-colors">优势</a>
+        <a href="#challenge" class="text-gray-600 hover:text-primary transition-colors">挑战</a>
+        <a href="#solution" class="text-gray-600 hover:text-primary transition-colors">破局</a>
+        <a href="#case" class="text-gray-600 hover:text-primary transition-colors">案例</a>
+        <a href="#future" class="text-gray-600 hover:text-primary transition-colors">展望</a>
+      </div>
+      <button class="md:hidden text-gray-600 focus:outline-none">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="container mx-auto px-4 pt-24 pb-12">
+    <!-- 标题部分 -->
+    <header class="text-center mb-12">
+      <h1 class="title-gradient text-[clamp(1.8rem,4vw,3rem)] font-bold mb-3">中国绿电政策退坡背景下分布式光伏发展路径研究</h1>
+      <p class="text-gray-600 text-lg mb-8">——基于电网约束与市场机制的破局之道</p>
+      <div class="flex justify-center space-x-4">
+        <span class="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">政策研究</span>
+        <span class="bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-medium">能源转型</span>
+        <span class="bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium">光伏技术</span>
+      </div>
+    </header>
+
+    <!-- 行业现状 -->
+    <section id="status" class="section-card">
+      <h2 class="text-2xl font-bold mb-6 title-gradient">行业现状：政策、市场与系统的三重矛盾</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">补贴退坡进程（2024Q4）</h3>
+          <div class="overflow-x-auto">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th class="bg-primary/10 text-primary">项目类型</th>
+                  <th class="bg-primary/10 text-primary">初始补贴（元/度）</th>
+                  <th class="bg-primary/10 text-primary">现行机制</th>
+                  <th class="bg-primary/10 text-primary">退坡幅度</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hover:bg-gray-50">
+                  <td>集中式光伏</td>
+                  <td>0.85 - 1.0 (2016)</td>
+                  <td>平价上网 + 市场化竞价</td>
+                  <td>&gt;95%</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td>分布式光伏</td>
+                  <td>0.42 (2013)</td>
+                  <td>0.05 - 0.1元（余电上网）</td>
+                  <td>85% - 90%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">消纳矛盾量化分析</h3>
+          <ul class="space-y-3">
+            <li class="key-point">
+              <span class="font-medium">电网瓶颈</span>：中西部农村地区配变容量裕度 &lt;15%，午间弃光率峰值达18%（西北能源监管局，2024）
+            </li>
+            <li class="key-point">
+              <span class="font-medium">供给过剩</span>：集中式光伏年新增100GW，跨区域输电通道建设滞后（利用率仅68%）
+            </li>
+            <li class="key-point">
+              <span class="font-medium">市场机制缺口</span>：绿证交易量仅占可再生能源发电量12%（中电联，2024），流动性不足压制溢价空间
+            </li>
+          </ul>
+          <div class="mt-6 space-y-3">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium">配变容量裕度</span>
+                <span class="text-sm font-medium">15%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-value" style="width: 15%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium">输电通道利用率</span>
+                <span class="text-sm font-medium">68%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-value" style="width: 68%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium">绿证交易占比</span>
+                <span class="text-sm font-medium">12%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-value" style="width: 12%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分布式光伏的不可替代性 -->
+    <section id="advantage" class="section-card">
+      <h2 class="text-2xl font-bold mb-6 title-gradient">分布式光伏的不可替代性</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">结构优势</h3>
+          <div class="bg-blue-50 rounded-lg p-5 border-l-4 border-primary">
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <div class="bg-primary/20 p-2 rounded-full mr-3">
+                  <i class="fa fa-map-marker text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">地理适配性</h4>
+                  <p class="text-gray-600">80%负荷集中在东部城市群，分布式光伏可实现就近消纳</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-primary/20 p-2 rounded-full mr-3">
+                  <i class="fa fa-line-chart text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">投资经济性</h4>
+                  <p class="text-gray-600">工商业屋顶IRR可达12% - 15%，投资回收期短至5 - 7年</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-primary/20 p-2 rounded-full mr-3">
+                  <i class="fa fa-bolt text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">系统价值</h4>
+                  <p class="text-gray-600">降低输配电损耗6% - 8%，缓解电网扩容压力</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">战略机遇窗口</h3>
+          <div class="bg-blue-50 rounded-lg p-5 border-l-4 border-secondary">
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <div class="bg-secondary/20 p-2 rounded-full mr-3">
+                  <i class="fa fa-money text-secondary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">电价机制改革</h4>
+                  <p class="text-gray-600">分时电价峰谷差扩大至4:1（如浙江），提升自用比例的经济性</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-secondary/20 p-2 rounded-full mr-3">
+                  <i class="fa fa-shield text-secondary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">ESG强制披露</h4>
+                  <p class="text-gray-600">上市公司绿电采购需求年增40%（万得，2024），形成刚性市场</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-secondary/20 p-2 rounded-full mr-3">
+                  <i class="fa fa-building text-secondary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">整县推进2.0</h4>
+                  <p class="text-gray-600">县域分布式开发从“规模导向”转向“效益导向”，优化资源配置</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 核心挑战的深度解构 -->
+    <section id="challenge" class="section-card">
+      <h2 class="text-2xl font-bold mb-6 title-gradient">核心挑战的深度解构</h2>
+      <div class="overflow-x-auto">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th class="bg-accent/10 text-accent">维度</th>
+              <th class="bg-accent/10 text-accent">痛点</th>
+              <th class="bg-accent/10 text-accent">根源剖析</th>
+              <th class="bg-accent/10 text-accent">影响程度</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-gray-50">
+              <td class="font-medium">市场机制</td>
+              <td>P2P交易结算周期 &gt;45天</td>
+              <td>缺乏省级区块链清算平台</td>
+              <td>
+                <div class="flex items-center">
+                  <div class="w-20 bg-gray-200 rounded-full h-2.5 mr-2">
+                    <div class="bg-accent h-2.5 rounded-full" style="width: 85%"></div>
+                  </div>
+                  <span class="text-sm">85%</span>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="font-medium">电网接入</td>
+              <td>10kV以下项目并网耗时3 - 6月</td>
+              <td>配网自动化覆盖率不足30%</td>
+              <td>
+                <div class="flex items-center">
+                  <div class="w-20 bg-gray-200 rounded-full h-2.5 mr-2">
+                    <div class="bg-accent h-2.5 rounded-full" style="width: 75%"></div>
+                  </div>
+                  <span class="text-sm">75%</span>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="font-medium">金融抑制</td>
+              <td>融资成本较集中式高2 - 3pct</td>
+              <td>缺乏项目现金流评级体系</td>
+              <td>
+                <div class="flex items-center">
+                  <div class="w-20 bg-gray-200 rounded-full h-2.5 mr-2">
+                    <div class="bg-accent h-2.5 rounded-full" style="width: 90%"></div>
+                  </div>
+                  <span class="text-sm">90%</span>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="font-medium">政策风险</td>
+              <td>地方补贴支付延迟率超40%</td>
+              <td>财政预算与项目进度错配</td>
+              <td>
+                <div class="flex items-center">
+                  <div class="w-20 bg-gray-200 rounded-full h-2.5 mr-2">
+                    <div class="bg-accent h-2.5 rounded-full" style="width: 70%"></div>
+                  </div>
+                  <span class="text-sm">70%</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 破局路径：创新闭环构建 -->
+    <section id="solution" class="section-card">
+      <h2 class="text-2xl font-bold mb-6 title-gradient">破局路径：创新闭环构建</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">商业模式进阶路线</h3>
+          <div class="space-y-4">
+            <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-primary font-bold">1</span>
+                </div>
+                <h4 class="font-medium text-lg">基础模式</h4>
+              </div>
+              <p class="text-gray-600">自发自用 + 余电上网</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-primary font-bold">2</span>
+                </div>
+                <h4 class="font-medium text-lg">增值模式</h4>
+              </div>
+              <p class="text-gray-600">绿证捆绑销售、现货市场套利</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 bg-blue-300 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-primary font-bold">3</span>
+                </div>
+                <h4 class="font-medium text-lg">高级模式</h4>
+              </div>
+              <p class="text-gray-600">VPP聚合（分布式 + 储能 + 可控负荷）、社区P2P（基于智能合约的微网交易）</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">技术协同关键节点</h3>
+          <div class="space-y-4">
+            <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa fa-plug text-green-600"></i>
+                </div>
+                <h4 class="font-medium text-lg">电网侧</h4>
+              </div>
+              <p class="text-gray-600">部署可编程智能断路器（缩短接入周期至15天）+ 动态增容技术（提升线路承载力20%）</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 bg-green-200 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa fa-home text-green-600"></i>
+                </div>
+                <h4 class="font-medium text-lg">用户侧</h4>
+              </div>
+              <p class="text-gray-600">推广AI功率预测系统（误差率 &lt;5%）+ 组串式逆变器集群控制</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 bg-green-300 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa fa-cogs text-green-600"></i>
+                </div>
+                <h4 class="font-medium text-lg">系统级</h4>
+              </div>
+              <p class="text-gray-600">建立分布式资源聚合管理平台（含T + 1消纳能力预测）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">政策工具箱优化</h3>
+          <div class="bg-green-50 rounded-lg p-5 border-l-4 border-green-600">
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fa fa-bullhorn text-green-600 mt-1 mr-3"></i>
+                <div>
+                  <h4 class="font-medium">激励调整</h4>
+                  <p class="text-gray-600">对峰谷差 &gt;0.8元地区给予度电补贴0.05元（限自发自用部分）；将配储项目优先纳入绿电交易池</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-file-text-o text-green-600 mt-1 mr-3"></i>
+                <div>
+                  <h4 class="font-medium">简政放权</h4>
+                  <p class="text-gray-600">建立“云审批”平台（承诺制接入，容缺受理）；统一省级备案标准（消除市县级政策摩擦）</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">金融创新实践路径</h3>
+          <div class="bg-purple-50 rounded-lg p-5 border-l-4 border-purple-600">
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fa fa-cubes text-purple-600 mt-1 mr-3"></i>
+                <div>
+                  <h4 class="font-medium">资产证券化</h4>
+                  <p class="text-gray-600">构建分布式光伏资产包 (单包规模50 - 100MW)</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-shield text-purple-600 mt-1 mr-3"></i>
+                <div>
+                  <h4 class="font-medium">引入险资</h4>
+                  <p class="text-gray-600">引入险资做优先级LP (要求BBB+以上评级)</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-money text-purple-600 mt-1 mr-3"></i>
+                <div>
+                  <h4 class="font-medium">现金流结构</h4>
+                  <p class="text-gray-600">基础电费(70%) + 绿证收益(20%) + 辅助服务(10%)</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-line-chart text-purple-600 mt-1 mr-3"></i>
+                <div>
+                  <h4 class="font-medium">预期收益</h4>
+                  <p class="text-gray-600">测算资本金IRR可提升至9.5%</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 实证案例：商业模式的财务验证 -->
+    <section id="case" class="section-card">
+      <h2 class="text-2xl font-bold mb-6 title-gradient">实证案例：商业模式的财务验证</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+          <div class="bg-primary/10 p-4">
+            <h3 class="text-xl font-semibold text-primary">浙江海宁晶科科技园区（15MW分布式）</h3>
+          </div>
+          <div class="p-5">
+            <div class="overflow-x-auto">
+              <table class="stats-table">
+                <thead>
+                  <tr>
+                    <th class="bg-gray-100 text-dark">指标</th>
+                    <th class="bg-gray-100 text-dark">常规模式</th>
+                    <th class="bg-gray-100 text-dark">VPP聚合模式</th>
+                    <th class="bg-gray-100 text-dark">提升幅度</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="hover:bg-gray-50">
+                    <td>自用比例</td>
+                    <td>65%</td>
+                    <td>82%</td>
+                    <td class="text-green-600">+17%</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td>度电收益</td>
+                    <td>0.48元</td>
+                    <td>0.61元</td>
+                    <td class="text-green-600">+27%</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td>IRR</td>
+                    <td>10.2%</td>
+                    <td>14.7%</td>
+                    <td class="text-green-600">+4.5pct</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-4">
+              <p class="text-gray-700"><span class="font-medium">关键创新：</span>接入浙江省虚拟电厂平台参与日前市场竞价</p>
+              <div class="mt-4">
+                <div class="flex justify-between mb-1">
+                  <span class="text-sm">自用比例提升</span>
+                  <span class="text-sm font-medium">65% → 82%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-value" style="width: 82%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+          <div class="bg-secondary/10 p-4">
+            <h3 class="text-xl font-semibold text-secondary">上海特斯拉超级工厂光储微网</h3>
+          </div>
+          <div class="p-5">
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mr-4">
+                  <i class="fa fa-bolt text-secondary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">技术组合</h4>
+                  <p class="text-gray-600">20MW光伏 + 4MW/16MWh储能</p>
+                </div>
+              </div>
+              <div class="border-t pt-4">
+                <h4 class="font-medium text-lg mb-3">收益来源矩阵</h4>
+                <ul class="space-y-2">
+                  <li class="flex items-center">
+                    <i class="fa fa-exchange text-secondary mr-2"></i>
+                    <span>峰谷套利（价差0.95元/kWh）</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fa fa-calculator text-secondary mr-2"></i>
+                    <span>容量电费管理（年节省320万元）</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fa fa-refresh text-secondary mr-2"></i>
+                    <span>黑启动服务补偿（200元/MW·次）</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="mt-4">
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="bg-gray-50 p-3 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-secondary">320万</div>
+                    <div class="text-sm text-gray-500">年节省电费</div>
+                  </div>
+                  <div class="bg-gray-50 p-3 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-secondary">0.95元</div>
+                    <div class="text-sm text-gray-500">峰谷价差</div>
+                  </div>
+                  <div class="bg-gray-50 p-3 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-secondary">200元</div>
+                    <div class="text-sm text-gray-500">黑启动补偿</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 结论与展望 -->
+    <section id="future" class="section-card">
+      <h2 class="text-2xl font-bold mb-6 title-gradient">结论与展望</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">破局关键</h3>
+          <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa fa-link text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium">三联动机制</h4>
+                  <p class="text-gray-600">建立“负控 - 储能 - 光伏”三联动机制，将弃光率控制在5%阈值内</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa fa-exchange text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium">证券化融资</h4>
+                  <p class="text-gray-600">通过省级交易平台证券化破解融资瓶颈（ABS发行成本压降至5.5%以下）</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa fa-cogs text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium">数字孪生电网</h4>
+                  <p class="text-gray-600">构建“数字孪生电网”预判消纳瓶颈，动态优化接入时序</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-primary">未来拓展</h3>
+          <div class="bg-gradient-to-br from-blue-50 to-green-50 rounded-lg p-5 border border-blue-100">
+            <div class="flex items-center justify-center mb-4">
+              <div class="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center">
+                <i class="fa fa-rocket text-accent text-2xl"></i>
+              </div>
+            </div>
+            <h4 class="font-medium text-lg mb-3 text-center">万亿级协同市场</h4>
+            <p class="text-gray-600 mb-4 text-center">制氢消纳与车网互动（V2G）将打开万亿级协同市场</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-white p-3 rounded-lg shadow-sm">
+                <div class="text-3xl font-bold text-accent text-center">20GW</div>
+                <div class="text-sm text-gray-500 text-center">2030年制氢配套光伏装机目标</div>
+              </div>
+              <div class="bg-white p-3 rounded-lg shadow-sm">
+                <div class="text-3xl font-bold text-accent text-center">500万辆</div>
+                <div class="text-sm text-gray-500 text-center">2030年V2G车网互动规模</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 附录：实施路线图（2025 - 2030） -->
+    <section class="section-card">
+      <h2 class="text-2xl font-bold mb-6 title-gradient">附录：实施路线图（2025 - 2030）</h2>
+      <div class="relative overflow-x-auto">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th class="bg-gradient-to-r from-blue-50 to-green-50 text-dark">阶段</th>
+              <th class="bg-gradient-to-r from-blue-50 to-green-50 text-dark">重点任务</th>
+              <th class="bg-gradient-to-r from-blue-50 to-green-50 text-dark">量化目标</th>
+              <th class="bg-gradient-to-r from-blue-50 to-green-50 text-dark">责任主体</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-gray-50">
+              <td class="font-medium">近期(2025)</td>
+              <td>10省份上线分布式交易平台</td>
+              <td>绿证交易占比提升至25%</td>
+              <td>国家能源局、省级发改委</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="font-medium">中期(2027)</td>
+              <td>建立配网承载力动态监测体系</td>
+              <td>弃光率压降至8%以下</td>
+              <td>电网企业、能源监管机构</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="font-medium">远期(2030)</td>
+              <td>分布式 + 储能 + 负荷聚合占比超30%</td>
+              <td>平准化成本降至0.2元/度</td>
+              <td>全产业链协同</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-6">
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+          <h4 class="font-medium mb-2">研究说明</h4>
+          <p class="text-gray-600">本报告在提纲基础上强化了数据颗粒度、机制穿透性、方案可量化、模式可视化和风险对冲设计等维度。</p>
+          <p class="text-gray-600 mt-2">可根据具体应用场景（政府/企业/投资机构）提供定制版本，重点突出决策相关性。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-8">
+    <a href="https://blog.30515245.xyz/posts/3818.html" class="inline-block ml-6 mt-6 text-white hover:text-gray-300 transition-colors">
+        <i class="fa-solid fa-arrow-left mr-2"></i>
+        返回文章
+    </a>
+
+  <script>
+    // 滚动时导航栏样式变化
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('py-2', 'shadow-md');
+        nav.classList.remove('py-3', 'shadow-sm');
+      } else {
+        nav.classList.add('py-3', 'shadow-sm');
+        nav.classList.remove('py-2', 'shadow-md');
+      }
+    });
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // 进度条动画
+    function animateProgressBars() {
+      const progressBars = document.querySelectorAll('.progress-value');
+      progressBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => {
+          bar.style.width = width;
+        }, 300);
+      });
+    }
+
+    // 初始动画
+    window.addEventListener('load', animateProgressBars);
+
+    // 为卡片添加交互效果
+    document.querySelectorAll('.section-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.classList.add('transform', 'translate-y-[-5px]');
+      });
+      card.addEventListener('mouseleave', function() {
+        this.classList.remove('transform', 'translate-y-[-5px]');
+      });
+    });
+  </script>
+</body>
+
+</html>
