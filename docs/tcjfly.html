@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京发铝业储能合作方案</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #2c5f2d 0%, #1e3a1f 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .ppt-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            max-width: 100%;
+        }
+        
+        .slide {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, #97BC62, #2c5f2d);
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .slide::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 80px;
+            height: 80px;
+            background-image: url('https://omo-oss-image.thefastimg.com/portal-saas/pg2024041519045510335/cms/image/6f77327a-9775-4b05-b887-7d3b938c39b0.png_290xaf.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .slide-header {
+            border-bottom: 3px solid #2c5f2d;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .slide-title {
+            color: #2c5f2d;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .slide-subtitle {
+            color: #555;
+            font-size: 1.4rem;
+            font-weight: 400;
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+        }
+        
+        .cover {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95)), 
+                        url('https://omo-oss-image.thefastimg.com/portal-saas/pg2024041519045510335/cms/image/e7b6d944-de4d-4acd-98c8-9755a021df82.jpg_118极速落地0xaf.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            align-items: center;
+        }
+        
+        .cover .slide-title {
+            font-size: 2.8rem;
+            margin-top: 30px;
+            color: #1e3a1f;
+        }
+        
+        .cover .slide-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: #2c5f2d;
+            font-weight: 500;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: rgba(44, 95, 45, 0.1);
+            border: 2px solid #2c5f2d;
+            border-radius: 15px;
+            padding: 15px 25px;
+            min-width: 180px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1e3a1f;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .toc-item {
+            background: rgba(44, 95, 45, 0.05);
+            border-left: 5px solid #2c5f2d;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .toc-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #2c5f2d;
+            margin-bottom: 10px;
+        }
+        
+        .toc-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e3a1f;
+            margin-bottom: 10px;
+        }
+        
+        .toc-desc {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .data-table th {
+            background-color: #2c5f2d;
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .chart {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            min-width: 300px;
+            max-width: 100%;
+        }
+        
+        .chart-title {
+            text-align: center;
+            font-weight: 600;
+            color: #1极速落地e3a1f;
+            margin-bottom: 15极速落地px;
+        }
+        
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #FF6B6B 0% 14.5%, 
+                #4ECDC4 14.5% 100%
+            );
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .pie-center {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            top: 50px;
+            left: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #1e3a1f;
+        }
+        
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            height: 200px;
+            gap: 40px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .bar {
+            width: 50px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .bar-before {
+            height: 150px;
+            background: #FF6B6B;
+        }
+        
+        .bar-after {
+            height: 120px;
+            background: #4ECDC4;
+            margin-top: 5px;
+        }
+        
+        .bar-label {
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .risk-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid #FF6B6B;
+        }
+        
+        .risk-title {
+            font-weight: 600;
+            color: #1e3a1f;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .risk-title i {
+            color: #FF6B6B;
+        }
+        
+        .risk-solution {
+            background: rgba(44, 95, 45, 0.07);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 3px solid #2c5f2d;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #2c5f2d;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 45%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2c5f2d;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -60px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -60px;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 3px solid #2c5f2d;
+        }
+        
+        .action-cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .action-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            width: 280px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #2c5f2d;
+        }
+        
+        .action-icon {
+            font-size: 3rem;
+            color: #2c5f2d;
+            margin-bottom: 20px;
+        }
+        
+        .action-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e3a1f;
+            margin-bottom: 15px;
+        }
+        
+        .action-desc {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .exclusive-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #2c5f2d;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .footer-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #2c5f2d;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .gantt {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 800px;
+        }
+        
+        .gantt-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+        
+        .gantt-label {
+            width: 150px;
+            font-weight: 600;
+            color: #1e3a1f;
+        }
+        
+        .gantt-bar {
+            height: 40px;
+            background: #97BC62;
+            border-radius: 5px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .config-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .config-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #2c5f2d;
+        }
+        
+        .config-title {
+            font-weight: 600;
+            color: #1e3a1f;
+            margin-bottom: 10px;
+        }
+        
+        .config-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c5f2d;
+            margin-bottom: 10px;
+        }
+        
+        .config-desc {
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+                min-height: auto;
+            }
+            
+            .slide-title {
+                font-size: 1.8rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-card {
+                width: 100%;
+            }
+            
+            .chart-container {
+                flex-direction: column;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 70px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 20px;
+            }
+            
+            .action-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ppt-container">
+        <!-- 封面页 -->
+        <section class="slide cover">
+            <div class="exclusive-badge">张总 专属方案 | 2025年6月</div>
+            <div class="slide-content">
+                <h1 class="slide-title">零首付・降本 30%・4 小时应急保障</h1>
+                <h2 class="slide-subtitle">京发铝业储能合作方案</h2>
+                <h3 class="slide-subtitle">第三方全投资，3 个月电费立减，100 天安全落地</h3>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-value">¥0</div>
+                        <div class="stat-label">前期投入</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">30%</div>
+                        <div class="stat-label">成本降低</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">100天</div>
+                        <div class="stat-label">实施周期</极速落地div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">4小时</div>
+                        <div class="stat-label">应急保障</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; color: #555;">
+                        第三方投资800万元，京发0投入 | 峰段用电享低谷价×1.2倍 | 年节约超150万元
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 目录页 -->
+        <section class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">方案目录</h1>
+                <h2 class="slide-subtitle">聚焦降本、安全、零风险三大核心价值</h2>
+            </div>
+            
+            <div class="toc-grid">
+                <div class="toc-item">
+                    <div class="toc-number">01</div>
+                    <div class="toc-title">三笔核心账</div>
+                    <div class="toc-desc">降本・安全・政策红利</div>
+                </div>
+                <div class="toc-item">
+                    <div class="toc-number">02</div>
+                    <div class="toc-title">合作模式</div>
+                    <div class="toc-desc">零风险全托管，收益透明分成</div>
+                </div>
+                <div class="toc-item">
+                    <div class="toc-number">03</div>
+                    <div class="toc-title">实施方案</div>
+                    <div class="toc-desc">100 天落地，生产零影响</div>
+                </div>
+                <div class="toc-item">
+                    <div class="toc-number">04</div>
+                    <div class="toc-title">风险控制</div>
+                    <div class="toc-desc">五大风险，条条兜底</div>
+                </div>
+                <div class="toc-item">
+                    <div class="toc-number">05</div>
+                    <div class="toc-title">立即行动</div>
+                    <div class="toc-desc">决策包 + 政策窗口期把握</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 企业痛点现状 -->
+        <section class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">企业痛点现状</h1>
+                <h2 class="slide-subtitle">用电结构分析与风险评估</h2>
+            </div>
+            
+            <div class="slide-content">
+                <div class="chart-container">
+                    <div class="chart">
+                        <h3 class="chart-title">当前用电结构</h3>
+                        <div class="pie-chart">
+                            <div class="pie-center">85.5%</div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <p><span style="background: #FF6B6B; display: inline-block; width: 15px; height: 15px;"></span> 外购电：85.5%</p>
+                            <p><span style="background: #4ECDC4; display: inline-block; width: 15px; height: 15px;"></span> 光伏自用：14.5%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chart">
+                        <h3 class="chart-title">生产风险分析</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                                <i class="fas fa-bolt" style="color: #FF6B6B; margin-right: 10px; font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 600;">无应急保障</div>
+                                    <div>单次停电损失≥500万元</div>
+                                </div>
+                            </li>
+                            <li style="padding: 15px; display: flex; align-items: center;">
+                                <i class="fas fa-chart-line" style="color: #FF6B6B; margin-right: 10px; font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 600;">电费占比高</div>
+                                    <div>占生产成本40%</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 107, 107, 0.1); padding: 20px; border-radius: 10px; margin-top: 20px;">
+                    <h3 style="color: #FF6B6B; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-exclamation-triangle"></i> 风险警示
+                    </h3>
+                    <p>安徽某铝企因停电损失600万元，现有方案无法规避此类风险</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 成本账 -->
+        <section class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">成本账</h1>
+                <h2 class="slide-subtitle">年节约150万元，3个月见效</h2>
+            </div>
+            
+            <div class="slide-content">
+                <div style="background: rgba(44, 95, 45, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                    <h3 style="color: #2c5f2d; margin-bottom: 15px;">零首付模式</h3>
+                    <p>第三方投资800万元，京发0投入</p>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart">
+                        <h3 class="chart-title">电价对比</h3>
+                        <div class="bar-chart">
+                            <div class="bar-group">
+                                <div class="bar bar-before"></div>
+                                <div class="bar-label">当前电价</div>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar bar-after"></div>
+                                <div class="bar-label">实施后电价</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart">
+                        <h3 class="chart-title">成本节约分析</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 15px; border-bottom: 1px solid #eee;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>折扣电价收益</span>
+                                    <span style="font-weight: 600; color: #2c5f2d;">¥100万/年</span>
+                                </div>
+                            </li>
+                            <li style="padding: 15px; border-bottom: 1px solid #eee;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>光伏消纳提升</span>
+                                    <span style="font-weight: 600; color: #2c5f2d;">¥49万/年</span>
+                                </div>
+                            </li>
+                            <li style="padding: 15px;">
+                                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem;">
+                                    <span>总节约</span>
+                                    <span style="color: #2c5极速落地f2d;">≥¥150万/年</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <p><i class="fas fa-arrow-right" style="color: #2c5f2d;"></i> 实施前电费：900万/年 → 实施后目标：≤750万/年</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 安全账 -->
+        <section class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">安全账</h1>
+                <h2 class="slide-subtitle">4小时应急，杜绝停机灾难</h2>
+            </div>
+            
+            <div class="slide-content">
+                <div style="background: rgba(44, 95, 45, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px; text-align: center;">
+                    <h3 style="color: #2c5f2d; margin-bottom: 15px;">核心价值</h3>
+                    <p>储能预留1 MWh（10%容量），电网停电时自动切换，保障电解槽等设备运行4小时</p>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart">
+                        <h3 class="chart-title">安全体系</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 15px; border-bottom: 1极速落地px solid #eee; display: flex; align-items: center;">
+                                <i class="fas fa-shield-alt" style="color: #2c5f2d; margin-right: 10px; font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 600;">电池热失控预警</div>
+                                    <div>提前72小时预警</div>
+                                </div>
+                            </li>
+                            <li style="padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                                <i class="fas fa-fire-extinguisher" style="color: #2c5f2d; margin-right: 10px; font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 600;">消防系统响应</div>
+                                    <div>10秒响应（全氟己酮气体灭火）</div>
+                                </div>
+                            </li>
+                            <li style="padding: 15px; display: flex; align-items: center;">
+                                <i class="fas fa-sync-alt" style="color: #2c5f2d; margin-right: 10px; font-size: 1.5rem;"></i>
+                                <div>
+                                    <div style="font-weight: 600;">双PCS冗余设计</div>
+                                    <div>切换时间＜500ms</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="chart">
+                        <h3 class="chart-title">应急保障方案</h3>
+                        <div style="text-align: center; margin-top: 30px;">
+                            <div style="font-size: 5rem; color: #2c5f2d; line-height: 1;">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 style="color: #1e3a1f; margin: 20px 0;">4小时持续供电</h3>
+                            <p>保障关键设备运行，避免生产中断</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 政策账 -->
+        <section class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">政策账</h1>
+                <h2 class="slide-subtitle">三重政策收益，10年持续红利</h2>
+            </div>
+            
+            <div class="slide-content">
+                <div class="config-cards">
+                    <div class="config-card">
+                        <div class="config-title">安徽省峰谷差价政策</div>
+                        <div class="config-value">0.36元/度差价保障</div>
+                        <div class="config-desc">峰段0.85元/度 → 谷段0.29元/度</div>
+                    </div>
+                    <div class="config-card">
+                        <div class="config-title">电力辅助服务补贴</div>
+                        <div class="config-value">0.20元/度额外收益</div>
+                        <div class="config-desc">电网调峰10-15次/月</div>
+                    </div>
+                    <div class="config-card">
+                        <div class="config-title">制造业设备更新专项</div>
+                        <div class="config-value">投资退税12%</div>
+                        <div class="config-desc">第三方投资可享税收优惠</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; background: rgba(44, 95, 45, 0.1); padding: 20px; border-radius: 10px;">
+                    <h3 style="color: #2c5f2d; margin-bottom: 15px;">政策窗口期提醒</h3>
+                    <p><i class="fas fa-exclamation-circle" style="color: #FF6B6B;"></i> 安徽省发改委文件规定2025年7月1日起储能放电补贴降低0.05元/度</p>
+                    <p><i class="fas fa-check-circle" style="color: #2c5f2d;"></i> 当前签约可锁定0.20元/度补贴标准至2035年</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 合作模式 -->
+        <section class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">合作模式</h1>
+                <h2 class="slide-subtitle">零风险全托管，收益透明分成</h2>
+            </div>
+            
+            <div class="slide-content">
+                <div class="chart-container">
+                    <div class="chart">
+                        <h3 class="chart-title">设备配置方案</h3>
+                        <table class="data-table">
+                            <tr>
+                                <th>参数</th>
+                                <th>数值</th>
+                            </tr>
+                            <tr>
+                                <td>储能容量</td>
+                                <td>10 MWh</td>
+                            </tr>
+                            <tr>
+                                <td>充放功率</td>
+                                <td>5 MW</td>
+                            </tr>
+                            <tr>
+                                <td>循环寿命</td>
+                                <td>8000次（≥15年）</td>
+                            </tr>
+                            <tr>
+                                <td>防护等级</td>
+                                <td>IP54（防尘防水）</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="chart">
+                        <h3 class="chart-title">收益分配机制</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 15px; border-bottom: 1px solid #eee;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>年总收益</span>
+                                    <span>¥200万元</span>
+                                </div>
+                            </li>
+                            <li style="padding: 15px; border-bottom: 1px solid #eee;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>京发铝业分成（70%）</span>
+                                    <span style="color: #2c5f2d; font-weight: 600;">¥140万元</span>
+                                </div>
+                            </li>
+                            <li style="padding: 15px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>运营方分成（30%）</span>
+                                    <span>¥60万元</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; background: rgba(44, 95, 45, 0.1); padding: 20px; border-radius: 10px;">
+                    <p><i class="fas fa-check-circle" style="color: #2c5f2d;"></i> 京发权益：免收租金、维护0成本、享受固定折极速落地扣电价</p>
+                    <p><i class="fas fa-check-circle" style="color: #2c5f2d;"></i> 运营方责任：投资建设、运营维护、电费结算</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 实施方案 -->
+        <section class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">实施方案</h1>
+                <h2 class="slide-subtitle">100天落地，生产零影响</h2>
+            </div>
+            
+            <div class="slide-content">
+                <div class="gantt">
+                    <div class="gantt-row">
+                        <div class="gantt-label">第1-15天</div>
+                        <div class="gantt-bar" style="width: 20%;">前期尽调与备案</div>
+                    </div>
+                    <div class="gantt-divider"></div>
+                    <div class="gantt-row">
+                        <div class="gantt-label">第16-30天</div>
+                        <div class="gantt-bar" style="width: 40%;">系统设计与设备采购</div>
+                    </div>
+                    <div class="gantt-divider"></div>
+                    <div class="gantt-row">
+                        <div class="gantt-label">第31-60天</div>
+                        <div class="gantt-bar" style="width: 60%;">设备到场与安装</div>
+                    </div>
+                    <div class="gantt-divider"></div>
+                    <div class="gantt-row">
+                        <div class="gantt-label">第61-80天</div>
+                        <div class="gantt-bar" style="width: 80%;">系统调试与验收</div>
+                    </div>
+                    <div class="gantt-divider"></div>
+                    <div class="gantt-row">
+                        <div class="gantt-label">第81-100天</div>
+                        <div class="gantt-bar" style="width: 100%;">并网运行与电费结算</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(44, 95, 45, 0.1); padding: 20px; border-radius: 10px; margin-top: 30px;">
+                    <h3 style="color: #2c5f2d; margin-bottom: 15px;">生产保障措施</h3>
+                    <p><i class="fas fa-bolt" style="color: #2c5f2d;"></i> 分区域分批施工，单区断电不超过4小时</p>
+                    <p><i class="fas fa-cog" style="color: #2c5f2d;"></i> 设备预组装减少现场工期50%</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 风险控制 -->
+        <section class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">风险控制</h1>
+                <h2 class="slide-subtitle">五大风险，条条兜底</h2>
+            </div>
+            
+            <div class="slide-content">
+                <div class="risk-matrix">
+                    <div class="risk-card">
+                        <div class="risk-title">
+                            <i class="fas fa-exclamation-circle"></i>
+                            投资方违约
+                        </div>
+                        <p>中途弃建怎么办？</p>
+                        <div class="risk-solution">
+                            <strong>解决方案：</strong> 银行履约保函（担保30%投资），违约赔150%损失
+                        </div>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <div class="risk-title">
+                            <i class="fas fa-exclamation-circle"></i>
+                            储能故障
+                        </div>
+                        <p>影响生产怎么办？</p>
+                        <div class="risk-solution">
+                            <strong>解决方案：</strong> 双PCS冗余 + 自动切换电网，切换时间＜500ms
+                        </div>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <div class="risk-title">
+                            <i class="fas fa-exclamation-circle"></i>
+                            政策变动
+                        </div>
+                        <p>电价补贴退坡怎么办？</p>
+                        <div class="risk-solution">
+                            <strong>解决方案：</strong> 合同约定"价差保护"：若下降超20%，折扣降至低谷价×1.1倍
+                        </div>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <div class="risk-title">
+                            <i class="fas fa-exclamation-circle"></i>
+                            场地问题
+                        </div>
+                        <p>承重/消防不通过怎么办？</p>
+                        <div class="risk-solution">
+                            <strong>解决方案：</strong> 投资方承担加固/审批费，未通过则项目终止（京发无责）
+                        </div>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <div class="risk-title">
+                            <i class="fas fa-exclamation-circle"></i>
+                            设备老化
+                        </div>
+                        <p>10年后如何处理？</p>
+                        <div class="risk-solution">
+                            <strong>解决方案：</strong> 投资方拆除或按残值30%转让（京发可选）
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(44, 95, 45, 0.1); padding: 20px; border-radius: 10px; margin-top: 30px; text-align: center;">
+                    <h3 style="color: #2c5f2d; margin-bottom: 15px;">风险兜底承诺</h3>
+                    <p style="font-size: 1.2rem;">京发全程零责任，所有风险由投资方承担</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 立即行动 -->
+        <section class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">立即行动</h1>
+                <h2 class="slide-subtitle">把握政策窗口期，锁定最优方案</h2>
+            </div>
+            
+            <div class="slide-content">
+                <div style="background: rgba(255, 107, 107, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px; text-align: center;">
+                    <h3 style="color: #FF6B6B; margin-bottom: 15px;">
+                        <i class="fas fa-hourglass-half"></i> 政策窗口期提示
+                    </h3>
+                    <p>2025年7月1日起，安徽省储能放电补贴可能从0.2元/度降至0.15元/度</p>
+                    <p style="margin-top: 10px; font-weight: 600;">现在签约可锁定<strong style="color: #2c5f2d;">0.36元/度峰段折扣</strong>，年节约额外增加30万元</p>
+                </div>
+                
+                <div class="action-cards">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="action-title">本周安排</h3>
+                        <p class="action-desc">安排投资方工厂参观</p>
+                        <div style="background: #2c5f2d; color: white; padding: 8px 20px; border-radius: 30px; display: inline-block;">
+                            立即预约
+                        </div>
+                    </div>
+                    
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3 class="action-title">15日内确认</h3>
+                        <p class="action-desc">确认合作条款，启动备案</p>
+                        <div style="background: #2c5f2d; color: white; padding: 8px 20px; border-radius: 30px; display: inline-block;">
+                            获取协议草本
+                        </div>
+                    </div>
+                    
+                    <div class="action-card">
+                        <div class极速落地="action-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 class="action-title">30日内签约</h3>
+                        <p class="action-desc">锁定最优折扣方案</p>
+                        <div style="background: #2c5f2d; color: white; padding: 8px 20px; border-radius: 30px; display: inline-block;">
+                            签署承诺书
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 封底页 -->
+        <section class="slide cover">
+            <div class="slide-content" style="text-align: center;">
+                <h1 class="slide-title" style="font-size: 3rem;">携手开启零碳降本新征程</h1>
+                
+                <div style="max-width: 700px; margin: 40px auto; padding: 30px; background: rgba(255, 255, 255, 0.9); border-radius: 15px;">
+<p style="font-size: 1.3rem; line-height: 1.8; margin-bottom: 30px; text-align: left;">
+    京发当前电费成本占比40%，每1%的节约都是净利润的直接提升。本方案零风险、高回报，100天内即可实现电费下降与生产保障的双重升级。
+</p>
+                    <p style="font-size: 1.4rem; font-weight: 600; color: #2c5f2d;">
+                        期待与您共同把握政策窗口，签署这份"降本+安全"双保险协议！
+                    </p>
+                </div>
+                
+                <div style="display: flex; justify-content: center; gap: 30px; margin-top: 30px;">
+                    <div style="width: 100px; height: 100px; background: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <div style="font-weight: 800; color: #2c5f2d;">京发铝业</div>
+                    </div>
+                    <div style="display: flex; align-items: center; font-size: 2rem; color: #fff;">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div style="width: 100px; height: 100px; background: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <div style="font-weight: 800; color: #2c5f2d;">平峰科技</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- 导航按钮 -->
+    <div class="footer-nav">
+        <div class="nav-btn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="nav-btn" onclick="scrollToNext()">
+            <i class="fas fa-arrow-down"></i>
+        </div>
+    </div>
+    
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            currentSlide = 0;
+        }
+        
+        function scrollToNext() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        window.addEventListener('scroll', function() {
+            let currentPosition = window.scrollY;
+            slides.forEach((slide, index) => {
+                const slideTop = slide.offsetTop;
+                const slideHeight = slide.offsetHeight;
+                
+                if (currentPosition >= slideTop - 100 && 
+                    currentPosition < slideTop + slideHeight - 100) {
+                    currentSlide = index;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
