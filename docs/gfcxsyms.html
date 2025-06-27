@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分布式光伏创新商业模式</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral Harmony -->
+    <!-- Application Structure Plan: The application uses a thematic, single-page dashboard structure with a sticky top navigation for easy access to key sections: 1) Market Pulse (高层数据概览), 2) Model Evolution (传统与创新模式对比), 3) Technology Fusion (技术深度解析), 4) Financing Paths (融资机制), and 5) Challenges & Outlook (风险与未来). This structure was chosen to guide the user from a high-level overview to detailed analysis in a logical, non-linear flow, promoting exploration and comparison rather than passive reading. Interactive cards, charts, and toggles are used to make dense information digestible and engaging. -->
+    <!-- Visualization & Content Choices: 
+        - Market Growth: Goal: Inform/Compare. Method: Bar & Donut charts (Chart.js) to show market scale and structure. Interaction: Hover tooltips. Justification: Visual comparison is more impactful than text.
+        - Business Models: Goal: Organize/Compare. Method: Interactive HTML/CSS cards with a toggle to switch between traditional and innovative models. Interaction: Click to expand details. Justification: Facilitates direct comparison and understanding of the evolution.
+        - PV+Storage: Goal: Explain. Method: Interactive line chart (Chart.js) demonstrating peak-valley arbitrage. Interaction: Button to simulate storage activation. Justification: Dynamically shows the core value proposition of storage better than a static image.
+        - Financing: Goal: Organize. Method: Tabbed content display for different financing mechanisms. Interaction: Click tabs to view details. Justification: Organizes complex financial information cleanly.
+        - Challenges: Goal: Inform. Method: Accordion list for different risk categories. Interaction: Click to expand. Justification: Condenses text-heavy information into a manageable format.
+        - All visualizations are built using Chart.js on Canvas or structured HTML/CSS, adhering to the NO SVG/Mermaid requirement. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Noto Sans SC', sans-serif; background-color: #F8F7F4; color: #3D405B; }
+        .bg-primary { background-color: #F8F7F4; }
+        .text-primary { color: #3D405B; }
+        .text-secondary { color: #5F6368; }
+        .bg-accent-light { background-color: #EAF2E8; }
+        .text-accent-green { color: #5B8C5A; }
+        .bg-accent-green { background-color: #5B8C5A; }
+        .border-accent-green { border-color: #5B8C5A; }
+        .bg-accent-orange { background-color: #E07A5F; }
+        .text-accent-orange { color: #E07A5F; }
+        .nav-link { transition: color 0.3s ease, border-bottom-color 0.3s ease; border-bottom: 2px solid transparent; }
+        .nav-link:hover, .nav-link.active { color: #E07A5F; border-bottom-color: #E07A5F; }
+        .card { background-color: #FFFFFF; border: 1px solid #E0E0E0; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1); }
+        .tab.active { border-color: #E07A5F; color: #E07A5F; background-color: #FEF6F4; }
+        .chart-container { position: relative; width: 100%; max-width: 900px; margin-left: auto; margin-right: auto; height: 300px; max-height: 40vh; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="{ activeSection: 'market-pulse' }" @scroll.window="activeSection = getActiveSection()">
+
+    <header class="bg-primary/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold text-primary">
+                分布式光伏<span class="text-accent-orange">创新商业模式</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#market-pulse" @click.prevent="scrollToSection('market-pulse')" class="nav-link" :class="{ 'active': activeSection === 'market-pulse' }">市场脉搏</a>
+                <a href="#model-evolution" @click.prevent="scrollToSection('model-evolution')" class="nav-link" :class="{ 'active': activeSection === 'model-evolution' }">模式演进</a>
+                <a href="#tech-fusion" @click.prevent="scrollToSection('tech-fusion')" class="nav-link" :class="{ 'active': activeSection === 'tech-fusion' }">技术融合</a>
+                <a href="#financing" @click.prevent="scrollToSection('financing')" class="nav-link" :class="{ 'active': activeSection === 'financing' }">融资新路径</a>
+                <a href="#challenges" @click.prevent="scrollToSection('challenges')" class="nav-link" :class="{ 'active': activeSection === 'challenges' }">挑战与展望</a>
+            </div>
+            <div class="md:hidden">
+                <select @change="scrollToSection($event.target.value)" class="bg-white border border-gray-300 rounded-md px-3 py-2">
+                    <option value="market-pulse">市场脉搏</option>
+                    <option value="model-evolution">模式演进</option>
+                    <option value="tech-fusion">技术融合</option>
+                    <option value="financing">融资新路径</option>
+                    <option value="challenges">挑战与展望</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        
+        <section id="market-pulse" class="pt-16 -mt-16 mb-20">
+            <h2 class="text-3xl font-bold text-center mb-4 text-primary">市场脉搏：全球与中国的增长浪潮</h2>
+            <p class="text-center max-w-3xl mx-auto text-secondary mb-12">
+                分布式光伏正从辅助能源走向舞台中央。中国市场在2021年迎来爆发式增长，新增装机量首次超越集中式电站，标志着能源结构优化的关键转折点。本节将通过核心数据直观展示这一蓬勃发展的态势。
+            </p>
+            <div class="grid md:grid-cols-3 gap-8 mb-12 text-center">
+                <div class="card p-6">
+                    <p class="text-5xl font-bold text-accent-green" x-data="counter(29)"></p>
+                    <p class="text-lg text-secondary mt-2">2021中国分布式新增装机 (GW)</p>
+                </div>
+                <div class="card p-6">
+                    <p class="text-5xl font-bold text-accent-green" x-data="counter(89)"></p>
+                    <p class="text-lg text-secondary mt-2">同比增长 (%)</p>
+                </div>
+                <div class="card p-6">
+                    <p class="text-5xl font-bold text-accent-green" x-data="counter(100, 0, 1)"></p>
+                    <p class="text-lg text-secondary mt-2">累计装机突破 (GW)</p>
+                </div>
+            </div>
+            <div class="grid lg:grid-cols-5 gap-8">
+                <div class="lg:col-span-3 card p-6">
+                    <h3 class="text-xl font-bold text-center mb-4">全球累计光伏装机容量对比 (截至2020)</h3>
+                    <div class="chart-container">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 card p-6">
+                    <h3 class="text-xl font-bold text-center mb-4">2021中国光伏新增装机结构</h3>
+                    <div class="chart-container">
+                        <canvas id="structureChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="model-evolution" class="pt-16 -mt-16 mb-20">
+            <h2 class="text-3xl font-bold text-center mb-4 text-primary">模式演进：从传统到创新</h2>
+             <p class="text-center max-w-3xl mx-auto text-secondary mb-12">
+                随着补贴政策退坡和技术的成熟，分布式光伏的商业模式正经历深刻变革。从依赖业主自有资金的重资产模式，演变为以服务为核心、多元化收益的轻资产模式。通过下方切换，探索不同模式的特点与区别。
+            </p>
+            <div x-data="{ modelType: 'innovative' }" class="max-w-6xl mx-auto">
+                <div class="flex justify-center mb-8">
+                    <button @click="modelType = 'traditional'" :class="{ 'bg-accent-orange text-white': modelType === 'traditional', 'bg-white text-gray-700': modelType !== 'traditional' }" class="px-6 py-2 rounded-l-lg font-semibold transition">传统模式</button>
+                    <button @click="modelType = 'innovative'" :class="{ 'bg-accent-orange text-white': modelType === 'innovative', 'bg-white text-gray-700': modelType !== 'innovative' }" class="px-6 py-2 rounded-r-lg font-semibold transition">创新模式</button>
+                </div>
+                <div x-show="modelType === 'traditional'" x-cloak>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="card p-6">
+                            <h4 class="font-bold text-lg mb-2">直接投资</h4>
+                            <p class="text-secondary text-sm">业主全额投资，完全拥有电站收益和所有权。优势是收益独享，挑战是初期投入高。</p>
+                        </div>
+                        <div class="card p-6">
+                            <h4 class="font-bold text-lg mb-2">银行贷款</h4>
+                            <p class="text-secondary text-sm">业主通过银行“光伏贷”等产品融资建设，降低初期门槛，但需承担还款压力。</p>
+                        </div>
+                        <div class="card p-6">
+                            <h4 class="font-bold text-lg mb-2">融资租赁</h4>
+                            <p class="text-secondary text-sm">租赁公司购买设备租给业主，业主用电费收入支付租金。解决了初期资金难题。</p>
+                        </div>
+                        <div class="card p-6">
+                            <h4 class="font-bold text-lg mb-2">合作开发</h4>
+                            <p class="text-secondary text-sm">光伏企业投资，用户提供屋顶并获得固定收益或折扣电价，期满后电站归用户。</p>
+                        </div>
+                        <div class="card p-6">
+                            <h4 class="font-bold text-lg mb-2">第三方投资(折扣电价)</h4>
+                            <p class="text-secondary text-sm">投资方建设运营，业主享受折扣电价。用户零投入，无运维负担。</p>
+                        </div>
+                        <div class="card p-6">
+                            <h4 class="font-bold text-lg mb-2">第三方投资(屋顶租赁)</h4>
+                            <p class="text-secondary text-sm">投资方租赁屋顶建设电站，业主获得固定租金收益。收益单一但稳定。</p>
+                        </div>
+                    </div>
+                </div>
+                 <div x-show="modelType === 'innovative'" x-cloak>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="card p-6 flex flex-col items-center text-center">
+                            <span class="text-4xl mb-3">🔋</span>
+                            <h4 class="font-bold text-lg mb-2">光伏 + 储能</h4>
+                            <p class="text-secondary text-sm">通过储能实现峰谷套利，提升自用率，并参与电网辅助服务，创造多元价值。</p>
+                        </div>
+                        <div class="card p-6 flex flex-col items-center text-center">
+                             <span class="text-4xl mb-3">🤖</span>
+                            <h4 class="font-bold text-lg mb-2">光伏 + 数字化</h4>
+                            <p class="text-secondary text-sm">融合AI、IoT、区块链技术，实现智能运维、P2P能源交易，重构能源生态。</p>
+                        </div>
+                        <div class="card p-6 flex flex-col items-center text-center">
+                            <span class="text-4xl mb-3">🏡</span>
+                            <h4 class="font-bold text-lg mb-2">社区能源</h4>
+                            <p class="text-secondary text-sm">居民共享投资与收益，实现能源民主化和地方共富，将社会效益最大化。</p>
+                        </div>
+                         <div class="card p-6 flex flex-col items-center text-center">
+                            <span class="text-4xl mb-3">🏢</span>
+                            <h4 class="font-bold text-lg mb-2">光伏建筑一体化(BIPV)</h4>
+                            <p class="text-secondary text-sm">光伏组件兼具建材功能，实现建筑美学与绿色发电的完美融合。</p>
+                        </div>
+                        <div class="card p-6 flex flex-col items-center text-center">
+                             <span class="text-4xl mb-3">🚗</span>
+                            <h4 class="font-bold text-lg mb-2">光伏 + 交通</h4>
+                            <p class="text-secondary text-sm">利用交通设施空间（车站、停车场）建设光伏，为交通系统提供清洁能源。</p>
+                        </div>
+                        <div class="card p-6 flex flex-col items-center text-center">
+                            <span class="text-4xl mb-3">🌱</span>
+                            <h4 class="font-bold text-lg mb-2">光伏 + 农业/渔业</h4>
+                            <p class="text-secondary text-sm">土地复合利用，实现“板上发电、板下种养”，提升土地综合效益。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech-fusion" class="pt-16 -mt-16 mb-20">
+            <h2 class="text-3xl font-bold text-center mb-4 text-primary">技术融合：创新模式的引擎</h2>
+            <p class="text-center max-w-3xl mx-auto text-secondary mb-12">
+                技术的进步是商业模式创新的核心驱动力。“光伏+”模式的涌现，正将光伏从单一发电单元，转变为能够参与电网互动、实现P2P交易、与社区共荣的智能能源节点。
+            </p>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-center">💡 “光伏+储能”：释放潜能</h3>
+                    <p class="text-secondary mb-4 text-center text-sm">储能系统解决了光伏发电的间歇性问题，通过在电价低谷时充电、高峰时放电，可实现峰谷套利，显著提升项目经济性。点击下方按钮，模拟储能系统的运作效果。</p>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="storageChart"></canvas>
+                    </div>
+                    <div class="flex justify-center mt-4">
+                        <button id="toggleStorageBtn" class="bg-accent-green text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">激活储能套利</button>
+                    </div>
+                </div>
+                <div class="card p-6">
+                     <h3 class="text-xl font-bold mb-4 text-center">🌐 “光伏+数字化”：重构生态</h3>
+                     <p class="text-secondary mb-6 text-center text-sm">人工智能、物联网和区块链正在赋予分布式光伏“智慧大脑”和“信任机制”，催生出智能运维、智慧微电网和去中心化的能源交易等全新范式。</p>
+                     <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="text-3xl">🧠</div>
+                            <div>
+                                <h4 class="font-bold">AI驱动的智能运维与优化</h4>
+                                <p class="text-secondary text-sm">通过AI算法预测发电、诊断故障、优化调度，大幅提升运维效率和发电量，降低度电成本。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="text-3xl">🔗</div>
+                            <div>
+                                <h4 class="font-bold">IoT构建的智慧能源管理</h4>
+                                <p class="text-secondary text-sm">物联网设备连接海量能源节点，实现实时监控、远程控制和需求响应，构建灵活高效的智慧微电网。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="text-3xl">⛓️</div>
+                            <div>
+                                <h4 class="font-bold">区块链实现的P2P能源交易</h4>
+                                <p class="text-secondary text-sm">利用区块链的去中心化和不可篡改特性，实现用户间的直接电力交易（“隔墙售电”），降低交易成本，提升结算效率。</p>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="financing" class="pt-16 -mt-16 mb-20">
+            <h2 class="text-3xl font-bold text-center mb-4 text-primary">融资新路径：拓宽资金渠道</h2>
+            <p class="text-center max-w-3xl mx-auto text-secondary mb-12">
+               资金是规模化发展的血液。为破解分布式光伏“融资难、融资贵”的困局，绿色金融产品和创新的融资模式应运而生，为行业发展注入了强劲动力。
+            </p>
+            <div x-data="{ activeTab: 'green-loan' }" class="max-w-5xl mx-auto">
+                <div class="border-b border-gray-200 mb-8">
+                    <nav class="-mb-px flex space-x-6 justify-center" aria-label="Tabs">
+                        <button @click="activeTab = 'green-loan'" :class="{ 'active': activeTab === 'green-loan' }" class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">绿色光伏贷</button>
+                        <button @click="activeTab = 'abs'" :class="{ 'active': activeTab === 'abs' }" class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">绿色债券/ABS</button>
+                        <button @click="activeTab = 'crowdfunding'" :class="{ 'active': activeTab === 'crowdfunding' }" class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">众筹</button>
+                        <button @click="activeTab = 'pace'" :class="{ 'active': activeTab === 'pace' }" class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">PACE融资</button>
+                    </nav>
+                </div>
+                <div class="card p-8 min-h-[20rem]">
+                    <div x-show="activeTab === 'green-loan'" x-cloak>
+                        <h4 class="text-xl font-bold mb-3 text-accent-orange">绿色光伏贷</h4>
+                        <p class="text-secondary">银行针对分布式光伏项目推出的定制化贷款，如户用光伏贷、企业光伏贷。有效降低了农户和中小企业的初期投资门槛。</p>
+                        <ul class="list-disc list-inside mt-4 space-y-2 text-secondary">
+                            <li><span class="font-semibold text-primary">优势：</span>申请便捷，专款专用，降低首付压力。</li>
+                            <li><span class="font-semibold text-primary">挑战：</span>对借款人资信有要求，覆盖范围和额度有限。</li>
+                        </ul>
+                    </div>
+                    <div x-show="activeTab === 'abs'" x-cloak>
+                        <h4 class="text-xl font-bold mb-3 text-accent-orange">绿色债券/资产证券化(ABS)</h4>
+                        <p class="text-secondary">将未来电费收益权或租赁债权打包，在资本市场发行证券进行融资。是连接产业和资本市场的桥梁。</p>
+                         <ul class="list-disc list-inside mt-4 space-y-2 text-secondary">
+                            <li><span class="font-semibold text-primary">优势：</span>融资规模大，期限长，能吸引机构投资者。</li>
+                            <li><span class="font-semibold text-primary">挑战：</span>发行门槛高，流程复杂，适合大型项目或平台型公司。</li>
+                        </ul>
+                    </div>
+                    <div x-show="activeTab === 'crowdfunding'" x-cloak>
+                        <h4 class="text-xl font-bold mb-3 text-accent-orange">众筹</h4>
+                        <p class="text-secondary">通过互联网平台向公众募集小额资金，共同投资光伏项目。体现了普惠金融和能源民主化的理念。</p>
+                        <ul class="list-disc list-inside mt-4 space-y-2 text-secondary">
+                            <li><span class="font-semibold text-primary">优势：</span>参与门槛低，扩大社会参与度。</li>
+                            <li><span class="font-semibold text-primary">挑战：</span>法律监管不确定性（如非法集资风险），信用和担保缺失，规模受限。</li>
+                        </ul>
+                    </div>
+                    <div x-show="activeTab === 'pace'" x-cloak>
+                        <h4 class="text-xl font-bold mb-3 text-accent-orange">PACE融资 (美国模式)</h4>
+                        <p class="text-secondary">Property Assessed Clean Energy，一种将项目贷款附加在房产税上，随房屋产权转移的创新模式。</p>
+                        <ul class="list-disc list-inside mt-4 space-y-2 text-secondary">
+                            <li><span class="font-semibold text-primary">优势：</span>可提供100%前期融资，还款期长，债务不随人走，完美解决业主投资顾虑。</li>
+                            <li><span class="font-semibold text-primary">挑战：</span>需要地方政府立法支持，法律框架复杂，在国内推广面临制度障碍。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="challenges" class="pt-16 -mt-16 mb-20">
+            <h2 class="text-3xl font-bold text-center mb-4 text-primary">挑战与展望：机遇之路</h2>
+            <p class="text-center max-w-3xl mx-auto text-secondary mb-12">
+                尽管前景广阔，分布式光伏的发展仍面临并网消纳、市场化交易、融资和政策等多重挑战。正视这些障碍，并积极探索解决方案，是行业迈向高质量、可持续发展的必经之路。
+            </p>
+            <div x-data="{ openAccordion: null }" class="max-w-4xl mx-auto space-y-4">
+                <div class="card overflow-hidden">
+                    <button @click="openAccordion = openAccordion === 1 ? null : 1" class="w-full text-left p-4 flex justify-between items-center bg-accent-light">
+                        <span class="font-semibold text-lg text-accent-green">技术风险</span>
+                        <span class="transform transition-transform" :class="{'rotate-180': openAccordion === 1}">▼</span>
+                    </button>
+                    <div x-show="openAccordion === 1" class="p-4 border-t" x-cloak>
+                        <ul class="list-disc list-inside space-y-2 text-secondary">
+                            <li><span class="font-semibold text-primary">并网稳定性：</span>大规模接入对配电网造成冲击，易引发过电压等问题。</li>
+                            <li><span class="font-semibold text-primary">数据安全：</span>智能化系统面临网络攻击和数据泄露风险。</li>
+                            <li><span class="font-semibold text-primary">互操作性：</span>不同厂商的设备和系统难以兼容，集成成本高。</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                     <button @click="openAccordion = openAccordion === 2 ? null : 2" class="w-full text-left p-4 flex justify-between items-center bg-accent-light">
+                        <span class="font-semibold text-lg text-accent-green">市场风险</span>
+                         <span class="transform transition-transform" :class="{'rotate-180': openAccordion === 2}">▼</span>
+                    </button>
+                    <div x-show="openAccordion === 2" class="p-4 border-t" x-cloak>
+                        <ul class="list-disc list-inside space-y-2 text-secondary">
+                            <li><span class="font-semibold text-primary">电价波动：</span>电力市场化改革带来售电收益的不确定性。</li>
+                            <li><span class="font-semibold text-primary">竞争加剧：</span>市场参与者增多，优质屋顶资源稀缺，项目收益率下降。</li>
+                            <li><span class="font-semibold text-primary">用户风险：</span>工商业主消纳比例和企业存续时间直接影响项目收益。</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="card overflow-hidden">
+                     <button @click="openAccordion = openAccordion === 3 ? null : 3" class="w-full text-left p-4 flex justify-between items-center bg-accent-light">
+                        <span class="font-semibold text-lg text-accent-green">融资风险</span>
+                         <span class="transform transition-transform" :class="{'rotate-180': openAccordion === 3}">▼</span>
+                    </button>
+                    <div x-show="openAccordion === 3" class="p-4 border-t" x-cloak>
+                        <ul class="list-disc list-inside space-y-2 text-secondary">
+                           <li><span class="font-semibold text-primary">高初期投入：</span>“光伏+储能”等创新系统前期投资成本高。</li>
+                           <li><span class="font-semibold text-primary">回收周期长：</span>较长的投资回收期给企业带来现金流压力。</li>
+                           <li><span class="font-semibold text-primary">渠道狭窄：</span>传统金融体系对小而散的分布式项目服务不足。</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                    <button @click="openAccordion = openAccordion === 4 ? null : 4" class="w-full text-left p-4 flex justify-between items-center bg-accent-light">
+                        <span class="font-semibold text-lg text-accent-green">政策与监管风险</span>
+                         <span class="transform transition-transform" :class="{'rotate-180': openAccordion === 4}">▼</span>
+                    </button>
+                    <div x-show="openAccordion === 4" class="p-4 border-t" x-cloak>
+                        <ul class="list-disc list-inside space-y-2 text-secondary">
+                            <li><span class="font-semibold text-primary">政策不确定性：</span>政策调整频繁影响投资者信心和长期规划。</li>
+                            <li><span class="font-semibold text-primary">市场规则不完善：</span>“隔墙售电”等市场化交易机制仍有待明确。</li>
+                            <li><span class="font-semibold text-primary">监管滞后：</span>法律法规跟不上技术和商业模式的创新速度。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 card p-8 bg-white text-center">
+                <h3 class="text-2xl font-bold mb-4 text-accent-orange">未来展望</h3>
+                <p class="text-secondary max-w-3xl mx-auto">
+                    展望未来，分布式光伏将朝着更<span class="font-semibold text-primary">智能化、市场化、普惠化</span>和<span class="font-semibold text-primary">集成化</span>的方向发展。通过深化技术融合、完善市场机制、创新金融产品和优化政策环境，分布式光伏必将成为未来智慧能源系统的核心驱动力。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-20">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <p>分布式光伏创新商业模式交互式报告 | 来源于研究文献</p>
+            <p class="text-gray-400 mt-1">此应用仅为信息可视化展示，不构成任何投资建议。</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('counter', (target, decimals = 0, speed = 2000) => ({
+                current: 0,
+                target: target,
+                
+                init() {
+                    const observer = new IntersectionObserver((entries) => {
+                        if (entries[0].isIntersecting) {
+                            this.animateValue();
+                            observer.disconnect();
+                        }
+                    }, { threshold: 0.1 });
+                    observer.observe(this.$el);
+                },
+
+                animateValue() {
+                    let start = 0;
+                    const duration = speed;
+                    const range = this.target - start;
+                    let startTime = null;
+
+                    const step = (timestamp) => {
+                        if (!startTime) startTime = timestamp;
+                        const progress = Math.min((timestamp - startTime) / duration, 1);
+                        this.current = (start + range * progress).toFixed(decimals);
+                        if (progress < 1) {
+                            window.requestAnimationFrame(step);
+                        } else {
+                            this.current = this.target.toFixed(decimals);
+                        }
+                    };
+                    window.requestAnimationFrame(step);
+                },
+
+                get displayValue() {
+                    return parseFloat(this.current).toLocaleString();
+                }
+            }));
+        });
+        
+        function getActiveSection() {
+            const sections = ['market-pulse', 'model-evolution', 'tech-fusion', 'financing', 'challenges'];
+            let currentSection = sections[0];
+            for (const id of sections) {
+                const section = document.getElementById(id);
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                        currentSection = id;
+                        break;
+                    }
+                }
+            }
+            return currentSection;
+        }
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Manually update activeSection for instant feedback on click
+                Alpine.store('app').activeSection = id; 
+            }
+        }
+        
+        document.addEventListener('alpine:init', () => {
+             Alpine.store('app', {
+                activeSection: 'market-pulse'
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const marketCtx = document.getElementById('marketChart').getContext('2d');
+            new Chart(marketCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['中国', '美国', '日本', '德国'],
+                    datasets: [{
+                        label: '累计装机容量 (GW)',
+                        data: [253.8, 73.8, 67, 53.8],
+                        backgroundColor: ['#E07A5F', '#81B29A', '#3D405B', '#F9C74F'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: false }
+                    },
+                    scales: {
+                        x: { beginAtZero: true }
+                    }
+                }
+            });
+
+            const structureCtx = document.getElementById('structureChart').getContext('2d');
+            new Chart(structureCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['分布式光伏', '集中式光伏'],
+                    datasets: [{
+                        data: [29, 25.86],
+                        backgroundColor: ['#5B8C5A', '#B0D4B0'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        title: { display: false }
+                    }
+                }
+            });
+
+            const storageCtx = document.getElementById('storageChart').getContext('2d');
+            const storageChartData = {
+                labels: Array.from({ length: 24 }, (_, i) => `${i}:00`),
+                datasets: [
+                    {
+                        label: '光伏发电',
+                        data: [0,0,0,0,0,0,0.5,1,3,5,7,8,8.5,8,7,5,3,1,0.5,0,0,0,0,0],
+                        borderColor: '#F9C74F',
+                        backgroundColor: 'rgba(249, 199, 79, 0.3)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: '用户用电',
+                        data: [2,2,2,2,2,3,4,5,6,6,5,5,4,4,5,6,7,8,9,8,6,4,3,2],
+                        borderColor: '#3D405B',
+                        backgroundColor: 'rgba(61, 64, 91, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: '储能放电',
+                        data: Array(24).fill(0),
+                        backgroundColor: '#5B8C5A',
+                        borderColor: '#5B8C5A',
+                        type: 'bar',
+                        hidden: true
+                    },
+                    {
+                        label: '储能充电',
+                        data: Array(24).fill(0),
+                        backgroundColor: '#E07A5F',
+                        borderColor: '#E07A5F',
+                        type: 'bar',
+                        hidden: true
+                    }
+                ]
+            };
+            const storageChart = new Chart(storageCtx, {
+                type: 'line',
+                data: storageChartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: true, position: 'top' } },
+                    scales: { y: { beginAtZero: true, title: { display: true, text: '功率 (kW)' } } }
+                }
+            });
+
+            const toggleBtn = document.getElementById('toggleStorageBtn');
+            toggleBtn.addEventListener('click', () => {
+                const pvData = storageChart.data.datasets[0].data;
+                const demandData = storageChart.data.datasets[1].data;
+                const chargeData = Array(24).fill(0);
+                const dischargeData = Array(24).fill(0);
+                
+                let storedEnergy = 0;
+                const maxStorage = 15;
+
+                for (let i = 0; i < 24; i++) {
+                    const surplus = pvData[i] - demandData[i];
+                    if (surplus > 0 && storedEnergy < maxStorage) { // 充电
+                        const chargeAmount = Math.min(surplus, maxStorage - storedEnergy);
+                        chargeData[i] = chargeAmount;
+                        storedEnergy += chargeAmount;
+                    } else if (surplus < 0 && storedEnergy > 0) { // 放电
+                        const dischargeAmount = Math.min(-surplus, storedEnergy);
+                        dischargeData[i] = dischargeAmount;
+                        storedEnergy -= dischargeAmount;
+                    }
+                }
+                
+                const isStorageActive = toggleBtn.textContent.includes('激活');
+                if(isStorageActive){
+                    storageChart.data.datasets[2].data = dischargeData;
+                    storageChart.data.datasets[3].data = chargeData;
+                    storageChart.data.datasets[2].hidden = false;
+                    storageChart.data.datasets[3].hidden = false;
+                    toggleBtn.textContent = '重置模拟';
+                    toggleBtn.classList.remove('bg-accent-green');
+                    toggleBtn.classList.add('bg-accent-orange');
+                } else {
+                    storageChart.data.datasets[2].data = Array(24).fill(0);
+                    storageChart.data.datasets[3].data = Array(24).fill(0);
+                    storageChart.data.datasets[2].hidden = true;
+                    storageChart.data.datasets[3].hidden = true;
+                    toggleBtn.textContent = '激活储能套利';
+                    toggleBtn.classList.remove('bg-accent-orange');
+                    toggleBtn.classList.add('bg-accent-green');
+                }
+                storageChart.update();
+            });
+        });
+
+    </script>
+</body>
+</html>
