@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>桃形鲤 - 绿色能源项目居间撮合平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#10B981',     // 主绿色 - 代表环保能源
+            secondary: '#3B82F6',   // 蓝色 - 代表专业信任
+            accent: '#F59E0B',      // 橙色 - 强调关键信息
+            dark: '#1F2937',        // 深色文本
+            light: '#F9FAFB',       // 浅色背景
+            muted: '#6B7280',       // 中性色
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .flow-step {
+        position: relative;
+        padding-left: 3rem;
+      }
+      .flow-step:not(:last-child):after {
+        content: '';
+        position: absolute;
+        left: 1.5rem;
+        top: 2rem;
+        bottom: -2rem;
+        width: 2px;
+        background-color: theme('colors.primary');
+      }
+      .step-dot {
+        position: absolute;
+        left: 0.75rem;
+        top: 0.75rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background-color: theme('colors.primary');
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+      }
+      .animate-number {
+        animation: countUp 2s ease-out forwards;
+        opacity: 0;
+      }
+      @keyframes countUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+
+<body class="font-inter text-dark bg-light antialiased">
+  <!-- 导航栏 -->
+  <nav id="main-nav" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="#" class="flex items-center">
+            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white mr-3">
+              <i class="fa fa-leaf text-xl"></i>
+            </div>
+            <span class="text-xl font-bold text-primary">桃形鲤</span>
+          </a>
+        </div>
+        
+        <!-- 桌面导航 -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#value-proposition" class="text-dark hover:text-primary transition-colors">价值主张</a>
+          <a href="#business-canvas" class="text-dark hover:text-primary transition-colors">商业画布</a>
+          <a href="#core-logic" class="text-dark hover:text-primary transition-colors">核心逻辑</a>
+          <a href="#advantages" class="text-dark hover:text-primary transition-colors">竞争优势</a>
+          <a href="#contact" class="bg-primary text-white px-5 py-2 rounded-full hover:bg-primary/90 transition-colors">联系我们</a>
+        </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden flex items-center">
+          <button id="menu-toggle" class="text-dark focus:outline-none">
+            <i class="fa fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+      <div class="container mx-auto px-4 py-3 space-y-3">
+        <a href="#value-proposition" class="block text-dark hover:text-primary transition-colors py-2">价值主张</a>
+        <a href="#business-canvas" class="block text-dark hover:text-primary transition-colors py-2">商业画布</a>
+        <a href="#core-logic" class="block text-dark hover:text-primary transition-colors py-2">核心逻辑</a>
+        <a href="#advantages" class="block text-dark hover:text-primary transition-colors py-2">竞争优势</a>
+        <a href="#contact" class="block bg-primary text-white px-5 py-2 rounded-full text-center hover:bg-primary/90 transition-colors">联系我们</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <header class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark mb-6">
+            绿色能源项目<br>
+            <span class="text-primary">一站式服务</span>伙伴
+          </h1>
+          <p class="text-lg text-muted mb-8 max-w-lg">
+            以轻资产模式构建能源项目对接生态，为需求方与投资方提供精准匹配、风险控制与全流程服务
+          </p>
+          <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="#business-canvas" class="bg-primary text-white px-8 py-3 rounded-full text-center hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/20">
+              了解商业画布
+            </a>
+            <a href="#contact" class="bg-white text-primary border border-primary px-8 py-3 rounded-full text-center hover:bg-primary/5 transition-all">
+              立即咨询
+            </a>
+          </div>
+        </div>
+        <div class="md:w-1/2 relative">
+          <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
+            <img src="https://blogtc.30515245.xyz/20250627132513455.webp" alt="绿色能源项目" class="w-full h-auto">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6 text-white">
+              <h3 class="text-xl font-bold mb-2">轻资产 · 高杠杆 · 可持续</h3>
+              <p class="text-white/80">构建绿色能源项目对接生态闭环</p>
+            </div>
+          </div>
+          <div class="absolute -top-4 -right-4 w-32 h-32 bg-accent/20 rounded-full blur-3xl z-0"></div>
+          <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-primary/20 rounded-full blur-3xl z-0"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 价值主张 -->
+  <section id="value-proposition" class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">核心价值主张</h2>
+        <p class="text-muted text-lg">为需求方、投资方与合作方提供差异化价值，构建多方共赢生态</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 需求方价值 -->
+        <div class="bg-light rounded-xl p-8 shadow-md card-hover">
+          <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
+            <i class="fa fa-building-o text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">需求方价值</h3>
+          <ul class="space-y-3 text-muted">
+            <li class="flex items-start">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <span>零成本升级：无需前期资金投入，享受7折绿电</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <span>省心服务：全流程托管，无需对接多方资源</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <span>品牌提升：绿色认证支持，增强市场竞争力</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 投资方价值 -->
+        <div class="bg-light rounded-xl p-8 shadow-md card-hover">
+          <div class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-6">
+            <i class="fa fa-investment text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">投资方价值</h3>
+          <ul class="space-y-3 text-muted">
+            <li class="flex items-start">
+              <i class="fa fa-check text-secondary mt-1 mr-3"></i>
+              <span>优质项目：严选高收益项目，IRR≥12%</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-secondary mt-1 mr-3"></i>
+              <span>风险保障：专业尽调与协议支持，降低投资风险</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-secondary mt-1 mr-3"></i>
+              <span>收益透明：实时数据共享，确保收益可预期</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 合作方价值 -->
+        <div class="bg-light rounded-xl p-8 shadow-md card-hover">
+          <div class="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-6">
+            <i class="fa fa-handshake-o text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">合作方价值</h3>
+          <ul class="space-y-3 text-muted">
+            <li class="flex items-start">
+              <i class="fa fa-check text-accent mt-1 mr-3"></i>
+              <span>资源变现：通过推荐项目获取分成收益</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-accent mt-1 mr-3"></i>
+              <span>市场拓展：借助平台扩大客户覆盖</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-accent mt-1 mr-3"></i>
+              <span>生态共建：共享行业资源与政策红利</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 商业画布 -->
+  <section id="business-canvas" class="py-16 md:py-24 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">商业画布</h2>
+        <p class="text-muted text-lg">围绕"资源对接、风险控制、收益分成"构建轻资产商业模式</p>
+      </div>
+      
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- 商业画布标题 -->
+        <div class="bg-primary text-white p-6 md:p-8">
+          <h3 class="text-2xl md:text-3xl font-bold">桃形鲤绿色能源居间撮合商业模式</h3>
+        </div>
+        
+        <!-- 商业画布内容 -->
+        <div class="p-6 md:p-8">
+          <!-- 客户细分 -->
+          <div class="mb-8">
+            <h4 class="text-xl font-bold mb-4 text-dark flex items-center">
+              <i class="fa fa-users text-primary mr-3"></i>
+              客户细分 (Customer Segments)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">核心客户</h5>
+                <ul class="space-y-2 text-muted">
+                  <li class="flex items-start">
+                    <i class="fa fa-dot-circle-o text-primary mt-1 mr-2"></i>
+                    <span>需求方：酒店、商业综合体、工业园区、物流中心</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa fa-dot-circle-o text-primary mt-1 mr-2"></i>
+                    <span>投资方：绿色能源基金、企业资本、工程承包商</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">延伸客户</h5>
+                <ul class="space-y-2 text-muted">
+                  <li class="flex items-start">
+                    <i class="fa fa-dot-circle-o text-primary mt-1 mr-2"></i>
+                    <span>设备供应商：光伏板、储能设备厂商</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa fa-dot-circle-o text-primary mt-1 mr-2"></i>
+                    <span>行业中介：酒店协会、园区管委会</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 价值主张 -->
+          <div class="mb-8">
+            <h4 class="text-xl font-bold mb-4 text-dark flex items-center">
+              <i class="fa fa-lightbulb-o text-primary mr-3"></i>
+              价值主张 (Value Propositions)
+            </h4>
+            <div class="bg-light p-5 rounded-lg">
+              <ul class="space-y-3 text-muted">
+                <li class="flex items-start">
+                  <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                  <span><strong>对需求方：</strong>零成本升级，省心服务，品牌提升</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                  <span><strong>对投资方：</strong>优质项目筛选，风险保障，收益透明</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                  <span><strong>对合作方：</strong>资源变现，市场拓展，生态共建</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- 渠道通路 -->
+          <div class="mb-8">
+            <h4 class="text-xl font-bold mb-4 text-dark flex items-center">
+              <i class="fa fa-road text-primary mr-3"></i>
+              渠道通路 (Channels)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">行业渗透</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>垂直领域合作</li>
+                  <li>连锁企业突破</li>
+                  <li>行业协会合作</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">数字化引流</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>线上项目库平台</li>
+                  <li>短视频案例营销</li>
+                  <li>行业垂直平台广告</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">口碑裂变</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>推荐返佣政策</li>
+                  <li>老客户转介绍</li>
+                  <li>成功案例分享</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 客户关系 -->
+          <div class="mb-8">
+            <h4 class="text-xl font-bold mb-4 text-dark flex items-center">
+              <i class="fa fa-heart text-primary mr-3"></i>
+              客户关系 (Customer Relationships)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">需求方关系</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>全流程托管服务</li>
+                  <li>定期收益报告</li>
+                  <li>绿色认证协助</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">投资方关系</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>风险共担机制</li>
+                  <li>收益透明化</li>
+                  <li>定期策略研讨会</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">合作方关系</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>合作伙伴联盟</li>
+                  <li>资源对接会</li>
+                  <li>收益分成机制</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 收入来源 -->
+          <div class="mb-8">
+            <h4 class="text-xl font-bold mb-4 text-dark flex items-center">
+              <i class="fa fa-money text-primary mr-3"></i>
+              收入来源 (Revenue Streams)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">核心收入</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>居间服务费 (1-3%)</li>
+                  <li>碳资产交易分成</li>
+                  <li>项目收益分成</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">增值收入</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>项目管理费 (0.5-1%)</li>
+                  <li>数据服务收入</li>
+                  <li>咨询服务收入</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">衍生收入</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>设备销售佣金</li>
+                  <li>金融服务手续费</li>
+                  <li>政策补贴分成</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 核心资源 -->
+          <div class="mb-8">
+            <h4 class="text-xl font-bold mb-4 text-dark flex items-center">
+              <i class="fa fa-cubes text-primary mr-3"></i>
+              核心资源 (Key Resources)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">渠道与数据</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>20+ 投资方合作</li>
+                  <li>50+ 设备供应商</li>
+                  <li>10+ 行业协会合作</li>
+                  <li>能源项目数据库</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">团队与资质</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>专业分析师团队</li>
+                  <li>法务与商务团队</li>
+                  <li>碳核查资质</li>
+                  <li>售电牌照</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 关键业务 -->
+          <div class="mb-8">
+            <h4 class="text-xl font-bold mb-4 text-dark flex items-center">
+              <i class="fa fa-tasks text-primary mr-3"></i>
+              关键业务 (Key Activities)
+            </h4>
+            <div class="bg-light p-5 rounded-lg">
+              <ul class="space-y-3 text-muted">
+                <li class="flex items-start">
+                  <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                  <span>项目挖掘与筛选：通过渠道与数据筛选高潜力项目</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                  <span>双向对接与撮合：组织供需方洽谈，促成合作</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                  <span>全流程监管：代签协议，跟进进度，监督收益</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                  <span>碳资产运营：开发与交易支持，提升项目价值</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- 重要合作 -->
+          <div class="mb-8">
+            <h4 class="text-xl font-bold mb-4 text-dark flex items-center">
+              <i class="fa fa-handshake-o text-primary mr-3"></i>
+              重要合作 (Key Partnerships)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">行业资源方</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>酒店协会</li>
+                  <li>工业园区管委会</li>
+                  <li>行业联盟组织</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">金融机构</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>银行</li>
+                  <li>绿色能源基金</li>
+                  <li>投资机构</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">专业服务方</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>律师事务所</li>
+                  <li>会计事务所</li>
+                  <li>认证机构</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 成本结构 -->
+          <div>
+            <h4 class="text-xl font-bold mb-4 text-dark flex items-center">
+              <i class="fa fa-costumes text-primary mr-3"></i>
+              成本结构 (Cost Structure)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">固定成本</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>团队人力成本</li>
+                  <li>平台开发维护</li>
+                  <li>办公场地费用</li>
+                  <li>资质维护费用</li>
+                </ul>
+              </div>
+              <div class="bg-light p-5 rounded-lg">
+                <h5 class="font-semibold text-primary mb-3">可变成本</h5>
+                <ul class="space-y-2 text-muted">
+                  <li>渠道推广费用</li>
+                  <li>项目尽调成本</li>
+                  <li>合作分成支出</li>
+                  <li>营销活动费用</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心逻辑 -->
+  <section id="core-logic" class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">商业模式核心逻辑</h2>
+        <p class="text-muted text-lg">以轻资产方式实现高利润，构建可持续的盈利闭环</p>
+      </div>
+      
+      <div class="relative max-w-4xl mx-auto">
+        <!-- 逻辑流程 -->
+        <div class="space-y-12">
+          <div class="flow-step">
+            <div class="step-dot">
+              <i class="fa fa-search text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-dark">挖掘优质能源项目需求</h3>
+            <p class="text-muted">通过行业渠道与数据模型，筛选高能耗、高需求的优质项目，建立项目库</p>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-dot">
+              <i class="fa fa-exchange text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-dark">匹配投资方资源</h3>
+            <p class="text-muted">根据项目特点与投资方偏好，精准匹配资金与施工资源，提高撮合效率</p>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-dot">
+              <i class="fa fa-handshake-o text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-dark">全程服务促成交易</h3>
+            <p class="text-muted">提供从需求对接、协议签订到项目落地的全流程服务，确保交易顺利完成</p>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-dot">
+              <i class="fa fa-money text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-dark">收取居间费与增值服务费</h3>
+            <p class="text-muted">按项目金额收取居间费，并通过增值服务创造额外收益，提高盈利水平</p>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-dot">
+              <i class="fa fa-shield text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-dark">沉淀行业资源形成壁垒</h3>
+            <p class="text-muted">通过持续服务积累行业资源与数据，构建竞争壁垒，提升市场地位</p>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-dot">
+              <i class="fa fa-line-chart text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-dark">扩大规模复制增长</h3>
+            <p class="text-muted">基于成熟模式与资源积累，实现业务规模化扩张，打造行业领先的撮合平台</p>
+          </div>
+        </div>
+        
+        <!-- 流程图连接线 -->
+<!-- <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary/30 -translate-x-1/2 z-0"></div> -->
+      </div>
+      
+      <!-- 数据统计 -->
+      <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-light p-6 rounded-xl text-center card-hover">
+          <div class="text-3xl md:text-4xl font-bold text-primary mb-2 animate-number" data-target="20">0</div>
+          <p class="text-muted">投资方合作</p>
+        </div>
+        <div class="bg-light p-6 rounded-xl text-center card-hover">
+          <div class="text-3xl md:text-4xl font-bold text-primary mb-2 animate-number" data-target="50">0</div>
+          <p class="text-muted">设备供应商合作</p>
+        </div>
+        <div class="bg-light p-6 rounded-xl text-center card-hover">
+          <div class="text-3xl md:text-4xl font-bold text-primary mb-2 animate-number" data-target="10">0</div>
+          <p class="text-muted">行业协会合作</p>
+        </div>
+        <div class="bg-light p-6 rounded-xl text-center card-hover">
+          <div class="text-3xl md:text-4xl font-bold text-primary mb-2 animate-number" data-target="12">0</div>
+          <p class="text-muted">平均项目IRR(%)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 竞争优势 -->
+  <section id="advantages" class="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">竞争优势</h2>
+        <p class="text-muted text-lg">通过"精准匹配+风险控制+全流程服务"构建核心竞争力</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
+            <i class="fa fa-bolt text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">轻资产高杠杆</h3>
+          <p class="text-muted">无需大量固定资产投入，通过资源整合与撮合服务实现高杠杆运营，降低经营风险，提高资本效率</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+          <div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-6">
+            <i class="fa fa-check-circle text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">精准项目筛选</h3>
+          <p class="text-muted">通过行业资源与数据模型，严格筛选高收益、低风险项目，确保推荐项目IRR≥12%，降低投资风险</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+          <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-6">
+            <i class="fa fa-cogs text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">全流程服务</h3>
+          <p class="text-muted">提供从项目挖掘、资源匹配、协议签订到落地监管的全流程服务，解决客户痛点，提高交易效率</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
+            <i class="fa fa-database text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">数据驱动决策</h3>
+          <p class="text-muted">自建能源项目数据库，利用数据分析与智能匹配算法，提升项目筛选与资源匹配的精准度</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+          <div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-6">
+            <i class="fa fa-handshake-o text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">丰富渠道资源</h3>
+          <p class="text-muted">与20+投资方、50+设备供应商及10+行业协会建立合作，形成广泛的行业资源网络</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+          <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-6">
+            <i class="fa fa-shield text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">风险控制能力</h3>
+          <p class="text-muted">专业团队提供项目尽调、协议审核与风险评估，建立风险共担机制，保障各方利益</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系我们 -->
+ <!--<section id="contact" class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex flex-col lg:flex-row">
+          <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-6">联系我们</h2>
+            <p class="text-muted text-lg mb-8">
+              无论您是有能源改造需求的企业，还是寻求优质项目的投资方，桃形鲤都能为您提供专业的居间撮合服务。填写表单或通过以下方式联系我们，开启绿色能源合作之旅。
+            </p>
+            
+            <div class="space-y-6 mb-8">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-4 flex-shrink-0">
+                  <i class="fa fa-map-marker"></i>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-dark mb-1">公司地址</h3>
+                  <p class="text-muted">北京市朝阳区绿色能源产业园A座1508</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-4 flex-shrink-0">
+                  <i class="fa fa-phone"></i>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-dark mb-1">联系电话</h3>
+                  <p class="text-muted">400-123-4567</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-4 flex-shrink-0">
+                  <i class="fa fa-envelope"></i>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-dark mb-1">电子邮箱</h3>
+                  <p class="text-muted">contact@taoxingli.com</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex space-x-4">
+              <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                <i class="fa fa-weixin"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                <i class="fa fa-weibo"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                <i class="fa fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="lg:w-1/2">
+            <div class="bg-light p-8 rounded-xl shadow-md">
+              <h3 class="text-xl font-bold mb-6 text-dark">发送消息</h3>
+              <form>
+                <div class="mb-4">
+                  <label for="name" class="block text-muted mb-2">姓名</label>
+                  <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的姓名">
+                </div>
+                
+                <div class="mb-4">
+                  <label for="email" class="block text-muted mb-2">邮箱</label>
+                  <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的邮箱">
+                </div>
+                
+                <div class="mb-4">
+                  <label for="phone" class="block text-muted mb-2">电话</label>
+                  <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的电话">
+                </div>
+                
+                <div class="mb-4">
+                  <label for="company" class="block text-muted mb-2">公司名称</label>
+                  <input type="text" id="company" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的公司名称">
+                </div>
+                
+                <div class="mb-6">
+                  <label for="message" class="block text-muted mb-2">留言内容</label>
+                  <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的留言内容"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                  提交信息
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <!--<footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <div class="flex items-center mb-6">
+            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white mr-3">
+              <i class="fa fa-leaf text-xl"></i>
+            </div>
+            <span class="text-xl font-bold">桃形鲤</span>
+          </div>
+          <p class="text-gray-400 mb-6">
+            绿色能源项目居间撮合专家，致力于为需求方与投资方提供精准匹配、风险控制与全流程服务，构建可持续的绿色能源生态。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weixin text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weibo text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-linkedin text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">快速链接</h4>
+          <ul class="space-y-3">
+            <li><a href="#value-proposition" class="text-gray-400 hover:text-white transition-colors">价值主张</a></li>
+            <li><a href="#business-canvas" class="text-gray-400 hover:text-white transition-colors">商业画布</a></li>
+            <li><a href="#core-logic" class="text-gray-400 hover:text-white transition-colors">核心逻辑</a></li>
+            <li><a href="#advantages" class="text-gray-400 hover:text-white transition-colors">竞争优势</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">联系我们</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">服务内容</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">能源项目居间撮合</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">碳资产开发服务</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">能源项目管理</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">绿色金融支持</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">低碳转型咨询</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">联系我们</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fa fa-map-marker text-primary mt-1 mr-3"></i>
+              <span class="text-gray-400">北京市朝阳区绿色能源产业园A座1508</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-phone text-primary mt-1 mr-3"></i>
+              <span class="text-gray-400">400-123-4567</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-envelope text-primary mt-1 mr-3"></i>
+              <span class="text-gray-400">contact@taoxingli.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+        <p>© 2025 桃形鲤绿色能源服务平台. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg opacity-0 invisible transition-all z-50">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 导航栏滚动效果
+    const mainNav = document.getElementById('main-nav');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        mainNav.classList.add('shadow-md');
+        mainNav.classList.remove('bg-white/90');
+        mainNav.classList.add('bg-white');
+      } else {
+        mainNav.classList.remove('shadow-md');
+        mainNav.classList.add('bg-white/90');
+        mainNav.classList.remove('bg-white');
+      }
+      
+      // 返回顶部按钮显示/隐藏
+      const backToTop = document.getElementById('back-to-top');
+      if (window.scrollY > 300) {
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+      } else {
+        backToTop.classList.add('opacity-0', 'invisible');
+        backToTop.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // 关闭移动端菜单
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
+    
+    // 返回顶部功能
+    document.getElementById('back-to-top').addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // 数字动画
+    const animateNumbers = document.querySelectorAll('.animate-number');
+    
+    function startAnimation() {
+      animateNumbers.forEach(num => {
+        const target = parseInt(num.getAttribute('data-target'));
+        let count = 0;
+        const duration = 2000; // 动画持续时间（毫秒）
+        const increment = target / (duration / 16); // 16ms间隔
+        
+        const updateCount = () => {
+          count += increment;
+          if (count < target) {
+            num.textContent = Math.floor(count);
+            requestAnimationFrame(updateCount);
+          } else {
+            num.textContent = target;
+          }
+        };
+        
+        updateCount();
+      });
+    }
+    
+    // 检查元素是否在视口中
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+    
+    // 滚动时触发动画
+    window.addEventListener('scroll', () => {
+      if (isInViewport(document.getElementById('core-logic')) && animateNumbers[0].textContent === '0') {
+        startAnimation();
+      }
+    });
+    
+    // 初始检查
+    if (isInViewport(document.getElementById('core-logic'))) {
+      startAnimation();
+    }
+  </script>
+</body>
+</html>
