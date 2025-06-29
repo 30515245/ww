@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>安徽天长产业新能源合作战略报告</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- 使用国内CDN加载核心CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
+    
+    <!-- 使用国内CDN加载Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <style>
+      /* Custom Styles */
+        :root {
+            --r-main-font-size: 30px;
+            --accent-gold: #f0c43c;
+            --dark-bg-start: #0a192f;
+            --dark-bg-end: #173a5e;
+            --card-bg: rgba(10, 25, 47, 0.75);
+            --card-border: rgba(240, 196, 60, 0.4);
+        }
+        body, .reveal { 
+            font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+        }
+        .reveal {
+            background: linear-gradient(135deg, var(--dark-bg-start) 0%, var(--dark-bg-end) 100%);
+            color: #e0e0e0;
+        }
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            text-transform: none;
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+        }
+        .reveal h2, .reveal h3, .reveal h4 { margin-bottom: 1em; }
+        .reveal .slides section { text-align: left; }
+        .reveal h1, .reveal h2 { text-align: center; }
+        .reveal h2 {
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .reveal h3 {
+            display: flex;
+            align-items: center;
+        }
+        .reveal h2 > i, .reveal h3 > i {
+            margin-right: 0.5em;
+        }
+        .reveal h1 {
+            font-size: 2.2em;
+            text-shadow: 0 0 15px rgba(240, 196, 60, 0.6);
+        }
+        .reveal ul {
+            display: block;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        .reveal li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8em;
+        }
+        .reveal li i {
+            flex-shrink: 0;
+            margin-right: 0.5em;
+            color: var(--accent-gold);
+            width: 25px;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .reveal li span { flex-grow: 1; }
+        .toc-container { text-align: center; }
+        .toc-list {
+            display: inline-block;
+            text-align: left;
+            list-style-type: none;
+            margin-top: 1em;
+            font-size: 1.1em;
+            padding-left: 0;
+        }
+        .toc-list li {
+            margin-bottom: 1em;
+        }
+        .responsive-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .grid-item {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            font-size: 0.85em;
+        }
+        .value-card {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--card-border);
+        }
+        .reveal p { color: #ccc; }
+        .reveal strong { color: var(--accent-gold); font-weight: 700; }
+        .reveal table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.7em;
+        }
+        .reveal th, .reveal td {
+            border: 1px solid var(--card-border);
+            padding: 10px;
+            text-align: center;
+        }
+        .reveal th {
+            background-color: var(--card-bg);
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+        .reveal td { background-color: rgba(10, 25, 47, 0.6); }
+        
+        .resource-map {
+            position: relative;
+            width: 90%;
+            height: 500px;
+            margin: 20px auto;
+            background: rgba(10, 25, 47, 0.5);
+            border-radius: 15px;
+            border: 1px solid var(--card-border);
+            font-size: 0.6em;
+        }
+        .map-item {
+            position: absolute;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+        }
+        .map-zone { border: 2px dashed; }
+        .map-enterprise { background: rgba(255,255,255,0.1); border: 1px solid #fff; }
+
+        .gantt-chart {
+            width: 100%;
+            border-left: 2px solid #ccc;
+            position: relative;
+            margin-top: 20px;
+            font-size: 0.65em;
+        }
+        .gantt-row { margin-bottom: 12px; display: flex; align-items: center; height: 25px; }
+        .gantt-label { width: 25%; text-align: right; padding-right: 10px; }
+        .gantt-bar-container { width: 75%; position: relative; height: 100%; }
+        .gantt-bar {
+            position: absolute;
+            height: 100%;
+            border-radius: 5px;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .gantt-timeline { display: flex; width: 75%; margin-left: 25%; justify-content: space-around; font-size: 0.8em; margin-bottom: 5px; }
+
+        .home-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 25px;
+            background-color: var(--accent-gold);
+            color: var(--dark-bg-start);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .home-button:hover { transform: scale(1.05); }
+
+        @media (min-width: 768px) {
+            :root { --r-main-font-size: 32px; }
+            .responsive-flex { flex-direction: row; }
+            .grid-container { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Title -->
+            <section data-background-image="https://images.unsplash.com/photo-1534294643559-2835f7f5c5d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" data-background-opacity="0.2">
+                <i class="fa-solid fa-handshake" style="font-size: 3em; display: block; text-align: center; margin-bottom: 20px;"></i>
+                <h1>安徽天长产业新能源<br>合作战略报告</h1>
+                <p style="text-align:center; margin-top: 50px;">报告编制单位：建投寰宇战略发展部、天长市城市建设投资有限公司</p>
+                <p style="text-align:center;">日期：2025 年 6 月</p>
+            </section>
+
+            <!-- TOC -->
+            <section>
+                <h2><i class="fa-solid fa-bars-staggered"></i>目录</h2>
+                <div class="toc-container">
+                    <ul class="toc-list">
+                        <li class="fragment"><span>1. 合作背景与战略意义</span></li>
+                        <li class="fragment"><span>2. 产业现状分析与痛点诊断</span></li>
+                        <li class="fragment"><span>3. 战略设计：从痛点到生态闭环</span></li>
+                        <li class="fragment"><span>4. 落地推进与保障体系</span></li>
+                        <li class="fragment"><span>5. 核心竞争力与战略价值</span></li>
+                        <li class="fragment"><span>6. 总结与行业启示</span></li>
+                        <li class="fragment"><span>7. 附件详情</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 1 -->
+            <section>
+                <section data-background-image="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" data-background-opacity="0.25">
+                    <h2><i class="fa-solid fa-lightbulb"></i>一、合作背景与战略意义</h2>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-city"></i>地方发展需求</h3>
+                    <div class="responsive-flex">
+                        <div style="flex: 1;">
+                            <ul>
+                                <li class="fragment"><i class="fa-solid fa-industry"></i><span><strong>传统产业占比超60%</strong>，面临转型压力。</span></li>
+                                <li class="fragment"><i class="fa-solid fa-leaf"></i><span>"双碳"背景下，迫切希望引入<strong>新能源产业</strong>。</span></li>
+                                <li class="fragment"><i class="fa-solid fa-chart-line"></i><span>目标：构建<strong>绿色低碳</strong>现代产业体系。</span></li>
+                            </ul>
+                        </div>
+                        <div class="fragment" style="flex: 1; min-width: 300px; height: 350px; position: relative;">
+                            <canvas id="industryChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-crosshairs"></i>建投寰宇战略定位</h3>
+                    <ul>
+                        <li class="fragment"><i class="fa-solid fa-link"></i><span>独特的 <strong>"资本 + 资源"</strong> 双向赋能模式。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-recycle"></i><span>致力于打造 <strong>"投资-建设-运营-生态闭环"</strong> 的全链条主导权。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-arrow-trend-up"></i><span>目标：从单一项目投资向<strong>产业生态构建</strong>战略升级。</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-file-alt"></i>政策与行业趋势</h3>
+                    <ul>
+                        <li class="fragment"><i class="fa-solid fa-bullhorn"></i><span>国家及安徽省 <strong>"双碳" 政策</strong>提供明确导向。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-sun"></i><span>长三角新能源产业迎来<strong>加速发展机遇期</strong>。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-map-marker-alt"></i><span>天长市具备显著<strong>土地成本优势（低30%）</strong>，能有效承接产业转移。</span></li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- Section 2 -->
+            <section>
+                <section data-background-image="https://images.unsplash.com/photo-1553102021-4bd26500a6e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" data-background-opacity="0.2">
+                    <h2><i class="fa-solid fa-microscope"></i>二、产业现状分析与痛点诊断</h2>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-cubes"></i>三维度产业基础解构</h3>
+                    <div class="grid-container">
+                        <div class="grid-item fragment"><h4><i class="fa-solid fa-seedling"></i>产业生态</h4><p>集中于光伏组件、电池材料，<strong>关键环节空白</strong>，电网智能化滞后。</p></div>
+                        <div class="grid-item fragment"><h4><i class="fa-solid fa-mountain-sun"></i>资源禀赋</h4><p>具备良好太阳能和风电开发潜力，有<strong>承接算力中心</strong>的工业园区。</p></div>
+                        <div class="grid-item fragment"><h4><i class="fa-solid fa-gavel"></i>政策环境</h4><p>有目标但<strong>缺乏实施细则</strong>，产业配套和创新资源有待加强。</p></div>
+                    </div>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-bolt"></i>核心痛点穿透</h3>
+                     <div class="responsive-flex">
+                        <div class="fragment" style="flex:1; background: rgba(255, 82, 82, 0.15); padding: 20px; border-radius: 10px; border: 1px solid rgba(255, 82, 82, 0.3);">
+                            <h4 style="color: #ff8a8a;">表象痛点</h4>
+                            <ul>
+                                <li><span>智慧城市建设分散</span></li>
+                                <li><span>乡镇用能改造 "投大、收慢、协调难"</span></li>
+                                <li><span>新兴领域技术和资金门槛高</span></li>
+                            </ul>
+                        </div>
+                        <div class="fragment" style="flex:1; background: rgba(255, 165, 0, 0.15); padding: 20px; border-radius: 10px; border: 1px solid rgba(255, 165, 0, 0.3);">
+                            <h4 style="color: #ffc966;">本质矛盾</h4>
+                            <ul>
+                                <li><span>短期政绩 vs 项目长周期回报</span></li>
+                                <li><span>核心技术和人才外部依赖</span></li>
+                                <li><span>地方财政资金约束</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- Section 3 -->
+            <section>
+                <section data-background-image="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" data-background-opacity="0.2">
+                    <h2><i class="fa-solid fa-sitemap"></i>三、战略设计：从痛点到生态闭环</h2>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-rocket"></i>短期破局策略 (1-2年)</h3>
+                    <h4>"三箭齐发" 示范工程</h4>
+                    <div class="grid-container">
+                        <div class="grid-item fragment"><strong>秦栏镇试点:</strong> "光伏+储能+虚拟电厂"，总投资1.2亿元。</div>
+                        <div class="grid-item fragment"><strong>主城区平台:</strong> 整合5000盏光伏路灯、2000个充电桩。</div>
+                        <div class="grid-item fragment"><strong>汊涧镇试验段:</strong> 建柔性电网，提升新能源消纳能力30%。</div>
+                    </div>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-magnet"></i>产业链精准招商</h3>
+                    <ul>
+                        <li class="fragment"><i class="fa-solid fa-map"></i><span><strong>招商图谱:</strong> 聚焦储能材料、逆变器芯片、系统集成等。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-hand-holding-dollar"></i><span><strong>配套政策:</strong> 5亿元产业基金、"3免5减半"税收优惠、定制化厂房。</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-infinity"></i>长期生态构建 (3-5年)</h3>
+                    <h4>产业集群化三大路径 & 生态壁垒构建</h4>
+                     <ul>
+                        <li class="fragment"><i class="fa-solid fa-network-wired"></i><span><strong>"源-网-荷-储"一体化:</strong> 规划1GW光伏、500MW风电、200MWh储能及2万机架算力中心。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-robot"></i><span><strong>数字化赋能:</strong> 搭建新能源大数据平台，推动5G+工业互联网。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-users"></i><span><strong>区域协同:</strong> 融入南京都市圈，打造长三角绿电算力副中心。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-shield-halved"></i><span><strong>生态壁垒:</strong> 输出技术标准、通过REITs发行构建资本闭环。</span></li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- Section 4 -->
+            <section>
+                <section data-background-image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" data-background-opacity="0.2">
+                    <h2><i class="fa-solid fa-cogs"></i>四、落地推进与保障体系</h2>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-sitemap"></i>组织保障："三位一体" 推进体系</h3>
+                    <div class="grid-container">
+                        <div class="grid-item fragment"><strong>决策层:</strong> 建投寰宇副总裁牵头</div>
+                        <div class="grid-item fragment"><strong>执行层:</strong> 三大事业部（投资/招商/研发）</div>
+                        <div class="grid-item fragment"><strong>监督层:</strong> 第三方机构季度评估</div>
+                    </div>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-coins"></i>资金逻辑落地</h3>
+                     <ul>
+                        <li class="fragment"><i class="fa-solid fa-person-digging"></i><span><strong>短期项目融资:</strong> "EPC+O&M" 模式，综合融资成本控制在4%以下。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-landmark"></i><span><strong>长期资本结构:</strong> "股权+债权" 融资体系，设立50亿元产业母基金。</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i>风险控制与动态调整</h3>
+                     <ul>
+                        <li class="fragment"><i class="fa-solid fa-file-invoice-dollar"></i><span><strong>政策/市场风险:</strong> 布局绿电交易、签订阶梯电价协议。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-microchip"></i><span><strong>技术/管理风险:</strong> 签订技术保底协议、成立联合工作小组。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-users-gear"></i><span><strong>人才/合规风险:</strong> 制定人才激励政策、引入第三方环保监督。</span></li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- Section 5 -->
+            <section>
+                <section data-background-image="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" data-background-opacity="0.25">
+                    <h2><i class="fa-solid fa-star"></i>五、核心竞争力与战略价值</h2>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-lightbulb"></i>模式创新：从项目投资到生态构建</h3>
+                    <ul>
+                        <li class="fragment"><i class="fa-solid fa-cubes-stacked"></i><span><strong>立体化运作模式:</strong> "平台公司 + 产业基金 + 技术联盟"。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-clone"></i><span><strong>县域转型范式:</strong> 构建 "新能源 + 数字化" 的可复制、可推广解决方案。</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-handshake-angle"></i>资源整合能力</h3>
+                     <ul>
+                        <li class="fragment"><i class="fa-solid fa-building-columns"></i><span><strong>建投集团支持:</strong> 管理资产超2万亿元，提供强大金融与产业协同。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-location-dot"></i><span><strong>属地优势互补:</strong> 天长城投具有丰富属地资源和政府协调能力。</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-bullseye"></i>长期价值目标</h3>
+                    <div class="grid-container">
+                        <div class="value-card fragment">
+                            <div class="icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                            <div class="value">>300 亿元</div>
+                            <div class="label">2030年新能源产值</div>
+                        </div>
+                        <div class="value-card fragment">
+                            <div class="icon"><i class="fa-solid fa-chart-pie"></i></div>
+                            <div class="value">>60%</div>
+                            <div class="label">天长本地市场份额</div>
+                        </div>
+                        <div class="value-card fragment">
+                            <div class="icon"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
+                            <div class="value">>50 亿元</div>
+                            <div class="label">平台公司估值</div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Section 6 -->
+            <section>
+                <section data-background-image="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" data-background-opacity="0.2">
+                    <h2><i class="fa-solid fa-check-circle"></i>六、总结与行业启示</h2>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-key"></i>合作本质</h3>
+                    <p class="fragment">地方政府与国企深度融合，借助资本、技术和管理优势，实现从传统制造向 <strong>"新能源 + 数字化"</strong> 的跨越式转型，达成互利共赢。</p>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-book-open"></i>行业借鉴</h3>
+                    <ul>
+                        <li class="fragment"><i class="fa-solid fa-arrows-turn-to-dots"></i><span>需构建 <strong>"政策-产业-资本-技术"</strong> 的全链条能力。</span></li>
+                        <li class="fragment"><i class="fa-solid fa-lightbulb"></i><span><strong>"新能源平台 + 算力经济"</strong> 模式在县域经济中具备显著复制潜力。</span></li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- Attachments -->
+            <section>
+                <section data-background-image="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" data-background-opacity="0.2">
+                    <h2><i class="fa-solid fa-paperclip"></i>附件</h2>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-map-location-dot"></i>附件1: 天长市新能源资源分布图 (示意图)</h3>
+                    <div class="resource-map">
+                        <div class="map-item map-zone" style="top: 10%; left: 5%; width: 30%; height: 40%; border-color: #f59e0b; color: #f59e0b;">风电潜力区<br>(200MW)</div>
+                        <div class="map-item map-zone" style="top: 10%; right: 5%; width: 55%; height: 80%; border-color: #3b82f6; color: #3b82f6;">太阳能高富集区<br>(2030h)</div>
+                        <div class="map-item map-enterprise" style="top: 15%; right: 40%;">光伏组件厂</div>
+                        <div class="map-item map-enterprise" style="top: 35%; right: 50%;">电池片厂</div>
+                        <div class="map-item map-enterprise" style="top: 55%; right: 30%;">储能系统厂</div>
+                        <div class="map-item" style="top: 25%; left: 10%; color: #f87171; font-weight: bold;">产业链缺失<br>(逆变器芯片等)</div>
+                        <div class="map-item" style="bottom: 10%; left: 5%; background: #10b981;">经济开发区 (PUE 1.15)</div>
+                        <div class="map-item" style="bottom: 10%; right: 5%; background: #8b5cf6;">高新区 (PUE 1.2)</div>
+                    </div>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-chart-gantt"></i>附件2: 2026-2030年项目进度甘特图</h3>
+                    <div class="gantt-chart">
+                        <div class="gantt-timeline"><span>'26</span><span>'27</span><span>'28</span><span>'29</span><span>'30</span></div>
+                        <div class="gantt-row fragment"><div class="gantt-label">示范工程</div><div class="gantt-bar-container"><div class="gantt-bar" style="left: 0%; width: 25%; background-color: #3b82f6;">Q1'26-Q2'27</div></div></div>
+                        <div class="gantt-row fragment"><div class="gantt-label">精准招商图谱</div><div class="gantt-bar-container"><div class="gantt-bar" style="left: 15%; width: 20%; background-color: #10b981;">Q3'26-Q2'27</div></div></div>
+                        <div class="gantt-row fragment"><div class="gantt-label">招商项目落地</div><div class="gantt-bar-container"><div class="gantt-bar" style="left: 30%; width: 40%; background-color: #0e9f74;">Q3'27-Q2'29</div></div></div>
+                        <div class="gantt-row fragment"><div class="gantt-label">产业基金平台</div><div class="gantt-bar-container"><div class="gantt-bar" style="left: 40%; width: 40%; background-color: #8b5cf6;">Q1'28-Q4'29</div></div></div>
+                        <div class="gantt-row fragment"><div class="gantt-label">孵化/直投项目</div><div class="gantt-bar-container"><div class="gantt-bar" style="left: 50%; width: 40%; background-color: #7c4ee3;">Q3'28-Q2'30</div></div></div>
+                        <div class="gantt-row fragment"><div class="gantt-label">基金退出/REITs</div><div class="gantt-bar-container"><div class="gantt-bar" style="left: 80%; width: 20%; background-color: #f59e0b;">Q1'30-Q4'30</div></div></div>
+                    </div>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-table-list"></i>附件3: 产业链招商目标企业清单</h3>
+                    <table>
+                        <thead><tr><th>环节</th><th>细分领域</th><th>目标企业</th><th>招商方向</th><th>优先级</th></tr></thead>
+                        <tbody>
+                            <tr><td rowspan="4">上游</td><td>锂电池正极材料</td><td>宁德时代(江苏)</td><td>年产5万吨正极材料项目</td><td>★★★★★</td></tr>
+                            <tr><td>电解液</td><td>江苏国泰</td><td>年产3万吨电解液生产线</td><td>★★★★☆</td></tr>
+                            <tr><td>逆变器芯片</td><td>英飞凌(上海)</td><td>芯片研发中心</td><td>★★★★☆</td></tr>
+                            <tr><td>光伏银浆</td><td>苏州固锝</td><td>年产2000吨银浆项目</td><td>★★★☆☆</td></tr>
+                            <tr><td rowspan="3">中游</td><td>储能系统集成</td><td>比亚迪储能(合肥)</td><td>10GWh储能PACK产线</td><td>★★★★★</td></tr>
+                            <tr><td>光伏组件</td><td>天合光能(宿迁)</td><td>5GW组件智能化工厂</td><td>★★★★☆</td></tr>
+                            <tr><td>逆变器</td><td>阳光电源(合肥)</td><td>30万台逆变器生产基地</td><td>★★★★☆</td></tr>
+                            <tr><td rowspan="3">下游</td><td>能源互联网</td><td>国网信通</td><td>能源大数据平台合资公司</td><td>★★★★☆</td></tr>
+                            <tr><td>智慧能源服务</td><td>远景能源</td><td>区域虚拟电厂运营中心</td><td>★★★☆☆</td></tr>
+                            <tr><td>算力中心</td><td>腾讯云(华东)</td><td>长三角绿电算力节点</td><td>★★★★★</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h3><i class="fa-solid fa-shield-virus"></i>附件4: 政策风险应对测算表</h3>
+                    <table>
+                        <thead><tr><th>风险类别</th><th>风险场景描述</th><th>应对措施</th><th>效果测算</th><th>责任主体</th></tr></thead>
+                        <tbody>
+                            <tr><td>补贴退坡风险</td><td>2026年后光伏度电补贴下降</td><td>①布局绿电交易(覆盖70%)<br>②开发CCER碳资产</td><td>IRR ≥8%</td><td>投资部</td></tr>
+                            <tr><td>审批流程延长</td><td>土地/电网接入延迟6个月</td><td>①设政策对接小组<br>②签审批时效协议</td><td>周期延长≤3个月</td><td>外联部</td></tr>
+                            <tr><td>碳交易政策</td><td>碳市场配额规则调整</td><td>①合作控排企业<br>②建碳资产管理平台</td><td>收益波动≤±15%</td><td>研发部</td></tr>
+                            <tr><td>电价机制改革</td><td>工商业电价市场化波动</td><td>①签阶梯电价协议<br>②购买电价期货对冲</td><td>现金流波动<10%</td><td>运营中心</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+
+            <!-- Final -->
+            <section>
+                <h2>谢谢观看</h2>
+                <p style="text-align:center;">期待合作成功！</p>
+                <div style="text-align: center;">
+                    <a href="#/0" class="home-button"><i class="fa-solid fa-house"></i> 返回首页</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- 使用国内CDN加载核心JS和插件 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+    
+    <!-- 使用国内CDN加载Chart.js -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+            slideNumber: 'c/t',
+            transition: 'slide',
+            backgroundTransition: 'fade'
+        });
+
+        Reveal.on('ready', event => {
+            const ctx = document.getElementById('industryChart')?.getContext('2d');
+            if (!ctx) return;
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['传统产业', '其他产业'],
+                    datasets: [{
+                        label: '产业结构',
+                        data: [60, 40],
+                        backgroundColor: [ 'rgba(240, 196, 60, 0.8)', 'rgba(66, 175, 250, 0.7)' ],
+                        borderColor: [ '#f0c43c', '#42affa' ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: '#e0e0e0', font: { size: 14, family: "'Microsoft YaHei', '微软雅黑', sans-serif" } } },
+                        title: { display: true, text: '天长市产业结构', color: '#e0e0e0', font: { size: 16, family: "'Microsoft YaHei', '微软雅黑', sans-serif" } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
