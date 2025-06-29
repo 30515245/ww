@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安徽天长产业新能源合作战略报告 - 信息图</title>
+    <!-- Chosen Palette: Brilliant Blues & Greens -->
+    <!-- Application Structure Plan: The infographic tells a linear story designed for scrolling. It starts with the high-level vision (The "Why"), moves to the foundational analysis (The "What"), details the core actions (The "How"), presents the timeline and structure (The "When & Who"), and concludes with the measurable outcomes (The "Success"). This narrative structure transforms the formal report into a compelling, problem-to-solution journey, making complex strategies more accessible and understandable for stakeholders. -->
+    <!-- Visualization & Content Choices: 
+        - Big Numbers (Inform): Used for key stats like 60% traditional industry, 30% lower land cost, and the 2030 goals (300亿产值). Goal: Grab attention and highlight critical data points. Method: HTML/CSS.
+        - Flow Chart (Organize): The "三位一体" organizational structure is visualized using a vertical flow chart. Goal: Clearly depict hierarchy and process flow without SVG. Method: HTML/Tailwind CSS.
+        - Donut Chart (Compare): Shows the "EPC+O&M" funding model split (60/30/10). Goal: Instantly communicate proportional contributions. Library: Chart.js (Canvas).
+        - Gantt Chart (Change): Recreates the report's project timeline. Goal: Show project phasing and duration over time. Library: Chart.js with date-fns adapter (Canvas).
+        - Styled Cards (Organize/Inform): Used for pain points, resources, strategic projects, and risks. Goal: Break down text-heavy information into digestible, visually distinct chunks. Method: HTML/Tailwind CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            color: #222E66;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #222E66;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #00AEEF;
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #00A651;
+            line-height: 1;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 500px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 500px;
+            }
+        }
+        .gantt-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 500px;
+            max-height: 600px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#222E66]">安徽天长产业新能源合作战略</h1>
+            <p class="mt-4 text-xl text-[#00AEEF]">从产业转型到生态构建的可视化蓝图</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <!-- Section: The Challenge & Opportunity -->
+        <section id="challenge" class="mb-20">
+            <h2 class="section-title">挑战与机遇</h2>
+            <p class="section-subtitle">天长市传统产业面临转型压力，但其独特的资源与区位优势为新能源发展提供了坚实基础。</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card bg-[#222E66] text-white">
+                    <h3 class="text-2xl font-bold text-center mb-4 text-[#00AEEF]">核心痛点</h3>
+                    <div class="space-y-4">
+                        <p><strong>产业结构失衡：</strong>传统产业占比超60%，技术短板明显。</p>
+                        <p><strong>电网消纳瓶颈：</strong>乡镇配电网自动化率不足30%，制约新能源利用。</p>
+                        <p><strong>发展矛盾：</strong>短期政绩需求与新能源项目长周期回报存在冲突。</p>
+                        <p><strong>要素制约：</strong>核心技术与高端人才外部依赖，本地财政资金存在约束。</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-center text-[#00A651] mb-4">关键机遇</h3>
+                    <div class="space-y-4">
+                        <p><strong>政策东风：</strong>国家及省级“双碳”政策提供明确导向和有力支撑。</p>
+                        <p><strong>成本优势：</strong>土地成本较周边核心城市低约30%，具备产业承接能力。</p>
+                        <p><strong>资源禀赋：</strong>年均日照2030小时，并拥有200MW风电开发潜力。</p>
+                        <p><strong>空间载体：</strong>12个工业集中区为承接算力中心等项目提供基础。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: The Strategy -->
+        <section id="strategy" class="mb-20">
+            <h2 class="section-title">两步走：从破局到生态</h2>
+            <p class="section-subtitle">通过“短期破局”与“长期生态构建”相结合，系统性推动产业升级。</p>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Short Term -->
+                <div class="card space-y-6">
+                    <h3 class="text-2xl font-bold text-[#00AEEF] border-b-2 border-[#00AEEF] pb-2">短期破局 (1-2年): “三箭齐发”示范工程</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>秦栏镇试点：</strong>建设“光伏+储能+虚拟电厂”，总投资1.2亿元，打造乡镇能源转型样板。</li>
+                        <li><strong>主城区平台：</strong>整合光伏路灯与充电桩，建设智慧能源管理平台，提升城市管理水平。</li>
+                        <li><strong>汊涧镇试验段：</strong>建设柔性电网，提升新能源消纳能力30%。</li>
+                    </ul>
+                    <div class="pt-4">
+                        <h4 class="text-xl font-semibold text-center mb-2">短期项目融资模式</h4>
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="fundingDonutChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Long Term -->
+                <div class="card space-y-6">
+                    <h3 class="text-2xl font-bold text-[#00A651] border-b-2 border-[#00A651] pb-2">长期生态构建 (3-5年): 产业集群化</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>“源-网-荷-储”一体化：</strong>规划1GW光伏、500MW风电及200MWh储能，配套2万机架算力中心。</li>
+                        <li><strong>数字化赋能：</strong>搭建新能源大数据平台，推动5G+工业互联网智能工厂建设。</li>
+                        <li><strong>区域协同：</strong>融入南京都市圈，打造长三角绿电算力副中心。</li>
+                        <li><strong>生态壁垒：</strong>输出技术标准，推动REITs发行构建资本闭环。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: The Blueprint -->
+        <section id="blueprint" class="mb-20">
+            <h2 class="section-title">实施蓝图</h2>
+            <p class="section-subtitle">以“三位一体”的组织架构为保障，按清晰的时间表推进战略落地。</p>
+            <!-- Org Structure -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-center mb-6">“三位一体”推进体系</h3>
+                    <div class="space-y-4 flex flex-col items-center">
+                        <div class="w-full text-center p-4 bg-blue-100 rounded-lg">
+                            <p class="font-bold text-lg text-[#222E66]">决策层</p>
+                            <p class="text-sm">建投寰宇、天长城投、政府部门</p>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-400">↓</div>
+                        <div class="w-full text-center p-4 bg-green-100 rounded-lg">
+                             <p class="font-bold text-lg text-[#00A651]">执行层</p>
+                             <p class="text-sm">投资开发、产业招商、技术研发三大事业部</p>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-400">↓</div>
+                        <div class="w-full text-center p-4 bg-gray-200 rounded-lg">
+                             <p class="font-bold text-lg">监督层</p>
+                             <p class="text-sm">第三方专业机构（季度评估）</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-center mb-6">核心风险与应对</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-lg bg-orange-50 border-l-4 border-[#F68D2E]">
+                            <h4 class="font-bold">政策风险</h4>
+                            <p class="text-sm">通过布局绿电交易、开发碳资产，覆盖70%补贴缺口。</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-blue-50 border-l-4 border-[#00AEEF]">
+                            <h4 class="font-bold">技术风险</h4>
+                            <p class="text-sm">与行业领先机构签订技术保底协议，确保技术可靠性。</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-green-50 border-l-4 border-[#00A651]">
+                            <h4 class="font-bold">市场风险</h4>
+                            <p class="text-sm">与算力用户签订阶梯电价协议，锁定保底出租率。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Gantt Chart -->
+            <div class="card">
+                <h3 class="text-2xl font-bold text-center mb-4">项目进度时间轴 (2026-2030)</h3>
+                <div class="gantt-chart-container">
+                    <canvas id="ganttChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: The Goals -->
+        <section id="goals">
+            <h2 class="section-title">2030年价值目标</h2>
+            <p class="section-subtitle">通过战略实施，旨在实现经济、市场与资本价值的全面提升。</p>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="card">
+                    <p class="text-lg font-semibold text-[#00A651] mb-2">经济目标</p>
+                    <div id="economic-goal" class="stat-number">0</div>
+                    <p class="text-xl">亿元新能源产值</p>
+                </div>
+                <div class="card">
+                    <p class="text-lg font-semibold text-[#00AEEF] mb-2">市场目标</p>
+                    <div class="flex justify-center items-baseline">
+                        <div id="market-goal" class="stat-number">0</div>
+                        <span class="text-3xl font-bold text-[#00AEEF]">%</span>
+                    </div>
+                    <p class="text-xl">本地市场份额</p>
+                </div>
+                <div class="card">
+                    <p class="text-lg font-semibold text-[#F68D2E] mb-2">资本目标</p>
+                    <div id="capital-goal" class="stat-number">0</div>
+                    <p class="text-xl">亿元平台公司估值</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-20 py-6 bg-[#222E66] text-white">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>报告编制单位：建投寰宇战略发展部、天长市城市建设投资有限公司</p>
+            <p>日期：2025年6月</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const FONT_COLOR = '#222E66';
+            Chart.defaults.color = FONT_COLOR;
+            Chart.defaults.font.family = "'PingFang SC', 'Microsoft YaHei', sans-serif";
+
+            const wrapLabel = (label) => {
+                if (label.length > 16) {
+                    const words = label.split(' ');
+                    const lines = [];
+                    let currentLine = '';
+                    for (const word of words) {
+                        if ((currentLine + word).length > 16) {
+                            lines.push(currentLine.trim());
+                            currentLine = '';
+                        }
+                        currentLine += word + ' ';
+                    }
+                    lines.push(currentLine.trim());
+                    return lines;
+                }
+                return label;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                return Array.isArray(label) ? label.join(' ') : label;
+            };
+
+            // Donut Chart for Funding
+            const fundingData = {
+                labels: ['建投寰宇出资', '地方配套', '渠道融资'],
+                datasets: [{
+                    label: '融资占比',
+                    data: [60, 30, 10],
+                    backgroundColor: ['#00AEEF', '#00A651', '#F68D2E'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            };
+            const fundingCtx = document.getElementById('fundingDonutChart').getContext('2d');
+            new Chart(fundingCtx, {
+                type: 'doughnut',
+                data: fundingData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: { title: tooltipTitleCallback }
+                        }
+                    }
+                }
+            });
+
+            // Gantt Chart
+            const ganttData = {
+                labels: [
+                    'REITs发行',
+                    '产业基金完全退出',
+                    ['孵化/直投', '项目'],
+                    ['产业基金合作', '平台'],
+                    ['招商项目', '落地'],
+                    '精准招商图谱',
+                    ['柔性电网', '试验段'],
+                    ['智慧能源管理', '平台']
+                ],
+                datasets: [
+                {
+                    label: '示范工程',
+                    data: [
+                        null, null, null, null, null, null,
+                        [new Date('2026-10-01'), new Date('2027-03-31')],
+                        [new Date('2026-04-01'), new Date('2026-09-30')]
+                    ],
+                    backgroundColor: 'rgba(0, 174, 239, 0.7)', // #00AEEF
+                },
+                {
+                    label: '产业链招商',
+                    data: [
+                        null, null, null, null,
+                        [new Date('2028-01-01'), new Date('2028-09-30')],
+                        [new Date('2027-04-01'), new Date('2027-09-30')],
+                        null, null
+                    ],
+                    backgroundColor: 'rgba(0, 166, 81, 0.7)', // #00A651
+                },
+                 {
+                    label: '生态构建',
+                    data: [
+                        null, null,
+                        [new Date('2029-07-01'), new Date('2030-06-30')],
+                        [new Date('2028-10-01'), new Date('2029-06-30')],
+                        null, null, null, null
+                    ],
+                    backgroundColor: 'rgba(34, 46, 102, 0.7)', // #222E66
+                },
+                {
+                    label: '资本运作',
+                    data: [
+                        [new Date('2030-10-01'), new Date('2030-12-31')],
+                        [new Date('2030-07-01'), new Date('2030-09-30')],
+                        null, null, null, null, null, null
+                    ],
+                    backgroundColor: 'rgba(246, 141, 46, 0.7)', // #F68D2E
+                }]
+            };
+            const ganttCtx = document.getElementById('ganttChart').getContext('2d');
+            new Chart(ganttCtx, {
+                type: 'bar',
+                data: ganttData,
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'quarter'
+                            },
+                            min: '2026-01-01',
+                            max: '2030-12-31',
+                            stacked: true,
+                            grid: {
+                                color: '#e0e0e0'
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) {
+                                    const start = new Date(context.raw[0]);
+                                    const end = new Date(context.raw[1]);
+                                    return `${context.dataset.label}: ${start.toLocaleDateString()} - ${end.toLocaleDateString()}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Animated Counters
+            const animateCounter = (el, target, duration = 2000) => {
+                let start = 0;
+                const step = (timestamp) => {
+                    if (!start) start = timestamp;
+                    const progress = timestamp - start;
+                    const percentage = Math.min(progress / duration, 1);
+                    el.innerText = Math.floor(percentage * target);
+                    if (progress < duration) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        el.innerText = target;
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const economicGoal = document.getElementById('economic-goal');
+                        const marketGoal = document.getElementById('market-goal');
+                        const capitalGoal = document.getElementById('capital-goal');
+
+                        animateCounter(economicGoal, 300);
+                        animateCounter(marketGoal, 60);
+                        animateCounter(capitalGoal, 50);
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(document.getElementById('goals'));
+        });
+    </script>
+</body>
+</html>
