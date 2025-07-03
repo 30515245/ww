@@ -1,0 +1,6 @@
+*.log  # 忽略所有 .log 文件
+/1config/  # 忽略 config 文件夹
+/2secret/*  # 忽略 secret 文件夹中的所有内容
+
+/.vscode/
+/.vscode/*
