@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>71天CSP-J/S入门级认证学习计划</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36D399',
+                        accent: '#FF6B35',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .timeline-item::before {
+                content: '';
+                position: absolute;
+                left: -29px;
+                top: 5px;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background-color: #165DFF;
+                border: 3px solid #ffffff;
+                box-shadow: 0 0 0 2px #165DFF;
+            }
+            .timeline-item::after {
+                content: '';
+                position: absolute;
+                left: -20px;
+                top: 26px;
+                bottom: -20px;
+                width: 2px;
+                background-color: #E2E8F0;
+            }
+            .timeline-item:last-child::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-light text-dark antialiased">
+    <!-- 顶部导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-graduation-cap text-primary text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-primary">ZJX-CSP-J/S 学习计划</h1>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#overview" class="text-dark hover:text-primary transition-colors font-medium">总览</a>
+                <a href="#weekly-details" class="text-dark hover:text-primary transition-colors font-medium">每周任务</a>
+                <a href="#resources" class="text-dark hover:text-primary transition-colors font-medium">学习资源</a>
+                <a href="#preparation" class="text-dark hover:text-primary transition-colors font-medium">考前准备</a>
+                <a href="#tips" class="text-dark hover:text-primary transition-colors font-medium">额外建议</a>
+            </nav>
+            <button class="md:hidden text-primary text-xl" id="mobile-menu-button">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#overview" class="text-dark hover:text-primary transition-colors py-2">总览</a>
+                <a href="#weekly-details" class="text-dark hover:text-primary transition-colors py-2">每周任务</a>
+                <a href="#resources" class="text-dark hover:text-primary transition-colors py-2">学习资源</a>
+                <a href="#preparation" class="text-dark hover:text-primary transition-colors py-2">考前准备</a>
+                <a href="#tips" class="text-dark hover:text-primary transition-colors py-2">额外建议</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 英雄区域 -->
+        <section class="relative bg-gradient-to-br from-primary/90 to-primary text-white py-16 md:py-24 overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://picsum.photos/id/180/1920/1080')] bg-cover bg-center opacity-10"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4 text-shadow leading-tight">
+                        ZJX-71天CSP-J/S入门级认证学习计划
+                    </h1>
+                    <p class="text-[clamp(1rem,2vw,1.25rem)] mb-8 opacity-90">
+                        从基础到精通，系统规划，助你在CSP-J/S入门级认证考试中取得优异成绩
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex items-center">
+                            <i class="fa fa-calendar text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm opacity-80">学习周期</p>
+                                <p class="font-bold">71天</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex items-center">
+                            <i class="fa fa-clock-o text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm opacity-80">每日投入</p>
+                                <p class="font-bold">2-3小时</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex items-center">
+                            <i class="fa fa-flag text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm opacity-80">考试日期</p>
+                                <p class="font-bold">2025年9月20日</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-[60px] md:h-[80px]">
+                    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="fill-white"></path>
+                    <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="fill-white"></path>
+                    <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="fill-white"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- 时间表总览 -->
+        <section id="overview" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">时间表总览</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-3xl mx-auto">从2025年7月12日开始，到2025年9月19日结束，共71天的系统化学习安排</p>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-[800px] border-collapse">
+                        <thead>
+                            <tr class="bg-primary/10 text-primary">
+                                <th class="py-4 px-6 text-left font-bold">周次</th>
+                                <th class="py-4 px-6 text-left font-bold">日期范围</th>
+                                <th class="py-4 px-6 text-left font-bold">核心内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第1周</td>
+                                <td class="py-4 px-6">7月12日–7月18日</td>
+                                <td class="py-4 px-6">C++环境配置与基础语法</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第2周</td>
+                                <td class="py-4 px-6">7月19日–7月25日</td>
+                                <td class="py-4 px-6">数组与字符串操作</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第3周</td>
+                                <td class="py-4 px-6">7月26日–8月1日</td>
+                                <td class="py-4 px-6">排序算法与递归</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第4周</td>
+                                <td class="py-4 px-6">8月2日–8月8日</td>
+                                <td class="py-4 px-6">栈、队列与链表</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第5周</td>
+                                <td class="py-4 px-6">8月9日–8月15日</td>
+                                <td class="py-4 px-6">图的基础、DFS与BFS</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第6周</td>
+                                <td class="py-4 px-6">8月16日–8月22日</td>
+                                <td class="py-4 px-6">模拟初赛笔试（15题限时2小时）</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第7周</td>
+                                <td class="py-4 px-6">8月23日–8月29日</td>
+                                <td class="py-4 px-6">动态规划与贪心算法</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第8周</td>
+                                <td class="py-4 px-6">8月30日–9月5日</td>
+                                <td class="py-4 px-6">模拟复赛机考（4题限时3.5小时）</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第9周</td>
+                                <td class="py-4 px-6">9月6日–9月12日</td>
+                                <td class="py-4 px-6">历年真题练习与错题本复盘</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">第10周</td>
+                                <td class="py-4 px-6">9月13日–9月19日</td>
+                                <td class="py-4 px-6">考前冲刺：手写模板、考场策略</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 每周任务详解 -->
+        <section id="weekly-details" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">每周任务详解</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-3xl mx-auto">详细了解每周的学习目标和任务安排，循序渐进提升编程能力</p>
+                </div>
+
+                <div class="relative pl-8 md:pl-12 space-y-8">
+                    <!-- 时间线 -->
+                    <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 md:left-6"></div>
+
+                    <!-- 第1周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第1周（7月12日–7月18日）</h3>
+                                <span class="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">基础入门</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>安装NOI Linux 2.0或本地GCC/Clang环境并配置VS Code或CLion。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>学习C++基本语法：变量、数据类型、运算符、条件分支、循环结构。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>完成简单练习：两数和、奇偶判断、九九乘法表。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 第2周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第2周（7月19日–7月25日）</h3>
+                                <span class="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">基础入门</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>掌握一维/二维数组的声明、遍历与边界处理。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>学习字符串常用操作：输入输出、拼接、查找、子串。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>刷题：Codeforces或LeetCode数组/字符串简单题各10道。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 第3周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第3周（7月26日–8月1日）</h3>
+                                <span class="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">算法入门</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>理解并实现冒泡、选择、插入、快速排序。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>递归练习：实现阶乘、斐波那契数列和汉诺塔问题。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>刷题：每种排序各2道，递归题5道。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 第4周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第4周（8月2日–8月8日）</h3>
+                                <span class="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">数据结构</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>栈与队列的原理、STL `stack`/`queue`用法。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>单链表和双链表的插入、删除、翻转操作。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>刷题：括号匹配、滑动窗口最大值、链表翻转各5道。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 第5周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第5周（8月9日–8月15日）</h3>
+                                <span class="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">数据结构</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>图的邻接矩阵与邻接表表示法。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>深度优先搜索与广度优先搜索模板及递归/队列实现。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>刷题：迷宫寻路、二分图判定、无权最短路径各3道。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 第6周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第6周（8月16日–8月22日）</h3>
+                                <span class="bg-accent/10 text-accent text-sm font-medium px-3 py-1 rounded-full">模拟考试</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>精选15道CSP-J初赛真题或模拟题，限时2小时完成。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>记录所有错题，分析原因并编写优化版代码模板。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>周末进行答题思路与代码效率的深度复盘。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 第7周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第7周（8月23日–8月29日）</h3>
+                                <span class="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">算法进阶</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>入门动态规划：背包、最长递增子序列、区间DP思路。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>贪心算法：活动选择、区间调度。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>刷题：DP 5道、贪心3道、综合题2道。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 第8周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第8周（8月30日–9月5日）</h3>
+                                <span class="bg-accent/10 text-accent text-sm font-medium px-3 py-1 rounded-full">模拟考试</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>模拟机考环境，限时3.5小时完成4道中等难度编程题。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>配置考试模板：快速IO、调试宏、常用数据结构函数。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>赛后分析：时间分配、易错点与性能优化。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 第9周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第9周（9月6日–9月12日）</h3>
+                                <span class="bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">真题训练</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>整理历年CSP-J/S机考真题，按考试节奏模拟练习。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>全面复盘错题本，针对薄弱算法模块专项突破。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>混合练习：结合数组、图、DP等知识点的综合题。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 第10周 -->
+                    <div class="timeline-item relative pl-6 md:pl-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-primary">第10周（9月13日–9月19日）</h3>
+                                <span class="bg-accent/10 text-accent text-sm font-medium px-3 py-1 rounded-full">考前冲刺</span>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>手写核心代码模板：输入输出、排序、DFS/BFS、DP框架。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>制定考场策略：先易后难、遇难快速跳题、预留调试时间。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>最后两天进行“初赛＋复赛”全真模拟，并完成完整错题总结。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 重要资源与工具 -->
+        <section id="resources" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">重要资源与工具</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-3xl mx-auto">推荐学习资料和工具，助力高效备考CSP-J/S认证</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 官方资料卡片 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                        <div class="h-4 bg-primary"></div>
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary/10 rounded-full p-3 mr-4">
+                                    <i class="fa fa-file-text-o text-primary text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-dark">官方资料</h3>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-external-link text-primary mt-1 mr-3"></i>
+                                    <span>CCF CSP-J/S官网规范与历年真题下载</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 参考书目卡片 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                        <div class="h-4 bg-primary"></div>
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary/10 rounded-full p-3 mr-4">
+                                    <i class="fa fa-book text-primary text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-dark">参考书目</h3>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-bookmark text-primary mt-1 mr-3"></i>
+                                    <span>信息学奥赛一本通</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-bookmark text-primary mt-1 mr-3"></i>
+                                    <span>算法导论（相关章节）</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 在线平台卡片 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                        <div class="h-4 bg-primary"></div>
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary/10 rounded-full p-3 mr-4">
+                                    <i class="fa fa-laptop text-primary text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-dark">在线平台</h3>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-external-link text-primary mt-1 mr-3"></i>
+                                    <span>Codeforces、LeetCode（C++标签）</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-external-link text-primary mt-1 mr-3"></i>
+                                    <span>CCF OJ模拟机考环境</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 开发工具卡片 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                        <div class="h-4 bg-primary"></div>
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary/10 rounded-full p-3 mr-4">
+                                    <i class="fa fa-code text-primary text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-dark">开发工具</h3>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-wrench text-primary mt-1 mr-3"></i>
+                                    <span>NOI Linux 2.0</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-wrench text-primary mt-1 mr-3"></i>
+                                    <span>本地GCC/Clang + VS Code/CLion</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 学习方法卡片 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                        <div class="h-4 bg-primary"></div>
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary/10 rounded-full p-3 mr-4">
+                                    <i class="fa fa-lightbulb-o text-primary text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-dark">学习方法</h3>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>定期与同伴或老师组队练习，互相点评代码与思路</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>使用Git或笔记软件管理错题本与代码模板版本</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 社区资源卡片 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                        <div class="h-4 bg-primary"></div>
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary/10 rounded-full p-3 mr-4">
+                                    <i class="fa fa-users text-primary text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-dark">社区资源</h3>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fa fa-external-link text-primary mt-1 mr-3"></i>
+                                    <span>关注CSP-J/S社区动态，学习高手经验与最新题型趋势</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 考前冲刺与心态建设 -->
+        <section id="preparation" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">考前冲刺与心态建设</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-3xl mx-auto">考试前的准备和心态调整策略，助你发挥最佳水平</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                            <i class="fa fa-calendar-check-o mr-3"></i> 考前准备
+                        </h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>按时作息，保持充足睡眠与轻度运动以集中注意力。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>考前一晚检查考试模板与环境配置，准备纸质草稿本与手写公式。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>模拟时严格计时，避免在单题上“卡壳”过久。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>考场上优先解决得分确定题目，再返工难点题。</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                            <i class="fa fa-heart-o mr-3"></i> 心态调整
+                        </h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>保持积极心态，相信自己的准备和能力。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>考试当天提前到达考场，熟悉环境，减少紧张感。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>遇到难题时，深呼吸，冷静分析，不要慌乱。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>考完一科后，不要与他人讨论答案，专注下一科考试。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 额外建议 -->
+        <section id="tips" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">额外建议</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-3xl mx-auto">提升学习效率和备考效果的实用建议</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-primary/5 rounded-lg p-6 border-l-4 border-primary card-hover">
+                        <div class="text-primary text-3xl mb-4">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">团队协作</h3>
+                        <p class="text-gray-600">定期与同伴或老师组队练习，互相点评代码与思路，共同进步。</p>
+                    </div>
+
+                    <div class="bg-primary/5 rounded-lg p-6 border-l-4 border-primary card-hover">
+                        <div class="text-primary text-3xl mb-4">
+                            <i class="fa fa-git"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">版本管理</h3>
+                        <p class="text-gray-600">使用Git或笔记软件管理错题本与代码模板版本，便于复习和回顾。</p>
+                    </div>
+
+                    <div class="bg-primary/5 rounded-lg p-6 border-l-4 border-primary card-hover">
+                        <div class="text-primary text-3xl mb-4">
+                            <i class="fa fa-comments"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">社区学习</h3>
+                        <p class="text-gray-600">关注CSP-J/S社区动态，学习高手经验与最新题型趋势，拓宽视野。</p>
+                    </div>
+
+                    <div class="bg-primary/5 rounded-lg p-6 border-l-4 border-primary card-hover">
+                        <div class="text-primary text-3xl mb-4">
+                            <i class="fa fa-arrow-up"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">持续挑战</h3>
+                        <p class="text-gray-600">考后可循CSP-S（Senior）路径继续挑战更高级别，不断提升编程能力。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 学习进度跟踪 -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">学习进度跟踪</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-3xl mx-auto">记录你的学习进度，保持动力，稳步前进</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium">总体进度</span>
+                            <span class="text-primary font-bold">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div class="bg-primary h-4 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                    <i class="fa fa-code text-primary"></i>
+                                </div>
+                                <span>基础知识掌握</span>
+                            </div>
+                            <span class="text-primary font-medium">0%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                    <i class="fa fa-sitemap text-primary"></i>
+                                </div>
+                                <span>数据结构理解</span>
+                            </div>
+                            <span class="text-primary font-medium">0%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                    <i class="fa fa-cogs text-primary"></i>
+                                </div>
+                                <span>算法应用能力</span>
+                            </div>
+                            <span class="text-primary font-medium">0%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                    <i class="fa fa-trophy text-primary"></i>
+                                </div>
+                                <span>模拟考试成绩</span>
+                            </div>
+                            <span class="text-primary font-medium">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 鼓励语 -->
+        <section class="py-16 bg-primary relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://picsum.photos/id/160/1920/1080')] bg-cover bg-center opacity-10"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-white mb-6 text-shadow">
+                        坚持就是胜利
+                    </h2>
+                    <p class="text-white/90 text-lg mb-8">
+                        每一次的努力都是成长的积累，每一天的坚持都是成功的基石。<br>
+                        相信自己，你一定能够在CSP-J/S认证考试中取得优异成绩！
+                    </p>
+                    <button class="bg-white text-primary font-bold py-3 px-8 rounded-full hover:bg-white/90 transition-colors shadow-lg">
+                        开始学习之旅
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fa fa-graduation-cap text-primary text-2xl"></i>
+                        <h2 class="text-xl font-bold">CSP-J/S 学习计划</h2>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        为CSP-J/S入门级认证考试精心设计的71天学习计划，助你系统掌握编程知识，提升算法能力。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#overview" class="text-gray-400 hover:text-white transition-colors">总览</a></li>
+                        <li><a href="#weekly-details" class="text-gray-400 hover:text-white transition-colors">每周任务</a></li>
+                        <li><a href="#resources" class="text-gray-400 hover:text-white transition-colors">学习资源</a></li>
+                        <li><a href="#preparation" class="text-gray-400 hover:text-white transition-colors">考前准备</a></li>
+                        <li><a href="#tips" class="text-gray-400 hover:text-white transition-colors">额外建议</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">订阅更新</h3>
+                    <p class="text-gray-400 mb-4">订阅我们的更新，获取最新学习资料和考试动态</p>
+                    <form class="flex">
+                        <input type="email" placeholder="你的邮箱地址" class="px-4 py-2 rounded-l-lg focus:outline-none text-dark flex-1">
+                        <button type="submit" class="bg-primary hover:bg-primary/90 transition-colors px-4 py-2 rounded-r-lg">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 CSP-J/S学习计划. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 滚动导航栏效果
+        const header = document.querySelector('header');
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('py-2', 'shadow-md');
+                header.classList.remove('py-3', 'shadow-sm');
+            } else {
+                header.classList.add('py-3', 'shadow-sm');
+                header.classList.remove('py-2', 'shadow-md');
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // 进度条动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBar = entry.target.querySelector('.bg-primary');
+                    if (progressBar) {
+                        const width = progressBar.style.width;
+                        progressBar.style.width = '0%';
+                        setTimeout(() => {
+                            progressBar.style.width = width;
+                        }, 300);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.w-full.bg-gray-200').forEach(progress => {
+            observer.observe(progress);
+        });
+    </script>
+</body>
+</html>    
