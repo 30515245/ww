@@ -1,0 +1,1210 @@
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>都匀一中2025-2028高中三年计算机科学与技术专业发展规划</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #2ecc71;
+            --accent-color: #3498db;
+            --text-color: #333333;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #7f8c8d;
+            --white: #ffffff;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+            padding-top: 70px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            background-color: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 1.2rem 0 0.8rem;
+            color: var(--accent-color);
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            margin: 1rem 0 0.6rem;
+            color: var(--text-color);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .card {
+            background-color: var(--light-gray);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .highlight {
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background-color: var(--medium-gray);
+            border-radius: 10px;
+            margin: 0.5rem 0 1.5rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: var(--shadow);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+            
+            .nav-links.active {
+                max-height: 300px;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ZJX高中三年规划</div>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="#background">背景与现状</a></li>
+                <li><a href="#overall-plan">整体规划</a></li>
+                <li><a href="#subject-plan">学科学习</a></li>
+                <li><a href="#contest-plan">奥赛计划</a></li>
+                <li><a href="#time-management">时间管理</a></li>
+                <li><a href="#quality">综合素质</a></li>
+                <li><a href="#evaluation">评估调整</a></li>
+                <li><a href="#future">未来展望</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1 style="color: white;">高中三年整体规划及执行方案</h1>
+            <h1 style="color: white;">（2025.9-2028.6）</h1>
+            <h4 style="color: white;">专业代码:080901 专业名称:计算机科学与技术</h4>
+            <h4 style="color: white;">目标院校</h4>
+            <h4 style="color: white;">清华大学、北京大学、上海交通大学、复旦大学、同济大学、华中师范大学、上海科技大学</h4>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="background">
+            <h2>一、背景与现状分析</h2>
+            <h3>1.1 个人基础信息评估</h3>
+            <p>核心科目成绩:语文133、数学125、英语105.5、理科综合116</p>
+            <p>成绩表明你在文科和理科方面都具备扎实基础，尤其是语文和数学成绩较为突出</p>
+            <div class="card" style="color: green;">
+                <h4>优势分析</h4>
+                <ul>
+                    <li>语文成绩优异，展现出较强的理解能力和表达能力</li>
+                    <li>数学基础扎实，为计算机科学学习提供了良好基础</li>
+                    <li>理科综合成绩良好，显示出对自然科学的理解能力</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="color: red;">
+                <h4>提升空间</h4>
+                <ul>
+                    <li>英语成绩相对其他科目有提升空间，需要着重加强</li>
+                    <li>信息学奥赛零基础，需要系统学习和训练</li>
+                    <li>对计算机专业认知和实践经验不足</li>
+                </ul>
+            </div>
+            
+            <h3>1.2 目标院校与专业要求分析</h3>
+            <p>目标院校:清华大学、北京大学、上海交通大学、复旦大学、同济大学、华中师范大学、上海科技大学</p>
+            <p>这些学校对计算机专业人才的选拔有以下特点</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>类别</th>
+                            <th>具体要求</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="3">录取标准</td>
+                            <td>高考成绩要求极高，通常需达到全省前1%的水平</td>
+                        </tr>
+                        <tr>
+                            <td>强基计划对信息学奥赛获奖学生有特殊优惠政策</td>
+                        </tr>
+                        <tr>
+                            <td>综合素质评价占据重要地位，包括科研能力、创新思维等</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">学科要求</td>
+                            <td>首选科目必须为物理，再选科目建议化学和生物</td>
+                        </tr>
+                        <tr>
+                            <td>计算机科学与技术专业对数学和物理要求特别高</td>
+                        </tr>
+                        <tr>
+                            <td>信息学奥赛省级一等奖及以上对强基计划和自主招生有显著帮助</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>1.3 信息学奥赛重要性与价值</h3>
+            <p>信息学奥赛作为五大学科竞赛之一，对计算机专业发展具有重要意义：</p>
+            
+            <div class="card">
+                <h4>竞赛价值</h4>
+                <ul>
+                    <li>NOI省级一等奖及以上有机会在高校强基计划中获得初审通过资格</li>
+                    <li>在综合评价招生中，省级二等奖及以上奖项能增加录取机会</li>
+                    <li>全国决赛金牌可获得保送资格，银牌可通过强基计划降分录取</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>能力培养</h4>
+                <ul>
+                    <li>提升算法设计和编程能力，为计算机专业学习奠定基础</li>
+                    <li>培养逻辑思维、问题解决能力和创新思维</li>
+                    <li>锻炼抗压能力和团队协作能力</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="overall-plan">
+            <h2>二、高中三年整体规划框架</h2>
+            
+            <h3>2.1 总体目标与阶段划分</h3>
+            
+            <div class="card">
+                <h4>总体目标</h4>
+                <ol>
+                    <li>高考成绩达到贵州省前1%，争取清华、北大计算机科学与技术专业录取</li>
+                    <li>英语能力显著提升，达到高考135分以上水平</li>
+                    <li>信息学奥赛取得优异成绩，争取NOI省级一等奖及以上</li>
+                    <li>全面发展综合素质，培养计算机专业所需的核心能力</li>
+                </ol>
+            </div>
+            
+            <h4>阶段划分</h4>
+            <ul>
+                <li><strong>高一阶段（2025.9-2026.7）</strong>：打牢基础，初步接触信息学奥赛</li>
+                <li><strong>高二阶段（2026.9-2027.7）</strong>：提升能力，参加省级信息学竞赛</li>
+                <li><strong>高三阶段（2027.9-2028.6）</strong>：冲刺高考，全力备战信息学奥赛</li>
+            </ul>
+            
+            <h3>2.2 核心发展策略</h3>
+            
+            <div class="card">
+                <h4>学科学习策略</h4>
+                <ul>
+                    <li>保持语文和数学优势，确保高考核心竞争力</li>
+                    <li>重点提升英语水平，缩小与其他科目的差距</li>
+                    <li>强化物理和化学学习，为计算机专业学习奠定基础</li>
+                    <li>合理安排学习时间，确保各科均衡发展</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>奥赛发展策略</h4>
+                <ul>
+                    <li>遵循"基础→提高→竞赛"的学习路径，循序渐进</li>
+                    <li>充分利用寒暑假进行集中培训和强化训练</li>
+                    <li>积极参加各类信息学比赛，积累实战经验</li>
+                    <li>寻求专业教练指导，提高训练效率和竞赛水平</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>综合素质培养策略</h4>
+                <ul>
+                    <li>参与计算机相关社团和科技创新活动</li>
+                    <li>尝试小型编程项目和科研实践</li>
+                    <li>培养自主学习和时间管理能力</li>
+                    <li>增强抗压能力和心理调适能力</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="subject-plan">
+            <h2>三、学科学习目标与计划</h2>
+            
+            <h3>3.1 英语学科专项提升计划</h3>
+            <p>鉴于英语是当前相对薄弱科目，特制定专项提升计划：</p>
+            
+            <div class="card">
+                <h4>总体目标</h4>
+                <p>从中考105.5分提升至高考135分以上，达到贵州省顶尖水平</p>
+            </div>
+            
+            <h4>阶段目标与措施</h4>
+            
+            <div class="card">
+                <h4>高一阶段（2025.9-2026.7）</h4>
+                <p><strong>上学期：</strong></p>
+                <ul>
+                    <li>词汇量从中考水平提升至3500词（掌握高考核心词汇50%）</li>
+                    <li>加强基础语法学习，重点突破时态、语态和从句</li>
+                    <li>每周进行3次听力训练，每次30分钟</li>
+                    <li>每周完成2篇阅读理解和1篇完形填空</li>
+                </ul>
+                <p><strong>下学期：</strong></p>
+                <ul>
+                    <li>词汇量增加到4500词（掌握高考核心词汇75%）</li>
+                    <li>开始系统学习高级语法和写作技巧</li>
+                    <li>每周增加1次口语练习，参加英语角活动</li>
+                    <li>每周完成3篇阅读理解、1篇完形填空和1篇写作</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>高二阶段（2026.9-2027.7）</h4>
+                <p><strong>上学期：</strong></p>
+                <ul>
+                    <li>词汇量达到5500词（掌握高考核心词汇95%以上）</li>
+                    <li>强化阅读理解和写作能力，掌握高考各类题型解题技巧</li>
+                    <li>开始高考真题训练，每周完成1套完整试题</li>
+                    <li>参加1-2次英语竞赛，如全国中学生英语能力竞赛</li>
+                </ul>
+                <p><strong>下学期：</strong></p>
+                <ul>
+                    <li>词汇量稳定在6000词以上，扩展学术词汇和专业术语</li>
+                    <li>重点突破高考难点题型，如七选五、语法填空</li>
+                    <li>每周完成2套完整试题，进行错题分析和强化训练</li>
+                    <li>提高听力和口语能力，达到流畅交流水平</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>高三阶段（2027.9-2028.6）</h4>
+                <p><strong>上学期：</strong></p>
+                <ul>
+                    <li>词汇量达到6500词以上，全面覆盖高考词汇和常用短语</li>
+                    <li>系统进行高考模拟训练，每周完成3-4套完整试题</li>
+                    <li>重点提升写作质量，积累高级表达和优秀范文</li>
+                    <li>参加高考英语听力"一年两考"，争取最佳成绩</li>
+                </ul>
+                <p><strong>下学期：</strong></p>
+                <ul>
+                    <li>查漏补缺，强化薄弱环节</li>
+                    <li>进行高考冲刺训练，调整考试状态</li>
+                    <li>保持每天英语学习习惯，确保语言能力不下降</li>
+                </ul>
+            </div>
+            
+            <h3>3.2 数学学科深化学习计划</h3>
+            <p>数学是计算机专业的基础学科，需要保持优势并进一步深化：</p>
+            
+            <div class="card">
+                <h4>总体目标</h4>
+                <p>从中考125分提升至高考140分以上，达到顶尖水平</p>
+            </div>
+            
+            <h3>3.3 物理学科重点突破计划</h3>
+            <p>物理是计算机专业的另一重要基础学科，需重点突破：</p>
+            
+            <div class="card">
+                <h4>总体目标</h4>
+                <p>高考物理成绩达到90分以上（满分100分）</p>
+            </div>
+            
+            <h3>3.4 其他学科协同发展计划</h3>
+            <p>除了英语、数学和物理外，其他学科也需要保持良好水平：</p>
+            
+            <div class="card">
+                <h4>语文学习计划</h4>
+                <ul>
+                    <li>保持优势，高考目标130分以上</li>
+                    <li>加强阅读理解和写作能力，尤其是议论文写作</li>
+                    <li>广泛阅读经典文学作品和学术文章，提高文化素养</li>
+                    <li>关注时事热点，积累写作素材</li>
+                    <li>每周完成2篇阅读理解和1篇作文训练</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>化学学习计划</h4>
+                <ul>
+                    <li>高考目标85分以上（满分100分）</li>
+                    <li>掌握化学基本概念和原理，重点突破化学反应原理和物质结构</li>
+                    <li>加强实验操作能力和化学计算能力</li>
+                    <li>每周完成15道提高性习题，培养化学思维</li>
+                    <li>参加化学兴趣小组或实验活动，提高学习兴趣</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>生物学习计划</h4>
+                <ul>
+                    <li>高考目标80分以上（满分100分）</li>
+                    <li>掌握生物学基本概念和原理，重点突破遗传和细胞生物学</li>
+                    <li>加强实验设计和数据分析能力</li>
+                    <li>每周完成10道提高性习题，培养科学思维</li>
+                    <li>关注生物与计算机科学的交叉领域，如生物信息学</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contest-plan">
+            <h2>四、信息学奥赛学习与参赛计划</h2>
+            
+            <h3>4.1 信息学奥赛学习路径与目标</h3>
+            <p>根据你的目标和现状，制定以下信息学奥赛学习路径：</p>
+            
+            <div class="card">
+                <h4>总体目标</h4>
+                <p>在NOI信息学奥赛中获得省级一等奖及以上成绩，争取进入国家集训队</p>
+            </div>
+            
+            <h4>阶段目标与学习路径</h4>
+            
+            <div class="card">
+                <h4>高一阶段（2025.9-2026.7）</h4>
+                <p><strong>上学期（入门阶段）：</strong></p>
+                <ul>
+                    <li>掌握C++编程语言基础（语法、基本数据结构、输入输出等）</li>
+                    <li>学习基础算法：排序、搜索、模拟、简单贪心</li>
+                    <li>每周学习时间不少于8小时（含课堂和自主学习）</li>
+                    <li>完成基础编程练习100题以上</li>
+                </ul>
+                <p><strong>下学期（基础阶段）：</strong></p>
+                <ul>
+                    <li>深入学习C++语言，掌握STL容器和算法库</li>
+                    <li>学习中等难度算法：递归、分治、动态规划基础、图论基础</li>
+                    <li>开始接触信息学奥赛真题和模拟题</li>
+                    <li>每周学习时间不少于10小时</li>
+                    <li>完成编程练习200题以上</li>
+                    <li>参加CSP-J/S认证，争取优异成绩</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>高二阶段（2026.9-2027.7）</h4>
+                <p><strong>上学期（提高阶段）：</strong></p>
+                <ul>
+                    <li>系统学习高级算法：动态规划进阶、图论进阶、搜索优化</li>
+                    <li>学习数据结构：链表、栈、队列、树、图、哈希表等</li>
+                    <li>开始系统训练NOIP真题和模拟题</li>
+                    <li>每周学习时间不少于12小时</li>
+                    <li>完成编程练习300题以上</li>
+                    <li>参加NOIP全国青少年信息学奥林匹克联赛，争取省级一等奖</li>
+                </ul>
+                <p><strong>下学期（竞赛阶段）：</strong></p>
+                <ul>
+                    <li>深入学习高级数据结构和算法：线段树、树状数组、并查集等</li>
+                    <li>学习算法设计技巧和优化方法</li>
+                    <li>参加省级信息学奥赛集训队，进行强化训练</li>
+                    <li>每周学习时间不少于15小时</li>
+                    <li>完成编程练习400题以上</li>
+                    <li>参加NOI省队选拔，争取进入省队</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>高三阶段（2027.9-2028.6）</h4>
+                <p><strong>上学期（冲刺阶段）：</strong></p>
+                <ul>
+                    <li>系统复习和强化所有算法和数据结构</li>
+                    <li>重点突破NOI全国决赛难度题目</li>
+                    <li>参加国家集训队集训，进行高强度训练</li>
+                    <li>每周学习时间不少于20小时</li>
+                    <li>完成编程练习500题以上</li>
+                    <li>参加NOI全国决赛，争取优异成绩</li>
+                </ul>
+                <p><strong>下学期（调整阶段）：</strong></p>
+                <ul>
+                    <li>根据NOI成绩调整学习计划</li>
+                    <li>若获得优异成绩，准备强基计划或保送考试</li>
+                    <li>若未达到预期，调整重心到高考备考，同时继续参与高水平竞赛</li>
+                    <li>保持编程和算法训练，确保能力不下降</li>
+                </ul>
+            </div>
+            
+            <h3>4.2 信息学奥赛学习资源与方法</h3>
+            <p>为了高效学习信息学奥赛，建议利用以下资源和方法：</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>资源类型</th>
+                            <th>具体内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="5">教材与书籍</td>
+                            <td>《信息学奥赛导学》（童程童美联合清华大学出版社出版）</td>
+                        </tr>
+                        <tr>
+                            <td>《算法导论》（Introduction to Algorithms）</td>
+                        </tr>
+                        <tr>
+                            <td>《C++ Primer Plus》</td>
+                        </tr>
+                        <tr>
+                            <td>《信息学奥赛一本通》系列教材</td>
+                        </tr>
+                        <tr>
+                            <td>NOI官方推荐学习资料</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="5">在线评测系统</td>
+                            <td>洛谷（Luogu）</td>
+                        </tr>
+                        <tr>
+                            <td>力扣（LeetCode）</td>
+                        </tr>
+                        <tr>
+                            <td>Codeforces</td>
+                        </tr>
+                        <tr>
+                            <td>CodeChef</td>
+                        </tr>
+                        <tr>
+                            <td>NOI Online Judge</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>4.3 详细参赛计划与时间表</h3>
+            <p>根据信息学奥赛的赛程安排，制定以下参赛计划：</p>
+            
+            <div class="card">
+                <h4>高一阶段参赛计划</h4>
+                <ul>
+                    <li>2025年10月：参加CSP-J/S认证（入门级和提高级）
+                        <ul>
+                            <li>目标：CSP-J/S提高级二等奖以上</li>
+                            <li>准备时间：提前3个月开始系统复习和模拟训练</li>
+                        </ul>
+                    </li>
+                    <li>2026年4月：参加贵州省青少年信息学奥林匹克联赛（预赛）
+                        <ul>
+                            <li>目标：获得复赛资格</li>
+                            <li>准备时间：提前2个月进行针对性训练</li>
+                        </ul>
+                    </li>
+                    <li>2026年5月：参加贵州省青少年信息学奥林匹克联赛（复赛）
+                        <ul>
+                            <li>目标：获得省级奖项</li>
+                            <li>准备时间：复赛名单公布后立即开始强化训练</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>高二阶段参赛计划</h4>
+                <ul>
+                    <li>2026年10月：再次参加CSP-J/S认证（提高级）
+                        <ul>
+                            <li>目标：CSP-J/S提高级一等奖</li>
+                            <li>准备时间：提前4个月开始系统复习和模拟训练</li>
+                        </ul>
+                    </li>
+                    <li>2026年11月：参加全国青少年信息学奥林匹克联赛（NOIP）
+                        <ul>
+                            <li>目标：获得省级一等奖</li>
+                            <li>准备时间：提前3个月进行系统训练</li>
+                        </ul>
+                    </li>
+                    <li>2027年3月：参加NOI省队选拔
+                        <ul>
+                            <li>目标：进入省队</li>
+                            <li>准备时间：提前2个月进行高强度训练</li>
+                        </ul>
+                    </li>
+                    <li>2027年7月：参加全国青少年信息学奥林匹克竞赛（NOI）
+                        <ul>
+                            <li>目标：获得全国奖项，争取进入国家集训队</li>
+                            <li>准备时间：提前3个月进行集训和模拟比赛</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="time-management">
+            <h2>五、时间管理与执行策略</h2>
+            
+            <h3>5.1 学期内学习时间分配</h3>
+            <p>为了平衡文化课学习和信息学奥赛训练，制定以下时间分配策略：</p>
+            
+            <div class="card">
+                <h4>高一阶段（2025.9-2026.7）</h4>
+                <p><strong>日常学习时间分配：</strong></p>
+                <ul>
+                    <li>周一至周五：
+                        <ul>
+                            <li>每天文化课学习时间：6-7小时（包括课堂学习和课后作业）</li>
+                            <li>信息学奥赛学习时间：1-2小时（晚自习或课后）</li>
+                            <li>体育锻炼和休息时间：1-2小时</li>
+                        </ul>
+                    </li>
+                    <li>周末：
+                        <ul>
+                            <li>文化课学习时间：8-10小时（系统复习和预习）</li>
+                            <li>信息学奥赛学习时间：4-6小时（系统学习和练习）</li>
+                            <li>综合素质拓展：2-4小时（社团活动、阅读等）</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>高二阶段（2026.9-2027.7）</h4>
+                <p><strong>日常学习时间分配：</strong></p>
+                <ul>
+                    <li>周一至周五：
+                        <ul>
+                            <li>每天文化课学习时间：7-8小时（包括课堂学习和课后作业）</li>
+                            <li>信息学奥赛学习时间：2-3小时（晚自习或课后）</li>
+                            <li>体育锻炼和休息时间：1-2小时</li>
+                        </ul>
+                    </li>
+                    <li>周末：
+                        <ul>
+                            <li>文化课学习时间：10-12小时（系统复习和预习）</li>
+                            <li>信息学奥赛学习时间：6-8小时（系统学习和练习）</li>
+                            <li>综合素质拓展：2-4小时（社团活动、阅读等）</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>高三阶段（2027.9-2028.6）</h4>
+                <p><strong>日常学习时间分配：</strong></p>
+                <ul>
+                    <li>周一至周五：
+                        <ul>
+                            <li>每天文化课学习时间：8-10小时（包括课堂学习和课后作业）</li>
+                            <li>信息学奥赛学习时间：3-4小时（晚自习或课后）</li>
+                            <li>体育锻炼和休息时间：1-2小时</li>
+                        </ul>
+                    </li>
+                    <li>周末：
+                        <ul>
+                            <li>文化课学习时间：12-14小时（系统复习和预习）</li>
+                            <li>信息学奥赛学习时间：8-10小时（系统学习和练习）</li>
+                            <li>综合素质拓展：2-4小时（社团活动、阅读等）</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <h3>5.2 学习环境与资源利用策略</h3>
+            <p>为了提高学习效率，优化学习环境和资源利用：</p>
+            
+            <div class="card">
+                <h4>学习环境优化</h4>
+                <ul>
+                    <li>在家中设立专门的学习区域，保持安静、整洁和舒适</li>
+                    <li>配置适合长时间学习的桌椅和照明设备</li>
+                    <li>准备必要的学习工具和材料，如电脑、参考书、笔记本等</li>
+                    <li>合理安排学习时间和休息时间，避免疲劳和注意力分散</li>
+                    <li>制定明确的学习计划和目标，提高学习的针对性和效率</li>
+                </ul>
+            </div>
+            
+            <h3>5.3 执行监督与调整机制</h3>
+            <p>为了确保学习计划的有效执行，建立以下监督和调整机制：</p>
+            
+            <div class="card">
+                <h4>自我监督机制</h4>
+                <ul>
+                    <li>建立学习日志，记录每天的学习内容和完成情况</li>
+                    <li>定期评估学习效果，分析进步和不足</li>
+                    <li>设置阶段性目标和奖励机制，激励自己坚持学习</li>
+                    <li>每周进行一次学习总结和反思，调整下周学习计划</li>
+                    <li>每月进行一次全面评估，调整学习策略和目标</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="quality">
+            <h2>六、综合素质与能力培养</h2>
+            
+            <h3>6.1 科技创新能力培养</h3>
+            <p>科技创新能力是计算机专业人才的核心竞争力，应重点培养：</p>
+            
+            <div class="card">
+                <h4>科技创新项目参与计划</h4>
+                <ul>
+                    <li><strong>高一阶段：</strong>
+                        <ul>
+                            <li>参与学校科技创新社团活动，了解科技创新的基本流程</li>
+                            <li>学习基础的项目设计和研究方法</li>
+                            <li>参与1-2个小型科技创新项目，如简单的应用程序开发</li>
+                        </ul>
+                    </li>
+                    <li><strong>高二阶段：</strong>
+                        <ul>
+                            <li>主导1个科技创新项目，如基于算法的应用系统开发</li>
+                            <li>参加青少年科技创新大赛或信息技术创新与实践活动</li>
+                            <li>学习科研方法和论文写作基础</li>
+                        </ul>
+                    </li>
+                    <li><strong>高三阶段：</strong>
+                        <ul>
+                            <li>完成1个具有一定深度的科技创新项目</li>
+                            <li>参加全国性科技创新比赛，如全国青少年科技创新大赛</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <h3>6.2 团队协作与领导力培养</h3>
+            <p>团队协作和领导力是未来发展的重要能力，应注重培养：</p>
+            
+            <div class="card">
+                <h4>社团活动参与计划</h4>
+                <ul>
+                    <li><strong>高一阶段：</strong>
+                        <ul>
+                            <li>加入学校计算机社团或科技创新社团</li>
+                            <li>积极参与社团活动，与其他成员建立良好关系</li>
+                        </ul>
+                    </li>
+                    <li><strong>高二阶段：</strong>
+                        <ul>
+                            <li>在社团中担任一定职务，如部长或项目负责人</li>
+                            <li>组织和策划社团活动，锻炼组织能力和领导力</li>
+                        </ul>
+                    </li>
+                    <li><strong>高三阶段：</strong>
+                        <ul>
+                            <li>担任社团负责人或核心成员</li>
+                            <li>指导和培养新成员，传承经验和知识</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <h3>6.3 国际视野与跨文化交流能力</h3>
+            <p>国际视野和跨文化交流能力对未来发展具有重要意义：</p>
+            
+            <div class="card">
+                <h4>国际交流活动参与计划</h4>
+                <ul>
+                    <li><strong>高一阶段：</strong>
+                        <ul>
+                            <li>参加学校或机构组织的国际交流活动</li>
+                            <li>学习国际礼仪和跨文化交流基本技巧</li>
+                        </ul>
+                    </li>
+                    <li><strong>高二阶段：</strong>
+                        <ul>
+                            <li>参加国际青少年科技交流活动</li>
+                            <li>参与跨国在线合作项目，如开源软件贡献</li>
+                        </ul>
+                    </li>
+                    <li><strong>高三阶段：</strong>
+                        <ul>
+                            <li>参加国际信息学奥林匹克竞赛（如有资格）</li>
+                            <li>访问国际知名大学或科研机构</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <h3>6.4 身心健康与压力管理</h3>
+            <p>身心健康是高效学习和长远发展的基础：</p>
+            
+            <div class="card">
+                <h4>体育锻炼计划</h4>
+                <ul>
+                    <li>日常锻炼：
+                        <ul>
+                            <li>每天保证1小时的体育锻炼时间</li>
+                            <li>选择适合自己的运动项目，如跑步、游泳、篮球等</li>
+                        </ul>
+                    </li>
+                    <li>体育课程：
+                        <ul>
+                            <li>认真对待学校体育课程，积极参与各项体育活动</li>
+                            <li>掌握至少1-2项体育运动技能</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="evaluation">
+            <h2>七、阶段性评估与调整策略</h2>
+            
+            <h3>7.1 高一阶段评估与调整</h3>
+            <p><strong>高一阶段目标评估：</strong></p>
+            
+            <div class="card">
+                <h4>文化课学习</h4>
+                <ul>
+                    <li>期中考试评估：检查各科成绩是否达到预期目标</li>
+                    <li>期末考试评估：全面评估高一阶段学习成果</li>
+                    <li>英语能力评估：检查词汇量和语言应用能力是否达标</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>信息学奥赛</h4>
+                <ul>
+                    <li>CSP-J/S认证成绩评估：是否达到预期目标</li>
+                    <li>编程能力评估：检查是否掌握基础编程技能</li>
+                    <li>算法学习评估：检查是否掌握基础算法知识</li>
+                </ul>
+            </div>
+            
+            <h3>7.2 高二阶段评估与调整</h3>
+            <p><strong>高二阶段目标评估：</strong></p>
+            
+            <div class="card">
+                <h4>文化课学习</h4>
+                <ul>
+                    <li>期中考试评估：检查各科成绩是否达到预期目标</li>
+                    <li>期末考试评估：全面评估高二阶段学习成果</li>
+                    <li>高考模拟考试评估：预测高考成绩和排名</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>信息学奥赛</h4>
+                <ul>
+                    <li>NOIP联赛成绩评估：是否获得省级一等奖</li>
+                    <li>NOI省队选拔评估：是否进入省队</li>
+                    <li>算法和编程能力评估：是否达到竞赛水平</li>
+                </ul>
+            </div>
+            
+            <h3>7.3 高三阶段评估与调整</h3>
+            <p><strong>高三阶段目标评估：</strong></p>
+            
+            <div class="card">
+                <h4>文化课学习</h4>
+                <ul>
+                    <li>高考模拟考试评估：预测高考成绩和排名</li>
+                    <li>高考成绩评估：是否达到预期目标</li>
+                    <li>强基计划评估：是否获得高校强基计划资格</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>信息学奥赛</h4>
+                <ul>
+                    <li>NOI全国决赛成绩评估：是否获得全国奖项</li>
+                    <li>国家集训队选拔评估：是否进入国家集训队</li>
+                    <li>国际竞赛参与评估：是否获得国际竞赛资格</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="future">
+            <h2>八、最终目标与未来展望</h2>
+            
+            <h3>8.1 短期目标与行动计划（2025.9-2026.7）</h3>
+            <div class="card">
+                <h4>短期目标</h4>
+                <ul>
+                    <li>文化课学习：保持优秀成绩，尤其是数学和语文</li>
+                    <li>英语能力：词汇量达到3500词，提高语言应用能力</li>
+                    <li>信息学奥赛：掌握基础编程技能，达到入门水平</li>
+                    <li>综合素质：参与科技创新活动，培养团队协作能力</li>
+                </ul>
+            </div>
+            
+            <h3>8.2 中期目标与行动计划（2026.9-2027.7）</h3>
+            <div class="card">
+                <h4>中期目标</h4>
+                <ul>
+                    <li>文化课学习：保持优异成绩，为高考奠定基础</li>
+                    <li>英语能力：词汇量达到5500词，具备高考应试能力</li>
+                    <li>信息学奥赛：获得NOIP省级一等奖，争取进入省队</li>
+                    <li>综合素质：参与科技创新竞赛，培养创新能力</li>
+                </ul>
+            </div>
+            
+            <h3>8.3 长期目标与行动计划（2027.9-2028.6）</h3>
+            <div class="card">
+                <h4>长期目标</h4>
+                <ul>
+                    <li>高考成绩：达到贵州省前1%，被清华或北大计算机专业录取</li>
+                    <li>信息学奥赛：获得NOI全国奖项，争取进入国家集训队</li>
+                    <li>综合素质：具备创新能力和国际视野，全面发展</li>
+                    <li>身心健康：保持良好的身心状态，具备抗压能力</li>
+                </ul>
+            </div>
+            
+            <h3>8.4 未来发展展望</h3>
+            
+            <div class="card">
+                <h4>大学阶段展望</h4>
+                <ul>
+                    <li>在清华大学或北京大学计算机科学与技术专业学习</li>
+                    <li>继续参与信息学竞赛和科技创新活动</li>
+                    <li>探索计算机科学的前沿领域，如人工智能、大数据等</li>
+                    <li>参与科研项目和实验室研究，培养科研能力</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>职业发展展望</h4>
+                <ul>
+                    <li>成为计算机领域的专业人才，如算法工程师、系统架构师等</li>
+                    <li>参与国家重大科技项目和创新工程</li>
+                    <li>从事计算机科学研究，推动技术进步和创新</li>
+                    <li>创办科技企业，实现创新创业梦想</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>九、总结与建议</h2>
+            
+            <h3>9.1 规划总结</h3>
+            <p>本规划基于你的个人情况和目标，为你制定了2025年9月至2028年6月高中三年的学习和发展计划：</p>
+            <ol>
+                <li><strong>学科学习</strong>：保持优势学科，重点提升英语，全面发展各学科能力，高考目标总分达到贵州省前1%</li>
+                <li><strong>信息学奥赛</strong>：系统学习信息学知识和技能，目标在NOI中获得省级一等奖及以上成绩</li>
+                <li><strong>时间管理</strong>：合理分配学习时间，平衡文化课和奥赛学习，确保全面发展</li>
+                <li><strong>综合素质</strong>：培养科技创新能力、团队协作能力和国际视野，全面提升个人素养</li>
+                <li><strong>身心健康</strong>：保持良好的身心状态，提高学习效率和抗压能力</li>
+            </ol>
+            
+            <h3>9.2 关键成功因素</h3>
+            <p>要实现这一规划目标，需要关注以下关键成功因素：</p>
+            <ol>
+                <li><strong>坚持与毅力</strong>：高中三年的学习和训练是一个长期过程，需要坚持不懈的努力和持之以恒的毅力</li>
+                <li><strong>科学方法</strong>：采用科学的学习方法和训练策略，提高学习效率和效果</li>
+                <li><strong>资源利用</strong>：充分利用学校、社会和家庭资源，为学习和发展创造良好条件</li>
+                <li><strong>心态调整</strong>：保持积极乐观的学习态度，正确面对挑战和挫折</li>
+                <li><strong>平衡发展</strong>：保持学习、生活和身心健康的平衡，避免单一化发展</li>
+            </ol>
+            
+            <h3>9.3 实施建议</h3>
+            <p>为确保规划的有效实施，提出以下建议：</p>
+            <ol>
+                <li><strong>分解目标</strong>：将长期目标分解为具体的短期和中期目标，制定详细的行动计划</li>
+                <li><strong>定期评估</strong>：定期评估学习进展和效果，及时调整学习计划和方法</li>
+                <li><strong>寻求支持</strong>：与老师、家长和同学保持良好沟通，寻求必要的支持和帮助</li>
+                <li><strong>保持热情</strong>：保持对计算机科学的热爱和学习热情，激发内在动力</li>
+                <li><strong>享受过程</strong>：在追求目标的过程中，学会享受学习和成长的乐趣</li>
+            </ol>
+            
+            <p style="text-align: center; margin-top: 2rem; font-weight: bold;">最后，希望你能够坚定信心，勇往直前，实现自己的梦想。相信通过三年的不懈努力，你一定能够收获成功和成长！</p>
+        </section>
+    </div>
+
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // 移动菜单切换
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动菜单
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // 回到顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 高亮当前章节
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-links a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.style.color = '';
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.style.color = 'var(--secondary-color)';
+                }
+            });
+        });
+    </script>
+
+
+</body></html>
