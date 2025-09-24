@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上海易信仓储 储能项目方案 - 公牛安全用电专家</title>
+    <!-- 引入Bootstrap样式 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <!-- 引入Chart.js用于数据可视化 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <style>
+        /* 全局样式 - 采用绿色主调 #368d32 */
+        :root {
+            --primary-color: #368d32;
+            --secondary-color: #2a6d27;
+            --light-color: #f8faf8;
+            --dark-color: #333647;
+            --gray-color: #86909C;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "Heiti SC", sans-serif;
+            color: var(--dark-color);
+            background-color: #fff;
+            line-height: 1.6;
+            font-size: 16px; /* 基础字体放大，提高可读性 */
+        }
+        
+        /* 简化标题样式 */
+        .section-title {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        /* 导航栏 - 移动优先优化 */
+        .navbar {
+            background-color: #fff !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 8px;
+        }
+        
+        .nav-link {
+            color: var(--dark-color) !important;
+            margin: 0 5px;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        /* Hero区域 - 简化设计 */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #fff;
+            padding: 40px 0; /* 减少 padding 让内容更紧凑 */
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 1.8rem; /* 移动端字体适中 */
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        
+        /* 卡片样式 - 简洁化 */
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 6px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 6px 6px 0 0 !important;
+            font-weight: 600;
+            padding: 12px 15px;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        /* 表格样式优化 */
+        .table-responsive {
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+        
+        .table th {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+            padding: 10px 8px;
+            font-size: 0.9rem;
+        }
+        
+        .table td {
+            padding: 10px 8px;
+            font-size: 0.9rem;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary-color);
+        }
+        
+        /* 案例卡片 - 确保移动端显示正常 */
+        .case-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .case-card .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* 页脚 - 简化 */
+        .footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer .col-md-4 {
+            margin-bottom: 25px;
+        }
+        
+        .footer h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .footer p, .footer a {
+            color: rgba(255,255,255,0.7);
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* 政策标签 - 简化 */
+        .policy-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+        
+        /* 收益项 - 提高可读性 */
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .benefit-item i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        /* 移动端优化 */
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+                max-width: 800px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        /* 确保按钮在移动端易于点击 */
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 8px 16px;
+            font-size: 1rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        /* 简化时间线样式 */
+        .timeline-item {
+            padding: 10px;
+        }
+        
+        /* 增加内容间距，提高可读性 */
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* 减少不必要的装饰，保持简洁 */
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        
+        section {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 - 优化移动端体验 -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiBmaWxsPSJ3aGl0ZSIvPgo8Y2lyY2xlIGN4PSIxNSIgY3k9IjE1IiByPSIxMCIgZmlsbD0iIzM2OGQzMiIvPgo8cGF0aCBkPSJNMTUgM2E2IDYgMCAwIDEgNiA2djZhNiA2IDAgMCAxLTYgNmgtMGE2IDYgMCAwIDEtNi02VjlhNiA2IDAgMCAxIDYtNnoiIGZpbGw9IiNmZmYiLz4KPC9zdmc+" alt="公牛logo">
+                公牛 · 安全用电专家
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#background">行业背景</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tech">技术方案</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#product">产品介绍</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#economic">经济收益</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#company">公司简介</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#cases">合作案例</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero区域 - 简化内容 -->
+    <section class="hero">
+        <div class="container">
+            <h1>上海易信仓储 60kW/115kWh 储能项目方案</h1>
+            <p>公牛核心技术助力企业"削峰填谷、降本增效"，响应国家"双碳"目标</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- 一、储能行业背景及政策 - 精简内容 -->
+        <section id="background" class="mb-8">
+            <h2 class="section-title">一、行业背景及政策</h2>
+            
+            <!-- 行业背景核心目标 -->
+            <div class="row mb-6">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <i class="fa fa-flag mr-2"></i>双碳目标
+                        </div>
+                        <div class="card-body">
+                            <p>中国力争2030年前碳达峰，2060年前碳中和，为能源变革指明方向。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <i class="fa fa-calendar-check-o mr-2"></i>十四五重点
+                        </div>
+                        <div class="card-body">
+                            <p>"3060目标"纳入"十四五"规划，成为年度重点任务。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <i class="fa fa-bolt mr-2"></i>新型电力系统
+                        </div>
+                        <div class="card-body">
+                            <p>构建"以新能源为主体的新型电力系统"，储能成为核心支撑。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 政策支持 - 简化内容 -->
+            <h3 class="h4 mb-4 text-primary">政策支持体系</h3>
+            <div class="row mb-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-building-o mr-2"></i>国家层面政策
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <span class="badge badge-primary me-2">发改能源规〔2021〕1051号</span>
+                                    <p class="mb-0">2025年新型储能从商业化初期向规模化转变，2030年全面市场化。</p>
+                                </li>
+                                <li>
+                                    <span class="badge badge-primary me-2">储能实施方案</span>
+                                    <p class="mb-0">2030年核心技术自主可控，市场机制成熟，支撑碳达峰。</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-map-marker mr-2"></i>地方层面政策
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h5 class="h6 text-dark">华东地区</h5>
+                                <p class="mb-0">上海及周边地区密集出台多领域储能政策，鼓励"新能源+储能"，简化审批流程。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 工商业储能价值 - 突出重点 -->
+            <h3 class="h4 mb-4 text-primary">工商业储能核心价值</h3>
+            <div class="card mb-6">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="benefit-item">
+                                <i class="fa fa-line-chart"></i>
+                                <div>
+                                    <h5 class="h6 text-dark mb-1">峰谷套利</h5>
+                                    <p class="mb-0">谷段低价充电，峰段高价放电，直接降低企业用电成本。</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fa fa-handshake-o"></i>
+                                <div>
+                                    <h5 class="h6 text-dark mb-1">需求侧响应</h5>
+                                    <p class="mb-0">参与电网需求响应，获得额外经济补偿。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="benefit-item">
+                                <i class="fa fa-tachometer"></i>
+                                <div>
+                                    <h5 class="h6 text-dark mb-1">容量管理</h5>
+                                    <p class="mb-0">降低需量电价，优化变压器容量配置。</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fa fa-battery-full"></i>
+                                <div>
+                                    <h5 class="h6 text-dark mb-1">备用电源</h5>
+                                    <p class="mb-0">限电期间保障关键设备供电，减少生产中断损失。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 二、技术方案 - 简化内容 -->
+        <section id="tech" class="mb-8">
+            <h2 class="section-title">二、技术方案</h2>
+            
+            <!-- 上海电价政策 - 保留核心数据 -->
+            <h3 class="h4 mb-4 text-primary">上海工商业电价政策</h3>
+            <div class="table-responsive mb-6">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>用电分类</th>
+                            <th>电压等级</th>
+                            <th>谷段电价（元/度）</th>
+                            <th>峰段电价（元/度）</th>
+                            <th>尖峰电价（元/度）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2">工商业用电（两部制）</td>
+                            <td>不满1千伏</td>
+                            <td>0.2972</td>
+                            <td>1.1395</td>
+                            <td>1.3276</td>
+                        </tr>
+                        <tr>
+                            <td>10千伏</td>
+                            <td>0.2899</td>
+                            <td>1.1063</td>
+                            <td>1.3276</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-muted small">尖峰时段：7-8月12:00-14:00、1月/12月19:00-21:00；谷段：22:00-次日6:00。</p>
+            </div>
+
+            <!-- 充放电策略 - 简化展示 -->
+            <h3 class="h4 mb-4 text-primary">充放电策略设计</h3>
+            <div class="row mb-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-clock-o mr-2"></i>常规月份策略
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm table-borderless">
+                                <tbody>
+                                    <tr><td class="fw-semibold">22:00-06:00</td><td>谷段充电（100%）</td><td>0.2899元/度</td></tr>
+                                    <tr><td class="fw-semibold">08:00-11:00</td><td>峰段放电（100%）</td><td>1.1063元/度</td></tr>
+                                    <tr><td class="fw-semibold">18:00-21:00</td><td>峰段放电（100%）</td><td>1.1063元/度</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-sun-o mr-2"></i>高温月份策略
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm table-borderless">
+                                <tbody>
+                                    <tr><td class="fw-semibold">22:00-06:00</td><td>谷段充电（100%）</td><td>0.2899元/度</td></tr>
+                                    <tr><td class="fw-semibold">12:00-14:00</td><td>尖峰放电（100%）</td><td>1.3276元/度</td></tr>
+                                    <tr><td class="fw-semibold">18:00-21:00</td><td>峰段放电（100%）</td><td>1.1063元/度</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 系统配置 - 突出核心参数 -->
+            <h3 class="h4 mb-4 text-primary">储能系统核心配置</h3>
+            <div class="card mb-6">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center mb-4">
+                                <i class="fa fa-cubes text-primary text-4xl mb-3"></i>
+                                <h5 class="h6 text-dark">设备型号</h5>
+                                <p>公牛60kW/115kWh液冷储能一体机</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center mb-4">
+                                <i class="fa fa-area-chart text-primary text-4xl mb-3"></i>
+                                <h5 class="h6 text-dark">运行参数</h5>
+                                <p>全年等效两充两放（310天），寿命10年以上</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center mb-4">
+                                <i class="fa fa-plug text-primary text-4xl mb-3"></i>
+                                <h5 class="h6 text-dark">接入方式</h5>
+                                <p>0.4kV低压侧接入，占地面积仅3㎡</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 三、产品介绍 - 精简参数 -->
+        <section id="product" class="mb-8">
+            <h2 class="section-title">三、产品介绍</h2>
+            
+            <!-- 产品核心参数 - 保留关键数据 -->
+            <h3 class="h4 mb-4 text-primary">公牛60kW/115kWh液冷储能一体机</h3>
+            <div class="row mb-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-list-ul mr-2"></i>核心电气参数
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm table-borderless">
+                                <tbody>
+                                    <tr><td class="fw-semibold w-40">额定能量</td><td>115kWh（标准条件）</td></tr>
+                                    <tr><td class="fw-semibold">额定输出功率</td><td>60kW（并网）</td></tr>
+                                    <tr><td class="fw-semibold">充放电效率</td><td>≥88%（标准测试条件）</td></tr>
+                                    <tr><td class="fw-semibold">工作温度范围</td><td>充电：0~54℃；放电：-20~54℃</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-shield mr-2"></i>安全与可靠性
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fa fa-check-circle text-primary mr-2"></i>
+                                    <span>液冷设计：电芯温差≤3℃，高效控温，延长寿命</span>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fa fa-check-circle text-primary mr-2"></i>
+                                    <span>三防设计：气凝胶防火、全箱密封防水、防腐蚀</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check-circle text-primary mr-2"></i>
+                                    <span>循环寿命：6000次循环后容量保持率≥80%</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 控制系统与管理平台 - 简化说明 -->
+            <h3 class="h4 mb-4 text-primary">智能控制系统</h3>
+            <div class="row mb-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-cogs mr-2"></i>控制系统架构
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <span class="fw-semibold">数据采集：</span>支持多协议，实时监控设备状态
+                                </li>
+                                <li class="mb-2">
+                                    <span class="fw-semibold">电池管理（BMS）：</span>实时监测电池健康状态
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">需量控制：</span>实时补偿用电负荷，降低需量电费
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-desktop mr-2"></i>能源管理系统
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fa fa-line-chart text-primary mr-2"></i>
+                                    <span>实时监控：设备运行参数、告警信息实时展示</span>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fa fa-file-text-o text-primary mr-2"></i>
+                                    <span>统计报表：自动生成电量、收益等多维度报表</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-mobile text-primary mr-2"></i>
+                                    <span>多端访问：支持Web、APP、小程序</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 质保服务 - 突出重点 -->
+            <div class="row mb-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-life-ring mr-2"></i>质保与售后服务
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm table-borderless">
+                                <tbody>
+                                    <tr><td class="fw-semibold">核心模块（电芯）</td><td>10年或6000次循环（保80%容量）</td></tr>
+                                    <tr><td class="fw-semibold">关键模块（PCS、BMS等）</td><td>5年免费质保</td></tr>
+                                    <tr><td class="fw-semibold">售后响应</td><td>7×24小时服务热线（400-883-2388）</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 四、经济收益分析 - 简化数据展示 -->
+        <section id="economic" class="mb-8">
+            <h2 class="section-title">四、经济收益分析</h2>
+            
+            <!-- 收益构成 - 突出核心 -->
+            <h3 class="h4 mb-4 text-primary">收益构成</h3>
+            <div class="row mb-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-money mr-2"></i>核心收益来源
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <span class="badge badge-primary me-2">主要收益</span>
+                                    <p class="mb-0"><strong>峰谷套利：</strong>通过谷段低价充电、峰段高价放电获取价差收益。</p>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="badge badge-primary me-2">政策收益</span>
+                                    <p class="mb-0"><strong>政府补贴：</strong>多地按放电量补贴（如无锡0.3元/kWh，连续2年）。</p>
+                                </li>
+                                <li>
+                                    <span class="badge badge-primary me-2">成本节约</span>
+                                    <p class="mb-0"><strong>需量电费：</strong>优化用电负荷，降低需量电价费用。</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 收益测算 - 简化表格 -->
+            <h3 class="h4 mb-4 text-primary">上海地区收益测算</h3>
+            <div class="row mb-6">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fa fa-calculator mr-2"></i>首年收益测算
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>项目</th>
+                                            <th>常规月份（8个月）</th>
+                                            <th>尖峰月份（4个月）</th>
+                                            <th>全年合计</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>日均放电量（kWh）</td>
+                                            <td>211</td>
+                                            <td>228</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>阶段收益（元）</td>
+                                            <td>29,431</td>
+                                            <td>17,359</td>
+                                            <td>46,790</td>
+                                        </tr>
+                                        <tr>
+                                            <td>碳减排收益（元）</td>
+                                            <td colspan="2">按碳价60元/吨测算</td>
+                                            <td>4,320</td>
+                                        </tr>
+                                        <tr>
+                                            <td>首年总收益（元）</td>
+                                            <td colspan="2">-</td>
+                                            <td><strong>51,110</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 收益趋势图表 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-line-chart mr-2"></i>10年收益趋势与回报周期
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <canvas id="revenueChart" height="250"></canvas>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="h6 text-dark mb-3">核心结论</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3">
+                                            <i class="fa fa-check-circle text-primary mr-2"></i>
+                                            <span><strong>投资成本：</strong>约10.93万元（含设备、施工）</span>
+                                        </li>
+                                        <li class="mb-3">
+                                            <i class="fa fa-check-circle text-primary mr-2"></i>
+                                            <span><strong>回本周期：</strong>约2.7年（含所得税减免、残值）</span>
+                                        </li>
+                                        <li class="mb-3">
+                                            <i class="fa fa-check-circle text-primary mr-2"></i>
+                                            <span><strong>10年总收益：</strong>约38.35万元</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 投资模式 - 简化说明 -->
+            <h3 class="h4 mb-4 text-primary">投资合作模式</h3>
+            <div class="row mb-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-building mr-2"></i>业主自投模式
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fa fa-angle-right text-primary mr-2"></i>企业全额承担设备与施工成本</li>
+                                <li class="mb-2"><i class="fa fa-angle-right text-primary mr-2"></i>全额享有所有收益</li>
+                                <li><i class="fa fa-angle-right text-primary mr-2"></i>适合资金充足、长期经营的企业</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-handshake-o mr-2"></i>第三方投资模式
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fa fa-angle-right text-primary mr-2"></i>第三方承担80%投资，企业承担20%</li>
+                                <li class="mb-2"><i class="fa fa-angle-right text-primary mr-2"></i>收益分成：企业获20%，投资方获80%</li>
+                                <li><i class="fa fa-angle-right text-primary mr-2"></i>适合资金紧张、轻资产运营的企业</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 五、公司简介 - 精简内容 -->
+        <section id="company" class="mb-8">
+            <h2 class="section-title">五、公司简介</h2>
+            
+            <!-- 公牛发展历程 - 简化时间线 -->
+            <h3 class="h4 mb-4 text-primary">公牛发展历程</h3>
+            <div class="card mb-6">
+                <div class="card-body">
+                    <div class="timeline">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <div class="timeline-item">
+                                    <h5 class="h6 text-primary fw-bold">1995-2014</h5>
+                                    <p class="small text-muted">以插座起家，成为安全用电专家</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="timeline-item">
+                                    <h5 class="h6 text-primary fw-bold">2014-2020</h5>
+                                    <p class="small text-muted">布局装饰开关、照明等前装市场</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="timeline-item">
+                                    <h5 class="h6 text-primary fw-bold">2020-2023</h5>
+                                    <p class="small text-muted">推出充电桩、工商业储能，登陆A股</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="timeline-item">
+                                    <h5 class="h6 text-primary fw-bold">2023-至今</h5>
+                                    <p class="small text-muted">液冷储能一体机量产，服务千行百业</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 创新成果与品质管理 - 精简 -->
+            <div class="row mb-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-lightbulb-o mr-2"></i>企业创新成果
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <span class="fw-semibold">研发资质：</span>国家级工业设计中心、博士后工作站
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-semibold">专利技术：</span>累计获得2379项专利授权
+                                </li>
+                                <li>
+                                    <span class="fw-semibold">标准制定：</span>主导/参与64项国家及行业标准
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-certificate mr-2"></i>品质管理体系
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fa fa-check-circle text-primary mr-2"></i>
+                                    <span>千余名专职质量管理人员，7000余台自动化检测设备</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check-circle text-primary mr-2"></i>
+                                    <span>全流程质量管控，从原材料到产品退役全生命周期追溯</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 六、合作案例 - 精简展示 -->
+        <section id="cases" class="mb-8">
+            <h2 class="section-title">六、合作案例</h2>
+            
+            <!-- 案例分类展示 - 减少案例数量，突出重点 -->
+            <h3 class="h4 mb-4 text-primary">工厂配储案例</h3>
+            <div class="row mb-6">
+                <div class="col-md-3">
+                    <div class="card case-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">嘉昊毛绒</h5>
+                            <h6 class="card-subtitle text-muted mb-3">625kW/1150kWh</h6>
+                            <p class="card-text small">纺织行业高耗能企业，年节省电费超80万元。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card case-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">西区工业园</h5>
+                            <h6 class="card-subtitle text-muted mb-3">4MW/8.6MWh</h6>
+                            <p class="card-text small">为20余家企业提供服务，降低园区整体用电成本。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card case-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">博迈立铖</h5>
+                            <h6 class="card-subtitle text-muted mb-3">250kW/460kWh</h6>
+                            <p class="card-text small">机械制造企业，保障关键设备供电，减少生产中断。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="h4 mb-4 text-primary">充电配储案例</h3>
+            <div class="row mb-6">
+                <div class="col-md-3">
+                    <div class="card case-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">胜日汇联超充站</h5>
+                            <h6 class="card-subtitle text-muted mb-3">125kW/230kWh</h6>
+                            <p class="card-text small">降低充电成本，提升充电桩利用率。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card case-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">高青路站</h5>
+                            <h6 class="card-subtitle text-muted mb-3">250kW/460kWh</h6>
+                            <p class="card-text small">避免变压器增容，年节省成本30万元。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 - 简化 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>公牛新能源</h4>
+                    <p>公牛集团旗下专注于新能源领域的核心业务板块，提供安全、高效、智能的储能解决方案。</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>联系方式</h4>
+                    <p><i class="fa fa-map-marker mr-2"></i>浙江省宁波市慈溪市观海卫镇工业园</p>
+                    <p><i class="fa fa-phone mr-2"></i>服务热线：400-883-2388</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>合作咨询</h4>
+                    <p>如对储能项目感兴趣，欢迎联系我们，提供定制化解决方案和专业服务。</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 宁波公牛新能源科技有限公司 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 收益趋势图表脚本 -->
+    <script>
+        $(function() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['第1年', '第2年', '第3年', '第4年', '第5年', '第6年', '第7年', '第8年', '第9年', '第10年'],
+                    datasets: [
+                        {
+                            label: '年度收益（万元）',
+                            data: [3.93, 3.77, 3.69, 3.61, 3.53, 3.45, 3.37, 3.29, 3.20, 3.12],
+                            borderColor: '#368d32',
+                            backgroundColor: 'rgba(54, 141, 50, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: '累计收益（万元）',
+                            data: [3.93, 7.70, 11.39, 15.00, 18.53, 21.98, 25.35, 28.64, 31.84, 34.96],
+                            borderColor: '#2a6d27',
+                            backgroundColor: 'rgba(42, 109, 39, 0.05)',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '收益（万元）'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '年份'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
