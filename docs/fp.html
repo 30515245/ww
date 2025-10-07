@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复盘结构画布 - 华为风格</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        huawei: {
+                            blue: '#1E50B3',      // 华为主蓝色
+                            lightblue: '#E8F3FF', // 浅蓝色背景
+                            darkblue: '#0A2463',  // 深蓝色
+                            gray: '#F5F7FA',      // 浅灰色背景
+                            darkgray: '#4E5969',  // 深灰色文字
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+            .card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 顶部导航栏 -->
+    <header class="bg-huawei-blue text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-refresh text-2xl" aria-hidden="true"></i>
+                <h1 class="text-xl md:text-2xl font-bold">复盘结构画布</h1>
+            </div>
+            <div class="hidden md:block">
+                <span class="text-sm opacity-80">华为风格 | 结构化复盘工具</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 介绍部分 -->
+        <div class="mb-10 text-center max-w-3xl mx-auto">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-4">复盘的结构与步骤</h2>
+            <p class="text-huawei-darkgray leading-relaxed">
+                复盘是一种结构化的回顾方法，通过系统性地回顾目标、评估结果、分析原因和总结经验，
+                帮助团队或个人从过去的经历中学习，持续改进并提升未来表现。
+            </p>
+        </div>
+
+        <!-- 复盘步骤卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- 1. 回顾目标 -->
+            <div class="bg-white rounded-lg overflow-hidden card-shadow card-hover">
+                <div class="bg-huawei-blue text-white p-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold">1. 回顾目标</h3>
+                        <i class="fa fa-bullseye text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <p class="text-sm opacity-90 mt-1">Goal</p>
+                </div>
+                <div class="p-5">
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <i class="fa fa-check-circle text-huawei-blue mt-1 mr-3" aria-hidden="true"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">明确目标</h4>
+                                <p class="text-sm text-huawei-darkgray mt-1">回顾项目或活动的初衷、期望达成的结果。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <i class="fa fa-check-circle text-huawei-blue mt-1 mr-3" aria-hidden="true"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">统一认知</h4>
+                                <p class="text-sm text-huawei-darkgray mt-1">确保团队或个人对最初设定的目标有清晰一致的理解。</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <div class="bg-huawei-lightblue rounded p-3 text-sm">
+                            <p class="text-huawei-darkblue"><i class="fa fa-lightbulb-o mr-2" aria-hidden="true"></i>
+                                关键问题：我们最初想要达成什么？目标是否清晰、可衡量？
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 评估结果 -->
+            <div class="bg-white rounded-lg overflow-hidden card-shadow card-hover">
+                <div class="bg-huawei-blue text-white p-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold">2. 评估结果</h3>
+                        <i class="fa fa-bar-chart text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <p class="text-sm opacity-90 mt-1">Result</p>
+                </div>
+                <div class="p-5">
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <i class="fa fa-check-circle text-huawei-blue mt-1 mr-3" aria-hidden="true"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">对比差异</h4>
+                                <p class="text-sm text-huawei-darkgray mt-1">将实际达到的结果与最初设定的目标进行比较，找出差距。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <i class="fa fa-check-circle text-huawei-blue mt-1 mr-3" aria-hidden="true"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">找出亮点与不足</h4>
+                                <p class="text-sm text-huawei-darkgray mt-1">记录过程中做得好的地方（成功之处）和做得不好的地方（失败之处）。</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <div class="bg-huawei-lightblue rounded p-3 text-sm">
+                            <p class="text-huawei-darkblue"><i class="fa fa-lightbulb-o mr-2" aria-hidden="true"></i>
+                                关键问题：实际结果与目标有哪些差异？哪些地方超出预期？哪些未达预期？
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 分析原因 -->
+            <div class="bg-white rounded-lg overflow-hidden card-shadow card-hover">
+                <div class="bg-huawei-blue text-white p-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold">3. 分析原因</h3>
+                        <i class="fa fa-search text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <p class="text-sm opacity-90 mt-1">Analysis</p>
+                </div>
+                <div class="p-5">
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <i class="fa fa-check-circle text-huawei-blue mt-1 mr-3" aria-hidden="true"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">探究关键原因</h4>
+                                <p class="text-sm text-huawei-darkgray mt-1">分析导致成功或失败的根本原因，可以从主观和客观两个层面进行。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <i class="fa fa-check-circle text-huawei-blue mt-1 mr-3" aria-hidden="true"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">识别问题和改进点</h4>
+                                <p class="text-sm text-huawei-darkgray mt-1">审视过去的做法，找到过程中存在的问题和可以改进的地方。</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <div class="bg-huawei-lightblue rounded p-3 text-sm">
+                            <p class="text-huawei-darkblue"><i class="fa fa-lightbulb-o mr-2" aria-hidden="true"></i>
+                                关键问题：成功或失败的根本原因是什么？哪些因素是可控的？哪些是不可控的？
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 总结经验 -->
+            <div class="bg-white rounded-lg overflow-hidden card-shadow card-hover">
+                <div class="bg-huawei-blue text-white p-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold">4. 总结经验</h3>
+                        <i class="fa fa-book text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <p class="text-sm opacity-90 mt-1">Insight</p>
+                </div>
+                <div class="p-5">
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <i class="fa fa-check-circle text-huawei-blue mt-1 mr-3" aria-hidden="true"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">提炼规律</h4>
+                                <p class="text-sm text-huawei-darkgray mt-1">将分析出的原因和改进点归纳总结成适用于未来情况的规律和经验。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <i class="fa fa-check-circle text-huawei-blue mt-1 mr-3" aria-hidden="true"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">形成行动计划</h4>
+                                <p class="text-sm text-huawei-darkgray mt-1">根据总结出的规律，制定下一步的行动计划，包括需要继续、改进或开始的新举措。</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <div class="bg-huawei-lightblue rounded p-3 text-sm">
+                            <p class="text-huawei-darkblue"><i class="fa fa-lightbulb-o mr-2" aria-hidden="true"></i>
+                                关键问题：我们从中学到了什么？未来如何应用这些经验？需要采取哪些具体行动？
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 复盘流程图示 -->
+        <div class="mt-12 bg-white rounded-lg p-6 card-shadow">
+            <h3 class="text-xl font-bold text-center text-gray-800 mb-8">复盘流程</h3>
+            
+            <div class="relative">
+                <!-- 连接线 - 仅在中等及以上屏幕显示 -->
+                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-huawei-blue/20 -translate-y-1/2 z-0"></div>
+                
+                <div class="flex flex-col md:flex-row justify-between relative z-10">
+                    <div class="flex flex-col items-center mb-8 md:mb-0">
+                        <div class="w-16 h-16 rounded-full bg-huawei-blue text-white flex items-center justify-center text-xl font-bold mb-3">1</div>
+                        <p class="text-center font-medium">回顾目标</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center mb-8 md:mb-0">
+                        <div class="w-16 h-16 rounded-full bg-huawei-blue text-white flex items-center justify-center text-xl font-bold mb-3">2</div>
+                        <p class="text-center font-medium">评估结果</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center mb-8 md:mb-0">
+                        <div class="w-16 h-16 rounded-full bg-huawei-blue text-white flex items-center justify-center text-xl font-bold mb-3">3</div>
+                        <p class="text-center font-medium">分析原因</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-huawei-blue text-white flex items-center justify-center text-xl font-bold mb-3">4</div>
+                        <p class="text-center font-medium">总结经验</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 循环箭头 -->
+            <div class="mt-8 text-center text-sm text-huawei-darkgray">
+                <i class="fa fa-refresh text-huawei-blue mr-2" aria-hidden="true"></i>
+                复盘是一个持续循环的过程，通过不断迭代优化，实现持续改进
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-huawei-darkblue text-white py-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm opacity-80">复盘结构画布 | 华为风格</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white/80 hover:text-white transition-colors">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <span class="ml-1 text-sm">使用帮助</span>
+                    </a>
+                    <a href="#" class="text-white/80 hover:text-white transition-colors">
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        <span class="ml-1 text-sm">相关文档</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 简单的交互脚本 -->
+    <script>
+        // 添加页面加载动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body>
+</html>
